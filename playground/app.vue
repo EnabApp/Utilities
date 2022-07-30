@@ -1,7 +1,7 @@
 <template>
   <div>
     Nuxt module playground!
-    <ModuleNameTest />
+    <UiButton title="hello" :solid="true" />
   </div>
 </template>
 

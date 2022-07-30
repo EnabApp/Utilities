@@ -5,6 +5,8 @@ export default defineNuxtConfig({
   modules: [
     MyModule,
 
+    "@enab/ui",
+    
     // Color Mode
     "@nuxtjs/color-mode",
 
