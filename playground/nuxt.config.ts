@@ -2,11 +2,23 @@ import { defineNuxtConfig } from 'nuxt'
 import MyModule from '..'
 
 export default defineNuxtConfig({
+
+  autoImports: {
+    global: true,
+  },
+  
+  components: {
+    global: true,
+    dirs: [
+        '~/components',
+    ]
+},
+
   modules: [
     MyModule,
 
     "@enab/ui",
-    
+
     // Color Mode
     "@nuxtjs/color-mode",
 
@@ -30,10 +42,9 @@ export default defineNuxtConfig({
 
   ],
 
+  moduleStarter: { },
 
-  moduleStarter: {
-    addPlugin: true
-  },
+  ssr: false,
 
   colorMode: {
     // preference: 'light',

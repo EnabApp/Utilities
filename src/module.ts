@@ -4,7 +4,7 @@ import { defineNuxtModule, addPlugin } from '@nuxt/kit'
 import path from "path";
 
 export interface ModuleOptions {
-  addPlugin: boolean
+  addPlugin: boolean,
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -13,7 +13,7 @@ export default defineNuxtModule<ModuleOptions>({
     configKey: 'moduleStarter'
   },
   defaults: {
-    addPlugin: true
+    addPlugin: true,
   },
   hooks: {
     // COMPONENTS

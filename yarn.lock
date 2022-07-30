@@ -295,10 +295,10 @@
   dependencies:
     mime "^3.0.0"
 
-"@enab/ui@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@enab/ui/-/ui-1.0.0.tgz#36c73422dd803a21e5f823633e20ae6d69d28b87"
-  integrity sha512-WcVA+ob3wdPkNekjLZUG2f7BSAH0wNVtzGqbDJAks6kObQf3SZAVTf8MJjrbLUapflEIhLRhL0HNlAhPXA4UzQ==
+"@enab/ui@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@enab/ui/-/ui-1.0.2.tgz#5a007fc58d1da38c6896ffc19764d7426ccde51d"
+  integrity sha512-aB6iMwfB58fFeFTCkWS/Nf9dr62U2NIgNOBdN/BzGHEb6l9OP0IY7xDaiz07aPmbReK69l8e9ihHNA2cuarGMw==
   dependencies:
     "@iconify/json" "^2.1.77"
     "@nuxt/kit" "^3.0.0-rc.6"
