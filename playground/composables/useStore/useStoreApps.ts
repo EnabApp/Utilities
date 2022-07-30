@@ -12,10 +12,10 @@ export const useStoreApps = defineStore("apps", {
         apps: [
             new App({
                 id: 1,
-                name: 'AppName',
-                title: "تطبيقي",
-                icon: "i-bxs-cart",
-                maximized: true,
+                name: 'Todo',
+                title: "مهامي",
+                icon: "i-ri:todo-line",
+                maximized: false,
                 solid: true,
                 owned: true,
                 // widgets: [
@@ -25,15 +25,15 @@ export const useStoreApps = defineStore("apps", {
                 //     title: 'للسوبر ماركت',
                 //   })
                 // ],
-                subApps: [
-                  new App({
-                    id: 1,
-                    name: 'Second',
-                    title: "برنامج ثاني",
-                    icon: "i-bxs-cart",
-                    size: "min-w-2xl min-h-3xl",
-                  })
-                ]
+                // subApps: [
+                //   new App({
+                //     id: 1,
+                //     name: 'Second',
+                //     title: "برنامج ثاني",
+                //     icon: "i-bxs-cart",
+                //     size: "min-w-2xl min-h-3xl",
+                //   })
+                // ]
               })
         ],
     }),

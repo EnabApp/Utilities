@@ -9,8 +9,8 @@ export interface ModuleOptions {
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: 'module-starter',
-    configKey: 'moduleStarter'
+    name: 'todo',
+    configKey: 'todo'
   },
   defaults: {
     addPlugin: true,
