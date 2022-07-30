@@ -1,4 +1,6 @@
 import { defineNuxtConfig } from 'nuxt'
+import MyModule from '..'
+
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
     isProduction: false,
@@ -16,7 +18,7 @@ export default defineNuxtConfig({
     },
 
     modules: [
-        '@enab/notepad',
+        MyModule,
 
         '@enab/ui',
 
