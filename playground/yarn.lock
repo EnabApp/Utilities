@@ -295,6 +295,60 @@
   dependencies:
     mime "^3.0.0"
 
+"@enab/appstore@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@enab/appstore/-/appstore-1.0.1.tgz#6b591ffc8a0a22e1ce98cf891847755d58145a61"
+  integrity sha512-BeCSj8UNonrJukNbHO6cMAjBnIu3PPKk8Ja/Vbsf872LLkOTcK/KpJy0aeAGr3OeUinvgywXOqP5SzTgn8uFvg==
+  dependencies:
+    "@enab/notepad" "^1.0.0"
+    "@enab/ui" "^1.0.2"
+    "@iconify/json" "^2.1.77"
+    "@nuxt/kit" "^3.0.0-rc.6"
+    "@nuxtjs/color-mode" "^3.1.4"
+    "@nuxtjs/composition-api" "^0.33.0"
+    "@pinia/nuxt" "^0.3.0"
+    "@tauri-apps/api" "^1.0.2"
+    "@unocss/inspector" "^0.44.2"
+    "@unocss/nuxt" "^0.44.0"
+    "@unocss/preset-attributify" "^0.44.1"
+    "@unocss/preset-icons" "^0.44.1"
+    "@unocss/preset-typography" "^0.44.1"
+    "@unocss/preset-web-fonts" "^0.44.1"
+    "@vueuse/core" "^9.0.2"
+    "@vueuse/motion" "^2.0.0-beta.18"
+    "@vueuse/nuxt" "^9.0.2"
+    mathjs "^11.0.1"
+    nuxt-lodash "^2.2.0"
+    pinia "^2.0.16"
+    vue-toastification "^2.0.0-rc.5"
+
+"@enab/calculator@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@enab/calculator/-/calculator-1.0.7.tgz#deff0b61e5e5c403a3167eb613da36ea38ae8d23"
+  integrity sha512-7Iz58lGp0hTxXV0o4j0jlHXHJc2vKcL2rL51bjQV8xdCXJ6wgwja9IstEbDDSGBXtPC7RvYwVEdUT+jiKREjVQ==
+  dependencies:
+    "@enab/notepad" "^1.0.0"
+    "@enab/ui" latest
+    "@iconify/json" "^2.1.77"
+    "@nuxt/kit" "^3.0.0-rc.6"
+    "@nuxtjs/color-mode" "^3.1.4"
+    "@nuxtjs/composition-api" "^0.33.0"
+    "@pinia/nuxt" "^0.3.0"
+    "@tauri-apps/api" "^1.0.2"
+    "@unocss/inspector" "^0.44.2"
+    "@unocss/nuxt" "^0.44.0"
+    "@unocss/preset-attributify" "^0.44.1"
+    "@unocss/preset-icons" "^0.44.1"
+    "@unocss/preset-typography" "^0.44.1"
+    "@unocss/preset-web-fonts" "^0.44.1"
+    "@vueuse/core" "^9.0.2"
+    "@vueuse/motion" "^2.0.0-beta.18"
+    "@vueuse/nuxt" "^9.0.2"
+    mathjs "^11.0.1"
+    nuxt-lodash "^2.2.0"
+    pinia "^2.0.16"
+    vue-toastification "^2.0.0-rc.5"
+
 "@enab/notepad@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@enab/notepad/-/notepad-1.0.0.tgz#24a1c6546581c474be94793104125befff6f7e8a"
@@ -322,10 +376,11 @@
     vue-toastification "^2.0.0-rc.5"
 
 "@enab/ui@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@enab/ui/-/ui-1.0.2.tgz#5a007fc58d1da38c6896ffc19764d7426ccde51d"
-  integrity sha512-aB6iMwfB58fFeFTCkWS/Nf9dr62U2NIgNOBdN/BzGHEb6l9OP0IY7xDaiz07aPmbReK69l8e9ihHNA2cuarGMw==
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@enab/ui/-/ui-1.0.6.tgz#eb983a282f2b7d17910dc97ae514b75070c23f5e"
+  integrity sha512-QmyQ994946BILGiNtfHs1mVCTLGsy7g/406xbXdSUfLCiTH95+F+i5Y+GYkYGP+So2PQshfs+88RkwAsj2lxNQ==
   dependencies:
+    "@enab/notepad" "^1.0.0"
     "@iconify/json" "^2.1.77"
     "@nuxt/kit" "^3.0.0-rc.6"
     "@nuxtjs/color-mode" "^3.1.4"
@@ -346,11 +401,38 @@
     pinia "^2.0.16"
     vue-toastification "^2.0.0-rc.5"
 
-"@enab/ui@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@enab/ui/-/ui-1.0.5.tgz#59ad5139907bdfa85e7cb0e61d442ff5abe4ba0d"
-  integrity sha512-I/6j6LG/DNbLM8In4IIhusDWkQyWwTDfdz46GdE0JuLIDgpkOU+ums1e7/jI9YEchgO/ltrNRm2MjRhN36RxYQ==
+"@enab/ui@^1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/@enab/ui/-/ui-1.1.6.tgz#10daf689d39c83c3e42e10c6447ad1aa223ba322"
+  integrity sha512-L/xX4TJm+sF77u9DOe2tpbkmXNR7J3LnUofkfMQKqiw+UHv1ydNPRBtfpUYng2VP3RUzKdHIrQtH5gayYsqXgA==
   dependencies:
+    "@enab/notepad" "^1.0.0"
+    "@iconify/json" "^2.1.77"
+    "@nuxt/kit" "^3.0.0-rc.6"
+    "@nuxtjs/color-mode" "^3.1.4"
+    "@nuxtjs/composition-api" "^0.33.0"
+    "@pinia/nuxt" "^0.3.0"
+    "@tauri-apps/api" "^1.0.2"
+    "@unocss/inspector" "^0.44.2"
+    "@unocss/nuxt" "^0.44.0"
+    "@unocss/preset-attributify" "^0.44.1"
+    "@unocss/preset-icons" "^0.44.1"
+    "@unocss/preset-typography" "^0.44.1"
+    "@unocss/preset-web-fonts" "^0.44.1"
+    "@vueuse/core" "^9.0.2"
+    "@vueuse/motion" "^2.0.0-beta.18"
+    "@vueuse/nuxt" "^9.0.2"
+    mathjs "^11.0.1"
+    nuxt-lodash "^2.2.0"
+    pinia "^2.0.16"
+    vue-toastification "^2.0.0-rc.5"
+
+"@enab/ui@latest":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@enab/ui/-/ui-1.1.2.tgz#7d626377ffed8055db1db6ca33126dc8bee2b908"
+  integrity sha512-g3EVbsan1rMivGl/IIgdNy4SJAvsC/OjNpgqIOLYVQkcLpunLysrrHnFih4vj9HXSIGDPAE1L/e6qUHYOTCZQA==
+  dependencies:
+    "@enab/notepad" "^1.0.0"
     "@iconify/json" "^2.1.77"
     "@nuxt/kit" "^3.0.0-rc.6"
     "@nuxtjs/color-mode" "^3.1.4"

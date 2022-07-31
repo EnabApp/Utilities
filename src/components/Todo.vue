@@ -1,7 +1,8 @@
-<template>
+<template >
   <!-- Application -->
-  <Transition>
-    <UiDesktopWindow v-if="app.running" v-show="!app.minimized" :app="app">
+  <Transition >
+    <UiDesktopWindow  v-if="app.running" v-show="!app.minimized" :app="app" >
+
       <!-- I couldn't change the hight -->
       <UiInput
         m="4"
@@ -11,6 +12,7 @@
         v-model="search"
         placeholder="ابحث هنا..."
         icon="i-ant-design-search-outlined"
+
       />
       <UiMenu w="52" bg="[#252c37]" mt="2" mr="6" title="الفلاتر">
         <UiMenuItem bg="[#3c4651]" hover="bg-[#]" text="white" title="مهمة" />
@@ -92,7 +94,8 @@
           </Transition>
         </UiModal>
       </Teleport>
-      <div
+      <div ref="el" :style="style" style="position: fixed">
+        <div
         mr="4"
         bg="[#4eaccf]"
         hover="bg-[#3c92b2]"
@@ -105,19 +108,23 @@
         justify="center"
         items="center"
         cursor="pointer"
-        right="0"
-        bottom="0"
-        absolute="~"
         @click="toggleModal()"
       >
         <div text="4xl" class="i-ant-design-plus-outlined"></div>
+      </div>
+      </div>
+      <div m="50" text="w-100">
+        {{hight}}
+        {{width}}
       </div>
     </UiDesktopWindow>
   </Transition>
 </template>
 
-<script setup>
-import { ref } from "vue";
+<script setup >
+import { ref } from 'vue'
+import { useDraggable } from '@vueuse/core'
+import { useElementSize } from '@vueuse/core'
 
 let search = ref(null);
 
@@ -133,6 +140,18 @@ const [stateSidebar, toggleSidebar] = useToggle(false);
 
 const [stateTitle, toggleTitle] = useToggle(false);
 
+const el = ref(null)
+const elSize = ref(null)
+const { width, height } = useElementSize(elSize)
+console.log(width, height)
+const { x, y, style } = useDraggable(el, {
+  initialValue: { x: 900, y: 600 },
+  onMove: (value) => {
+    // console.log(value)
+    // x.value= width
+    // y.value= height
+  }
+})
 const props = defineProps({
   app: {
     type: Object,
