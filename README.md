@@ -16,4 +16,7 @@
 - `git remote add template https://github.com/EnabApp/module-starter.git`
 - `git fetch --all`
 - `git merge template/master --allow-unrelated-histories`
-- Fix conflicts that will show on GitHub Disktop.
+- Fix conflicts that will show on GitHub Disktop. **Be careful with these:**
+  1. `package.json` `name => Current Change` `dependencies => Incoming Change` 
+  2. `App.ts, BottomBar, useStoreApps, default, desktop, nuxt.config.ts, playground/package.json  => ALWAYS Incoming Change`
+  3. 
