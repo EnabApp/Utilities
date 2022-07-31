@@ -2,6 +2,7 @@
   <!-- Application -->
   <Transition >
     <UiDesktopWindow  v-if="app.running" v-show="!app.minimized" :app="app" >
+      <div m="4" flex="~ col grow gap-4" >
 
       <!-- I couldn't change the hight -->
       <UiInput
@@ -96,7 +97,6 @@
       </Teleport>
       <div ref="el" :style="style" style="position: fixed">
         <div
-        mr="4"
         bg="[#4eaccf]"
         hover="bg-[#3c92b2]"
         duration="200"
@@ -113,18 +113,15 @@
         <div text="4xl" class="i-ant-design-plus-outlined"></div>
       </div>
       </div>
-      <div m="50" text="w-100">
-        {{hight}}
-        {{width}}
       </div>
     </UiDesktopWindow>
   </Transition>
 </template>
 
-<script setup >
+<script setup>
 import { ref } from 'vue'
 import { useDraggable } from '@vueuse/core'
-import { useElementSize } from '@vueuse/core'
+// import { useElementBounding } from '@vueuse/core'
 
 let search = ref(null);
 
@@ -141,16 +138,22 @@ const [stateSidebar, toggleSidebar] = useToggle(false);
 const [stateTitle, toggleTitle] = useToggle(false);
 
 const el = ref(null)
-const elSize = ref(null)
-const { width, height } = useElementSize(elSize)
-console.log(width, height)
+// const elSize = ref(null)
+// const {x:elX , y:elY} = useElementBounding(elSize)
 const { x, y, style } = useDraggable(el, {
   initialValue: { x: 900, y: 600 },
-  onMove: (value) => {
-    // console.log(value)
-    // x.value= width
-    // y.value= height
-  }
+  // onMove: (value) => {
+  //   //  if(value.x > right.value)
+  //   //  x.value = right.value
+  //   // else if(value.x < left.value)
+  //   // x.value = left.value
+  //   if(elX.value-value.x <= 10)
+  //     return
+
+  //   console.log(elX.value)
+
+
+  // }
 })
 const props = defineProps({
   app: {
