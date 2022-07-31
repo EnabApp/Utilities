@@ -11,3 +11,9 @@
 - `yarn dev`
 
 * Your playground inside `playground` folder.
+
+## Pulling updates
+- `git remote add template https://github.com/EnabApp/module-starter.git`
+- `git fetch --all`
+- `git merge template/master --allow-unrelated-histories`
+- Fix conflicts.
