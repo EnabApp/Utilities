@@ -1,126 +1,128 @@
-<template >
+<template>
   <!-- Application -->
-  <Transition >
-    <UiDesktopWindow  v-if="app.running" v-show="!app.minimized" :app="app" >
-      <div m="4" flex="~ col grow gap-4" >
-
-      <!-- I couldn't change the hight -->
-      <UiInput
-        m="4"
-        p="2"
-        pb="12"
-        h="4"
-        v-model="search"
-        placeholder="ابحث هنا..."
-        icon="i-ant-design-search-outlined"
-
-      />
-      <UiMenu w="52" bg="[#252c37]" mt="2" mr="6" title="الفلاتر">
-        <UiMenuItem bg="[#3c4651]" hover="bg-[#]" text="white" title="مهمة" />
-        <UiMenuItem bg="[#3c4651]" hover="bg-[#]" text="white" title="مكتمله" />
-        <UiMenuItem
-          bg="[#3c4651]"
-          hover="bg-[#]"
-          text="white"
-          title=" غير مكتمله"
+  <Transition>
+    <UiDesktopWindow v-if="app.running" v-show="!app.minimized" :app="app">
+      <div m="4" mt="5" flex="~ col grow gap-2">
+        <UiInput
+          m="4"
+          p="2"
+          pb="12"
+          h="4"
+          v-model="search"
+          placeholder="ابحث هنا..."
+          icon="i-ant-design-search-outlined"
         />
-        <UiMenuItem
-          bg="[#3c4651]"
-          hover="bg-[#]"
-          text="white"
-          title="قيد التنفيذ"
-        />
-      </UiMenu>
-      <TodoList />
-      <Teleport to="body">
-        <UiModal
-          v-model="stateModal"
-          confirm="Save"
-          @confirm="modalConfirmed"
-          @cancel="modalCanceled"
-        >
-          <template v-slot:title>
-            <div ref="titleEl">
-              <h4 v-if="stateTitle" text="w-100">
-                <UiInput h="20" v-model="task" />
-              </h4>
-              <div v-if="!stateTitle" @click="toggleTitle()">
-                <div flex="~" items="center">
-                  <h4 text="w-100">
-                    {{ task }}
-                  </h4>
-                  <div class="i-fa6-solid:pen text-xl mr-3"></div>
+        <UiMenu w="52" bg="[#252c37]" mt="2" mr="6" title="الفلاتر">
+          <UiMenuItem bg="[#3c4651]" hover="bg-[#]" text="white" title="مهمة" />
+          <UiMenuItem
+            bg="[#3c4651]"
+            hover="bg-[#]"
+            text="white"
+            title="مكتمله"
+          />
+          <UiMenuItem
+            bg="[#3c4651]"
+            hover="bg-[#]"
+            text="white"
+            title=" غير مكتمله"
+          />
+          <UiMenuItem
+            bg="[#3c4651]"
+            hover="bg-[#]"
+            text="white"
+            title="قيد التنفيذ"
+          />
+        </UiMenu>
+        <TodoList />
+        <Teleport to="body">
+          <UiModal
+            v-model="stateModal"
+            confirm="Save"
+            @confirm="modalConfirmed"
+            @cancel="modalCanceled"
+          >
+            <template v-slot:title>
+              <div ref="titleEl">
+                <h4 v-if="stateTitle" text="w-100">
+                  <UiInput h="20" v-model="task" />
+                </h4>
+                <div v-if="!stateTitle" @click="toggleTitle()">
+                  <div flex="~" items="center">
+                    <h4 text="w-100">
+                      {{ task }}
+                    </h4>
+                    <div class="i-fa6-solid:pen text-xl mr-3"></div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </template>
-          <div flex="~ col">
-            <div class="overflow-y-auto h-90 w-full">
-              <textarea
-                ref="textarea"
-                bg="transparent"
-                text="w-100"
-                border="none"
-                v-model="input"
-                class="resize-none outline-none placeholder:text-w-100"
-                cols="100"
-                rows="10"
-                placeholder="التفاصيل"
-              />
-            </div>
-          </div>
-          <div v-if="!stateSidebar" class="flex justify-center relative">
-            <div
-              @click="toggleSidebar()"
-              class="i-bi:arrow-up-square-fill absolute top-15"
-              text="xl w-100"
-            ></div>
-          </div>
-          <Transition>
-            <div
-              v-if="stateSidebar"
-              class="border rounded-lg flex flex-col mt-3 items-center h-20"
-            >
-              <div
-                @click="toggleSidebar()"
-                class="i-bi:arrow-down-square-fill"
-                text="xl w-100"
-              ></div>
-              <div class="flex">
-                <div></div>
-                <div>df</div>
-                <div>df</div>
+            </template>
+            <div flex="~ col">
+              <div class="overflow-y-auto h-90 w-full">
+                <textarea
+                  ref="textarea"
+                  bg="transparent"
+                  text="w-100"
+                  border="none"
+                  v-model="input"
+                  class="resize-none outline-none placeholder:text-w-100"
+                  cols="100"
+                  rows="10"
+                  placeholder="التفاصيل"
+                />
               </div>
             </div>
-          </Transition>
-        </UiModal>
-      </Teleport>
-      <div ref="el" :style="style" style="position: fixed">
-        <div
-        bg="[#4eaccf]"
-        hover="bg-[#3c92b2]"
-        duration="200"
-        rounded="full"
-        w="[62px]"
-        h="[62px]"
-        text="white"
-        flex="~"
-        justify="center"
-        items="center"
-        cursor="pointer"
-        @click="toggleModal()"
-      >
-        <div text="4xl" class="i-ant-design-plus-outlined"></div>
-      </div>
-      </div>
+            <div v-if="!stateSidebar" class="flex justify-center relative">
+              <div
+                @click="toggleSidebar()"
+                class="i-bi:arrow-up-square-fill absolute top-15"
+                text="xl w-100"
+              ></div>
+            </div>
+            <Transition>
+              <div
+                v-if="stateSidebar"
+                class="border rounded-lg flex flex-col mt-3 items-center h-20"
+              >
+                <div
+                  @click="toggleSidebar()"
+                  class="i-bi:arrow-down-square-fill"
+                  text="xl w-100"
+                ></div>
+                <div class="flex">
+                  <div></div>
+                  <div>df</div>
+                  <div>df</div>
+                </div>
+              </div>
+            </Transition>
+          </UiModal>
+        </Teleport>
+        <div ref="el" :style="style" style="position: fixed">
+          <div
+            bg="[#4eaccf]"
+            hover="bg-[#3c92b2]"
+            duration="200"
+            rounded="full"
+            w="[62px]"
+            h="[62px]"
+            text="white"
+            flex="~"
+            justify="center"
+            items="center"
+            cursor="pointer"
+            @click="toggleModal()"
+          >
+            <div text="4xl" class="i-ant-design-plus-outlined"></div>
+          </div>
+        </div>
       </div>
     </UiDesktopWindow>
   </Transition>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useDraggable } from '@vueuse/core'
+import { ref } from "vue";
+import { useDraggable } from "@vueuse/core";
 // import { useElementBounding } from '@vueuse/core'
 
 let search = ref(null);
@@ -137,7 +139,7 @@ const [stateSidebar, toggleSidebar] = useToggle(false);
 
 const [stateTitle, toggleTitle] = useToggle(false);
 
-const el = ref(null)
+const el = ref(null);
 // const elSize = ref(null)
 // const {x:elX , y:elY} = useElementBounding(elSize)
 const { x, y, style } = useDraggable(el, {
@@ -152,9 +154,8 @@ const { x, y, style } = useDraggable(el, {
 
   //   console.log(elX.value)
 
-
   // }
-})
+});
 const props = defineProps({
   app: {
     type: Object,
