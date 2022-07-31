@@ -12,13 +12,36 @@
         placeholder="ابحث هنا..."
         icon="i-ant-design-search-outlined"
       />
-      <UiMenu class="bg-[#252c37] w-52" mt="2" mr="6" title="الفلاتر">
-        <UiMenuItem bg="[#3c4651]" hover="bg-[#]" text="white" title="مهمة" />
-        <UiMenuItem bg="[#3c4651]" hover="bg-[#]" text="white" title="مكتمله" />
-        <UiMenuItem bg="[#3c4651]" hover="bg-[#]" text="white" title=" غير مكتمله" />
-        <UiMenuItem bg="[#3c4651]" hover="bg-[#]" text="white" title="قيد التنفيذ" />
+      <UiMenu 
+      w="52" 
+      bg="[#252c37]" 
+      mt="2" 
+      mr="6" 
+      title="الفلاتر">
+        <UiMenuItem 
+        bg="[#3c4651]" 
+        hover="bg-[#]" 
+        text="white" 
+        title="مهمة" />
+        <UiMenuItem 
+        bg="[#3c4651]" 
+        hover="bg-[#]" 
+        text="white" 
+        title="مكتمله" />
+        <UiMenuItem
+          bg="[#3c4651]"
+          hover="bg-[#]"
+          text="white"
+          title=" غير مكتمله"
+        />
+        <UiMenuItem
+          bg="[#3c4651]"
+          hover="bg-[#]"
+          text="white"
+          title="قيد التنفيذ"
+        />
       </UiMenu>
-      <TodoList />
+      <TodoList bg="black" />
       <Teleport to="body">
         <UiModal
           v-model="stateModal"
