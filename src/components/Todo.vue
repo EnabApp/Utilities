@@ -8,15 +8,15 @@
         p="2"
         pb="12"
         h="4"
-        v-model="task"
+        v-model="search"
         placeholder="ابحث هنا..."
         icon="i-ant-design-search-outlined"
       />
-      <UiMenu class="bg-[#252C37] w-52" mt="2" mr="6" title="الفلاتر">
-        <UiMenuItem title="مهمة" />
-        <UiMenuItem title="مكتمله" />
-        <UiMenuItem title=" غير مكتمله" />
-        <UiMenuItem title="قيد التنفيذ" />
+      <UiMenu class="bg-[#252c37] w-52" mt="2" mr="6" title="الفلاتر">
+        <UiMenuItem bg="[#3c4651]" hover="bg-[#]" text="white" title="مهمة" />
+        <UiMenuItem bg="[#3c4651]" hover="bg-[#]" text="white" title="مكتمله" />
+        <UiMenuItem bg="[#3c4651]" hover="bg-[#]" text="white" title=" غير مكتمله" />
+        <UiMenuItem bg="[#3c4651]" hover="bg-[#]" text="white" title="قيد التنفيذ" />
       </UiMenu>
       <TodoList />
       <Teleport to="body">
@@ -30,30 +30,43 @@
           Content
         </UiModal>
       </Teleport>
-      <UiButton title="showModel" @click="toggleModal()" /> -->
+      <div
+        mr="4"
+        bg="[#4eaccf]"
+        hover="bg-[#3c92b2]"
+        duration="200"
+        rounded="full"
+        w="[62px]"
+        h="[62px]"
+        text="white"
+        flex="~"
+        justify="center"
+        items="center"
+        cursor="pointer"
+        right="0"
+        bottom="0"
+        absolute="~"
+        @click="toggleModal()"
+      >
+        <div text="4xl" class="i-ant-design-plus-outlined"></div>
+      </div>
     </UiDesktopWindow>
   </Transition>
 </template>
 
 <script setup>
-let task = ref(null);
-// const show = () =>{
-//   if(task.value != null){
-//     console.log(task.value)
-//     return true
-// }
-// }
+let search = ref(null);
 const props = defineProps({
   app: {
     type: Object,
     required: true,
   },
 });
-watch(task, (val) => {
-  localStorage.setItem("task", val);
+watch(search, (val) => {
+  localStorage.setItem("search", val);
 });
 onMounted(() => {
-  task.value = localStorage.getItem("task") || "";
+  search.value = localStorage.getItem("search") || "";
 });
 
 const getApp = props.app.getSubApp(1);

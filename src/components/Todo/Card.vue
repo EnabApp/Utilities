@@ -1,8 +1,13 @@
 <template>
   <div
-    class="w-52 h-56 bg-[#252C37] rounded-lg shadow-sm border-t-7 border-green-400"
     m="6"
     mt="10"
+    w="52"
+    h="56"
+    bg="[#252C37]"
+    rounded="lg"
+    shadow="sm"
+    border="t-7 green-400"
   >
     <div class="p-2 text-center flex flex-col gap-5">
       <!-- Title -->
