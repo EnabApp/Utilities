@@ -7,7 +7,8 @@
     h="56"
     bg="[#252C37]"
     rounded="lg"
-    shadow="sm"
+    hover="shadow-md"
+    duration="200"
     border="t-7 green-400"
     ref="htmlRefHook"
     cursor="pointer"
@@ -31,7 +32,7 @@
       </div>
       <div class="flex justify-end mt-3">
         <!-- Date -->
-        <p text="gray-400" class="text-xs">من 2022/23/2 الى 2023/24/8</p>
+        <p text="gray-400 xs" font="sans" >2023/24/8 | 2024/24/8</p>
       </div>
     </div>
   </div>
@@ -47,7 +48,7 @@ const longpressoutside = ref(null);
 const htmlRefHook = ref<HTMLElement | null>(null);
 const longPressedHook = ref(true);
 
-//===Card Shake Function====//
+//===Card Long Press Function====//
 const onLongPressCallbackHook = (e: PointerEvent) => {
   longPressedHook.value = false;
   warnDisabled();
