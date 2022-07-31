@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     autoImports: {
         global: true
     },
-    
+
     // build: {
     //     analyze: true,
     // },
@@ -50,7 +50,7 @@ export default defineNuxtConfig({
 
         // Motion
         '@vueuse/motion/nuxt',
-        
+
 
     ],
 
@@ -97,6 +97,7 @@ export default defineNuxtConfig({
                 'i-ic-baseline-calculate',
                 'i-bxs-cart',
                 'i-ri-todo-fill',
+                'i-ri-todo-line',
             ]
         ],
         preflights: [

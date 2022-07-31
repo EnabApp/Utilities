@@ -24,29 +24,33 @@ export const useStoreApps = defineStore("apps", {
             }),
 
             new App({
-                id: 2,
-                name: 'First',
-                title: "تجريبي",
-                owned: true,
-                points: 1999,
-                icon: "i-ic-baseline-calculate",
-                size: "min-w-md min-h-xl",
-                maximizable: false,
-                resizeable: false,
-                utility: true,
-                subApps: [
-                    new App({
-                        id: 3,
-                        name: 'Second',
-                        title: "تجريبي",
-                        owned: true,
-                        icon: "i-ic-baseline-calculate",
-                        size: "min-w-md min-h-xl",
-                        maximizable: false,
-                        resizeable: false,
-                    }),
-                ]
+              id: 1,
+              name: "Todo",
+              title: "مهامي",
+              icon: "i-ri-todo-line",
+              maximized: false,
+              solid: true,
+              owned: true,
+              size: "min-w-2xl min-h-3xl",
+              // widgets: [
+              //   new Widget({
+              //     id: 1,
+              //     name: 'First',
+              //     title: 'للسوبر ماركت',
+              //   })
+              // ],
+              // subApps: [
+              //   new App({
+              //     id: 1,
+              //     name: 'Second',
+              //     title: "برنامج ثاني",
+              //     icon: "i-bxs-cart",
+              //     size: "min-w-2xl min-h-3xl",
+              //   })
+              // ]
             }),
+
+
 
             new App({
                 id: 3,
@@ -77,7 +81,7 @@ export const useStoreApps = defineStore("apps", {
         setFocus(title){
             this.focused = title;
         },
-        
+
     },
 });
 
