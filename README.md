@@ -19,4 +19,8 @@
 - Fix conflicts that will show on GitHub Disktop. **Be careful with these:**
   1. `package.json` `name => Current Change` `dependencies => Incoming Change` 
   2. `App.ts, BottomBar, useStoreApps, default, desktop, nuxt.config.ts, playground/package.json  => ALWAYS Incoming Change`
-  3. 
+  3. `README.md => Current Change`
+  4. `src/module.ts => Current Change` 
+  5. `yarn.lock => Incoming Change`
+- `yarn install`
+- `yarn dev:prepare`
