@@ -55,7 +55,21 @@
             </div>
           </template>
           <div flex="~ col">
-            <div class="overflow-y-auto h-90 w-full">
+            <div flex="~" class=" items-center" >
+                <h5>
+                  تاريخ البدء
+                </h5>
+                <div mx="4">
+                    <input bg="transparent" text="primary" type="date" class=" w-full border-0  cursor-pointer  text-sm rounded p-0.5" >
+                </div>
+                  <h5 mx="4" text="primary" >
+                      تاريخ الانتهاء
+                  </h5>
+                <div mx="4">
+                    <input bg="transparent" text="w-100" type="date" class=" w-full border-0  cursor-pointer text-sm rounded p-0.5">
+                </div>
+            </div>
+            <div class="overflow-y-auto h-90 w-full mt-10">
               <textarea
                 ref="textarea"
                 bg="transparent"
@@ -65,11 +79,11 @@
                 class="resize-none outline-none placeholder:text-w-100"
                 cols="100"
                 rows="10"
-                placeholder="التفاصيل"
+                placeholder="اكتب المهمة هنا..."
               />
             </div>
           </div>
-          <div v-if="!stateSidebar" class="flex justify-center relative">
+          <!-- <div v-if="!stateSidebar" class="flex justify-center relative">
             <div
               @click="toggleSidebar()"
               class="i-bi:arrow-up-square-fill absolute top-15"
@@ -92,7 +106,7 @@
                 <div>df</div>
               </div>
             </div>
-          </Transition>
+          </Transition> -->
         </UiModal>
       </Teleport>
       <div ref="el" :style="style" style="position: fixed">
