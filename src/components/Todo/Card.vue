@@ -1,59 +1,78 @@
 <template>
-  <div
-    :class="{ shake: disabled }"
-    m="6"
-    mt="10"
-    w="52"
-    h="56"
-    bg="[#252C37]"
-    rounded="lg"
-    shadow="sm"
-    border="t-7 green-400"
-    ref="htmlRefHook"
-    cursor="pointer"
-  >
-    <UiCloseButton
-      ref="longpressoutside"
-      v-if="longPressedHook == false"
-      absolute="~"
-      color="primary"
-      @click="removeTask()"
-    />
-    <div class="p-2 text-center flex flex-col gap-5">
-      <!-- Title -->
-      <h3 class="font-semibold" text="white">{{task.title}}</h3>
-      <div>
-        <!-- Description -->
-        <p text="gray-300" class="text-sm">
-            {{task.content}}
-        </p>
-      </div>
-      <div class="flex justify-end mt-3">
-        <!-- Date -->
-        <p text="gray-400" class="text-xs">من {{task.startDate}} الى {{task.endDate}}</p>
+  <div flex="~" flex-col="~" ref="hoverdate">
+    <div
+      :class="{ shake: disabled }"
+      m="6"
+      w="96"
+      h="30"
+      bg="[#252C37]"
+      rounded="lg"
+      hover="shadow-md -translate-y-1"
+      border="r-7 green-400"
+      ref="htmlRefHook"
+      cursor="pointer"
+      duration="200"
+    >
+      <div flex="~ col" gap="1">
+        <div flex="~ col">
+          <div flex="~" items="center" justify="between">
+            <!-- Title -->
+            <h3 class="font-semibold" text="white" p="1" mr="2">
+              {{ task.title }}
+            </h3>
+            <UiCloseButton
+              v-if="longPressedHook == false"
+              ml="2"
+              mt="1"
+              ref="longpressoutside"
+              color="primary"
+              @click="removeTask()"
+            />
+          </div>
+          <!-- Description -->
+          <div>
+            <p text="gray-300 md" px="4">
+              {{ task.content.substring(0, 60) + "..." }}
+            </p>
+          </div>
+        </div>
+
+        <div flex="~" justify="between">
+          <div flex="~" mr="2.5" items="center" text="gray-400">
+            Category
+            <div
+              text="gray-400 2xl"
+              class="i-icon-park-solid-category-management"
+            ></div>
+          </div>
+
+          <!-- Date -->
+          <div
+            flex="~"
+            justify="end"
+            items="center"
+            font="sans"
+            text="gray-400"
+            ml="2"
+          >
+            <span>{{ isHovered ? task.endDate : task.startDate }}</span>
+
+            <div text="gray-400 2xl" class="i-uim-calender"></div>
+          </div>
+        </div>
       </div>
     </div>
-            <!-- <div
-          flex="~"
-          justify="end"
-          items="center"
-          font="sans"
-          text="gray-400"
-          mt="3"
-          relative="~"
-        >
-          2001/24/8
-          <div text="gray-400 2xl" class="i-uim-calender"></div>
-        </div> -->
+  </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import { onLongPress } from "@vueuse/core";
 import { onClickOutside } from "@vueuse/core";
+import { useElementHover } from "@vueuse/core";
 
 const props = defineProps({
-  task:Object,
+  task: Object,
 });
 console.log(props.task);
 
@@ -61,6 +80,9 @@ const longpressoutside = ref(null);
 
 const htmlRefHook = ref<HTMLElement | null>(null);
 const longPressedHook = ref(true);
+
+const hoverdate = ref();
+const isHovered = useElementHover(hoverdate);
 
 //===Card Long Press Function====//
 const onLongPressCallbackHook = (e: PointerEvent) => {

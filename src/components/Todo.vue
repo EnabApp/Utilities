@@ -2,7 +2,8 @@
   <!-- Application -->
   <Transition>
     <UiDesktopWindow v-if="app.running" v-show="!app.minimized" :app="app">
-      <div m="4" mt="5" flex="~ col grow gap-2">
+      <div mt="5" flex="~ col grow gap-2">
+        <!-- ===========>> Search InPut Content <<=========== -->
         <UiInput
           m="4"
           p="2"
@@ -12,6 +13,7 @@
           placeholder="ابحث هنا..."
           icon="i-ant-design-search-outlined"
         />
+        <!-- ===========>>  UiMenu Content <<=========== -->
         <UiMenu w="52" bg="[#252c37]" mt="2" mr="6" title="الفلاتر">
           <UiMenuItem bg="[#3c4651]" hover="bg-[#]" text="white" title="مهمة" />
           <UiMenuItem
@@ -33,7 +35,15 @@
             title="قيد التنفيذ"
           />
         </UiMenu>
-        <TodoList />
+        <!-- ===========>> Card List Content <<=========== -->
+        <div
+          class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 overflow-y-scroll h-[50rem]"
+        >
+          <div v-for="item in tasks" :key="item">
+            <TodoCard :task="item" />
+          </div>
+        </div>
+        <!-- ===========>> Model Content <<=========== -->
         <Teleport to="body">
           <UiModal
             v-model="stateModal"
@@ -94,9 +104,7 @@
                 />
               </div>
             </div>
-            <button @click="addTask()">
-              <div class="i-fa6-solid:save text-xl mr-3">save</div>
-            </button>
+            <UiButton title="save" :outline="true" w="15" @click="addTask()" />
             <!-- <div v-if="!stateSidebar" class="flex justify-center relative">
             <div
               @click="toggleSidebar()"
