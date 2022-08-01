@@ -44,7 +44,7 @@
             <template v-slot:title>
               <div ref="titleEl">
                 <h4 v-if="stateTitle" text="w-100">
-                  <UiInput h="20" v-model="task" />
+                  <UiInput h="20" v-model="title" />
                 </h4>
                 <div v-if="!stateTitle" @click="toggleTitle()">
                   <div flex="~" items="center">
@@ -57,44 +57,70 @@
               </div>
             </template>
             <div flex="~ col">
-              <div class="overflow-y-auto h-90 w-full">
+              <div flex="~" class="items-center">
+                <h5>تاريخ البدء</h5>
+                <div mx="4">
+                  <input
+                    v-model="startDate"
+                    bg="transparent"
+                    text="primary"
+                    type="date"
+                    class="w-full border-0 cursor-pointer text-sm rounded p-0.5"
+                  />
+                </div>
+                <h5 mx="4" text="primary">تاريخ الانتهاء</h5>
+                <div mx="4">
+                  <input
+                    v-model="endDate"
+                    bg="transparent"
+                    text="w-100"
+                    type="date"
+                    class="w-full border-0 cursor-pointer text-sm rounded p-0.5"
+                  />
+                </div>
+              </div>
+
+              <div class="overflow-y-auto h-90 w-full mt-10">
                 <textarea
+                  v-model="content"
                   ref="textarea"
                   bg="transparent"
                   text="w-100"
                   border="none"
-                  v-model="input"
                   class="resize-none outline-none placeholder:text-w-100"
                   cols="100"
                   rows="10"
-                  placeholder="التفاصيل"
+                  placeholder="اكتب المهمة هنا..."
                 />
               </div>
             </div>
-            <div v-if="!stateSidebar" class="flex justify-center relative">
+            <button @click="addTask()">
+              <div class="i-fa6-solid:save text-xl mr-3">save</div>
+            </button>
+            <!-- <div v-if="!stateSidebar" class="flex justify-center relative">
+            <div
+              @click="toggleSidebar()"
+              class="i-bi:arrow-up-square-fill absolute top-15"
+              text="xl w-100"
+            ></div>
+          </div>
+          <Transition>
+            <div
+              v-if="stateSidebar"
+              class="border rounded-lg flex flex-col mt-3 items-center h-20"
+            >
               <div
                 @click="toggleSidebar()"
-                class="i-bi:arrow-up-square-fill absolute top-15"
+                class="i-bi:arrow-down-square-fill"
                 text="xl w-100"
               ></div>
-            </div>
-            <Transition>
-              <div
-                v-if="stateSidebar"
-                class="border rounded-lg flex flex-col mt-3 items-center h-20"
-              >
-                <div
-                  @click="toggleSidebar()"
-                  class="i-bi:arrow-down-square-fill"
-                  text="xl w-100"
-                ></div>
-                <div class="flex">
-                  <div></div>
-                  <div>df</div>
-                  <div>df</div>
-                </div>
+              <div class="flex">
+                <div></div>
+                <div>df</div>
+                <div>df</div>
               </div>
-            </Transition>
+            </div>
+          </Transition> -->
           </UiModal>
         </Teleport>
         <div ref="el" :style="style" style="position: fixed">
@@ -128,6 +154,11 @@ import { useDraggable } from "@vueuse/core";
 let search = ref(null);
 
 const titleEl = ref(null);
+const title = ref(null);
+const tasks = ref([]);
+const content = ref("");
+const startDate = ref("");
+const endDate = ref("");
 
 const { textarea, input } = useTextareaAutosize();
 
@@ -163,6 +194,35 @@ const props = defineProps({
   },
 });
 
+const addTask = () => {
+  if (
+    content.value.trim === "" ||
+    startDate.value.trim === "" ||
+    endDate.value.trim === ""
+  ) {
+    alert("الرجاء إدخال جميع البيانات");
+    return;
+  }
+  tasks.value.push({
+    title: title.value,
+    content: content.value,
+    startDate: startDate.value,
+    endDate: endDate.value,
+    state: 0,
+  });
+  content.value = "";
+  startDate.value = "";
+  endDate.value = "";
+  title.value = "";
+  toggleModal();
+};
+watch(
+  tasks,
+  (newVal) => {
+    localStorage.setItem("tasks", JSON.stringify(newVal));
+  },
+  { deep: true }
+);
 watch(search, (val) => {
   localStorage.setItem("search", val);
 });

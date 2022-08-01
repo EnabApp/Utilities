@@ -1,37 +1,39 @@
 <template>
-    <div
-      :class="{ shake: disabled }"
-      m="6"
-      mt="10"
-      w="48"
-      h="56"
-      bg="[#252C37]"
-      rounded-t="xl"
-      rounded-b="md"
-      hover="shadow-sm -translate-y-1"
-      duration="250"
-      border="t-7 green-400"
-      ref="htmlRefHook"
-      cursor="pointer"
-    >
-      <UiCloseButton
-        ref="longpressoutside"
-        v-if="longPressedHook == false"
-        absolute="~"
-        color="primary"
-      />
-      <div class="p-2 text-center flex flex-col gap-3.5">
-        <!-- Title -->
-        <h3 class="font-semibold" text="white">عرس حسن</h3>
-        <div>
-          <!-- Description -->
-          <p text="gray-300 sm">
-            `Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Pellentesque euismod, nisi eu consectetur consectetur, nisl nisi
-            consectetur nisl, eu consectetur nisl nisi...
-          </p>
-        </div>
-        <div
+  <div
+    :class="{ shake: disabled }"
+    m="6"
+    mt="10"
+    w="52"
+    h="56"
+    bg="[#252C37]"
+    rounded="lg"
+    shadow="sm"
+    border="t-7 green-400"
+    ref="htmlRefHook"
+    cursor="pointer"
+  >
+    <UiCloseButton
+      ref="longpressoutside"
+      v-if="longPressedHook == false"
+      absolute="~"
+      color="primary"
+      @click="removeTask()"
+    />
+    <div class="p-2 text-center flex flex-col gap-5">
+      <!-- Title -->
+      <h3 class="font-semibold" text="white">{{task.title}}</h3>
+      <div>
+        <!-- Description -->
+        <p text="gray-300" class="text-sm">
+            {{task.content}}
+        </p>
+      </div>
+      <div class="flex justify-end mt-3">
+        <!-- Date -->
+        <p text="gray-400" class="text-xs">من {{task.startDate}} الى {{task.endDate}}</p>
+      </div>
+    </div>
+            <!-- <div
           flex="~"
           justify="end"
           items="center"
@@ -42,15 +44,18 @@
         >
           2001/24/8
           <div text="gray-400 2xl" class="i-uim-calender"></div>
-        </div>
-      </div>
-    </div>
+        </div> -->
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import { onLongPress } from "@vueuse/core";
 import { onClickOutside } from "@vueuse/core";
+
+const props = defineProps({
+  task:Object,
+});
+console.log(props.task);
 
 const longpressoutside = ref(null);
 
