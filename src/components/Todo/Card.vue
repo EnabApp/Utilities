@@ -17,21 +17,20 @@
       v-if="longPressedHook == false"
       absolute="~"
       color="primary"
+      @click="removeTask()"
     />
     <div class="p-2 text-center flex flex-col gap-5">
       <!-- Title -->
-      <h3 class="font-semibold" text="white">عرس حسن</h3>
+      <h3 class="font-semibold" text="white">{{task.title}}</h3>
       <div>
         <!-- Description -->
         <p text="gray-300" class="text-sm">
-          `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque
-          euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisl,
-          eu consectetur nisl nisi...
+            {{task.content}}
         </p>
       </div>
       <div class="flex justify-end mt-3">
         <!-- Date -->
-        <p text="gray-400" class="text-xs">من 2022/23/2 الى 2023/24/8</p>
+        <p text="gray-400" class="text-xs">من {{task.startDate}} الى {{task.endDate}}</p>
       </div>
     </div>
   </div>
@@ -42,12 +41,22 @@ import { ref } from "vue";
 import { onLongPress } from "@vueuse/core";
 import { onClickOutside } from "@vueuse/core";
 
+const props = defineProps({
+  task:Object,
+});
+console.log(props.task);
+
 const longpressoutside = ref(null);
 
 const htmlRefHook = ref<HTMLElement | null>(null);
 const longPressedHook = ref(true);
 
+
 //===Card Shake Function====//
+
+const removeTask =() => {
+  props.task;
+}
 const onLongPressCallbackHook = (e: PointerEvent) => {
   longPressedHook.value = false;
   warnDisabled();

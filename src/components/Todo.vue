@@ -31,7 +31,13 @@
           title="قيد التنفيذ"
         />
       </UiMenu>
-      <TodoList />
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <div v-for="item in tasks" :key="item">
+            <TodoCard  :task="item" />
+          </div>
+        </div>
+
       <Teleport to="body">
         <UiModal
           v-model="stateModal"
@@ -42,7 +48,7 @@
           <template v-slot:title>
             <div ref="titleEl">
               <h4 v-if="stateTitle" text="w-100">
-                <UiInput h="20" v-model="task" />
+                <UiInput h="20" v-model="title"  />
               </h4>
               <div v-if="!stateTitle" @click="toggleTitle()">
                 <div flex="~" items="center">
@@ -60,22 +66,24 @@
                   تاريخ البدء
                 </h5>
                 <div mx="4">
-                    <input bg="transparent" text="primary" type="date" class=" w-full border-0  cursor-pointer  text-sm rounded p-0.5" >
+                    <input v-model="startDate" bg="transparent" text="primary" type="date" class=" w-full border-0  cursor-pointer  text-sm rounded p-0.5" >
                 </div>
                   <h5 mx="4" text="primary" >
                       تاريخ الانتهاء
                   </h5>
                 <div mx="4">
-                    <input bg="transparent" text="w-100" type="date" class=" w-full border-0  cursor-pointer text-sm rounded p-0.5">
+                    <input v-model="endDate" bg="transparent" text="w-100" type="date" class=" w-full border-0  cursor-pointer text-sm rounded p-0.5">
                 </div>
             </div>
+
             <div class="overflow-y-auto h-90 w-full mt-10">
+
               <textarea
+                v-model="content"
                 ref="textarea"
                 bg="transparent"
                 text="w-100"
                 border="none"
-                v-model="input"
                 class="resize-none outline-none placeholder:text-w-100"
                 cols="100"
                 rows="10"
@@ -83,6 +91,9 @@
               />
             </div>
           </div>
+          <button @click="addTask()">
+            <div class="i-fa6-solid:save text-xl mr-3">save</div>
+          </button>
           <!-- <div v-if="!stateSidebar" class="flex justify-center relative">
             <div
               @click="toggleSidebar()"
@@ -125,8 +136,8 @@
         @click="toggleModal()"
       >
         <div text="4xl" class="i-ant-design-plus-outlined"></div>
-      </div>
-      </div>
+          </div>
+        </div>
       </div>
     </UiDesktopWindow>
   </Transition>
@@ -140,6 +151,11 @@ import { useDraggable } from '@vueuse/core'
 let search = ref(null);
 
 const titleEl = ref(null);
+const title = ref(null);
+const tasks = ref([]);
+const content = ref('');
+const startDate = ref('');
+const endDate = ref('');
 
 const { textarea, input } = useTextareaAutosize();
 
@@ -176,6 +192,28 @@ const props = defineProps({
   },
 });
 
+const addTask=()=>{
+  if(content.value.trim === '' || startDate.value.trim === '' || endDate.value.trim === '')
+  {
+    alert('الرجاء إدخال جميع البيانات')
+    return
+  }
+  tasks.value.push({
+    title:title.value,
+    content:content.value,
+    startDate:startDate.value,
+    endDate:endDate.value,
+    state:0
+  })
+  content.value = ''
+  startDate.value = ''
+  endDate.value = ''
+  title.value = ''
+  toggleModal()
+}
+watch(tasks,newVal =>{
+  localStorage.setItem('tasks',JSON.stringify(newVal))
+},{deep:true})
 watch(search, (val) => {
   localStorage.setItem("search", val);
 });
