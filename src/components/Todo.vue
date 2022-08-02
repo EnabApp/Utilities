@@ -2,7 +2,7 @@
   <!-- Application -->
   <Transition>
     <UiDesktopWindow v-if="app.running" v-show="!app.minimized" :app="app">
-      <div mt="5" flex="~ col grow gap-2">
+      <d1iv mt="5" flex="~ col grow gap-2" w="full">
         <!-- ===========>> Search InPut Content <<=========== -->
         <UiInput
           m="4"
@@ -13,36 +13,75 @@
           placeholder="ابحث هنا..."
           icon="i-ant-design-search-outlined"
         />
-        <!-- ===========>>  UiMenu Content <<=========== -->
-        <UiMenu w="52" bg="[#252c37]" mt="2" mr="6" title="الفلاتر">
-          <UiMenuItem bg="[#3c4651]" hover="bg-[#]" text="white" title="مهمة" />
-          <UiMenuItem
-            bg="[#3c4651]"
-            hover="bg-[#]"
-            text="white"
-            title="مكتمله"
-          />
-          <UiMenuItem
-            bg="[#3c4651]"
-            hover="bg-[#]"
-            text="white"
-            title=" غير مكتمله"
-          />
-          <UiMenuItem
-            bg="[#3c4651]"
-            hover="bg-[#]"
-            text="white"
-            title="قيد التنفيذ"
-          />
-        </UiMenu>
-        <!-- ===========>> Card List Content <<=========== -->
-        <div
-          class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 overflow-y-scroll h-[50rem]"
-        >
-          <div v-for="item in tasks" :key="item">
-            <TodoCard :task="item" />
-          </div>
-        </div>
+        <UiTabGroup mr="3" :col="false" :tabs="['المهام', 'الأرشيف']">
+          <template #tab-1>
+            <!-- ===========>>  UiMenu Content <<=========== -->
+            <UiMenu w="52" bg="[#252c37]" mt="2" mr="3" title="الفلاتر">
+              <UiMenuItem
+                bg="[#3c4651]"
+                hover="bg-[#]"
+                text="white"
+                title="مهمة"
+              />
+              <UiMenuItem
+                bg="[#3c4651]"
+                hover="bg-[#]"
+                text="white"
+                title="مكتمله"
+              />
+              <UiMenuItem
+                bg="[#3c4651]"
+                hover="bg-[#]"
+                text="white"
+                title=" غير مكتمله"
+              />
+              <UiMenuItem
+                bg="[#3c4651]"
+                hover="bg-[#]"
+                text="white"
+                title="قيد التنفيذ"
+              />
+            </UiMenu>
+            <!-- ===========>> Card List Content <<=========== -->
+            <div class="overflow-y-scroll h-[85%]">
+              <div class="grid grid-cols-1 md:grid-cols-2">
+                <div v-for="item in tasks" :key="item">
+                  <TodoCard :task="item" />
+                </div>
+              </div>
+            </div>
+            <!-- Flowing Button -->
+            <div
+              bg="[#4eaccf]"
+              hover="bg-[#3c92b2]"
+              duration="200"
+              rounded="full"
+              m="15"
+              w="[55px]"
+              h="[55px]"
+              text="white"
+              flex="~"
+              justify="center"
+              items="center"
+              cursor="pointer"
+              absolute="~"
+              bottom="0"
+              right="0"
+              shadow="lg"
+              @click="toggleModal()"
+            >
+              <div
+                text="4xl"
+                relative="~"
+                class="i-ant-design-plus-outlined"
+              ></div>
+            </div>
+          </template>
+
+          <template #tab-2>
+            <TodoArchive />
+          </template>
+        </UiTabGroup>
         <!-- ===========>> Model Content <<=========== -->
         <Teleport to="body">
           <UiModal
@@ -61,7 +100,7 @@
                     <h4 text="w-100">
                       {{ task }}
                     </h4>
-                    <div class="i-fa6-solid:pen text-xl mr-3"></div>
+                    <div class="i-fa6-solid-pen text-xl mr-3"></div>
                   </div>
                 </div>
               </div>
@@ -105,51 +144,9 @@
               </div>
             </div>
             <UiButton title="save" :outline="true" w="15" @click="addTask()" />
-            <!-- <div v-if="!stateSidebar" class="flex justify-center relative">
-            <div
-              @click="toggleSidebar()"
-              class="i-bi:arrow-up-square-fill absolute top-15"
-              text="xl w-100"
-            ></div>
-          </div>
-          <Transition>
-            <div
-              v-if="stateSidebar"
-              class="border rounded-lg flex flex-col mt-3 items-center h-20"
-            >
-              <div
-                @click="toggleSidebar()"
-                class="i-bi:arrow-down-square-fill"
-                text="xl w-100"
-              ></div>
-              <div class="flex">
-                <div></div>
-                <div>df</div>
-                <div>df</div>
-              </div>
-            </div>
-          </Transition> -->
           </UiModal>
         </Teleport>
-        <div ref="el" :style="style" style="position: fixed">
-          <div
-            bg="[#4eaccf]"
-            hover="bg-[#3c92b2]"
-            duration="200"
-            rounded="full"
-            w="[62px]"
-            h="[62px]"
-            text="white"
-            flex="~"
-            justify="center"
-            items="center"
-            cursor="pointer"
-            @click="toggleModal()"
-          >
-            <div text="4xl" class="i-ant-design-plus-outlined"></div>
-          </div>
-        </div>
-      </div>
+      </d1iv>
     </UiDesktopWindow>
   </Transition>
 </template>
@@ -178,23 +175,23 @@ const [stateSidebar, toggleSidebar] = useToggle(false);
 
 const [stateTitle, toggleTitle] = useToggle(false);
 
-const el = ref(null);
+// const el = ref(null);
 // const elSize = ref(null)
 // const {x:elX , y:elY} = useElementBounding(elSize)
-const { x, y, style } = useDraggable(el, {
-  initialValue: { x: 900, y: 600 },
-  // onMove: (value) => {
-  //   //  if(value.x > right.value)
-  //   //  x.value = right.value
-  //   // else if(value.x < left.value)
-  //   // x.value = left.value
-  //   if(elX.value-value.x <= 10)
-  //     return
+// const { x, y, style } = useDraggable(el, {
+//   initialValue: { x: 900, y: 600 },
+// onMove: (value) => {
+//   //  if(value.x > right.value)
+//   //  x.value = right.value
+//   // else if(value.x < left.value)
+//   // x.value = left.value
+//   if(elX.value-value.x <= 10)
+//     return
 
-  //   console.log(elX.value)
+//   console.log(elX.value)
 
-  // }
-});
+// }
+// });
 const props = defineProps({
   app: {
     type: Object,
