@@ -1,15 +1,20 @@
 <template>
   <div flex="~" ref="hoverdate">
     <div
-      :class="{ shake: disabled, border: disabled }"
+      :class="{
+        shake: disabled,
+        'border-gray-400': isNew,
+        'border-amber-400': isProgress,
+        'border-green-400': isDone,
+      }"
       m="6"
       w="[90%]"
       h="[100%]"
       bg="[#252C37]"
       rounded="lg"
       hover="shadow-md -translate-y-1"
-      border="r-7 green-400"
       ref="htmlRefHook"
+      border-r="7"
       cursor="pointer"
       duration="200"
     >
