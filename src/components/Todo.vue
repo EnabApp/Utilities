@@ -16,32 +16,58 @@
         <UiTabGroup mr="3" :col="false" :tabs="['المهام', 'الأرشيف']">
           <template #tab-1>
             <!-- ===========>>  UiMenu Content <<=========== -->
-            <UiMenu w="52" bg="[#252c37]" mt="2" mr="3" title="الفلاتر">
-              <UiMenuItem
-                bg="[#3c4651]"
-                hover="bg-[#]"
-                text="white"
-                title="مهمة"
-              />
-              <UiMenuItem
-                bg="[#3c4651]"
-                hover="bg-[#]"
-                text="white"
-                title="مكتمله"
-              />
-              <UiMenuItem
-                bg="[#3c4651]"
-                hover="bg-[#]"
-                text="white"
-                title=" غير مكتمله"
-              />
-              <UiMenuItem
-                bg="[#3c4651]"
-                hover="bg-[#]"
-                text="white"
-                title="قيد التنفيذ"
-              />
-            </UiMenu>
+            <div flex="~">
+              <div>
+                <UiMenu w="30" bg="[#252c37]" mt="2" mr="3" title="الفلاتر">
+                  <UiMenuItem
+                    bg="[#3c4651]"
+                    hover="bg-[#]"
+                    text="white"
+                    title="جديد"
+                  />
+                  <UiMenuItem
+                    bg="[#3c4651]"
+                    hover="bg-[#]"
+                    text="white"
+                    title="قيد التنفيذ"
+                  />
+                  <UiMenuItem
+                    bg="[#3c4651]"
+                    hover="bg-[#]"
+                    text="white"
+                    title="مكتمله"
+                  />
+                </UiMenu>
+              </div>
+              <div>
+                <UiMenu w="40" bg="[#252c37]" mt="2" mr="3" title="فئه">
+                  <UiMenuItem
+                    bg="[#3c4651]"
+                    hover="bg-[#]"
+                    text="white"
+                    title="شخصي"
+                  />
+                  <UiMenuItem
+                    bg="[#3c4651]"
+                    hover="bg-[#]"
+                    text="white"
+                    title="عمل"
+                  />
+                  <UiMenuItem
+                    bg="[#3c4651]"
+                    hover="bg-[#]"
+                    text="white"
+                    title="مناسبات"
+                  />
+                  <UiMenuItem
+                    bg="[#3c4651]"
+                    hover="bg-[#]"
+                    text="white"
+                    title="مشتريات"
+                  />
+                </UiMenu>
+              </div>
+            </div>
             <!-- ===========>> Card List Content <<=========== -->
             <div class="overflow-y-scroll h-[85%]">
               <div class="grid grid-cols-1 md:grid-cols-2">
