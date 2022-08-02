@@ -56,33 +56,82 @@
             Category
           </div>
           <div flex="~" items="center" gap="3" border="0.5" rounded="~" px="2">
-            <div
-            @click="isnew()"
-              :class="{
-                'text-white':isNew,
-                'opacity-30': isProgress,
-                'opacity-20': isDone,
-              }"
-              class="i-clarity-new-line hover:text-w-90 text-lg cursor-pointer"
-            ></div>
-            <div
-            @click="isprogress()"
-              :class="{
-                'text-amber-400': isProgress,
-                'opacity-30': isNew,
-                'opacity-20': isDone,
-              }"
-              class="i-mdi-progress-clock hover:text-amber-300 cursor-pointer"
-            ></div>
-            <div
-            @click="isdone()"
-              :class="{
-                'text-green-400': isDone,
-                'opacity-30': isNew,
-                'opacity-20': isProgress,
-              }"
-              class="i-mdi-progress-check hover:text-green-400 cursor-pointer"
-            ></div>
+            <div ref="hoverNew">
+              <div
+                v-if="isHoveredNew"
+                absolute="~"
+                border="0.5"
+                border-color="white"
+                px="2"
+                rounded="sm"
+                bg="[#252C37]"
+                right="66"
+                text="[10px]"
+                top="13"
+              >
+                مهمة جديده
+              </div>
+              <div
+                @click="isnew()"
+                :class="{
+                  'text-white': isNew,
+                  'opacity-30': isProgress,
+                  'opacity-20': isDone,
+                }"
+                class="i-clarity-new-line hover:text-w-90 text-lg cursor-pointer"
+              ></div>
+            </div>
+            <div ref="hoverPro">
+              <div
+                v-if="isHoveredPro"
+                absolute="~"
+                border="0.5"
+                border-color="white"
+                px="2"
+                rounded="sm"
+                bg="[#252C37]"
+                right="73"
+                text="[10px]"
+                top="13"
+              >
+                قيد التنفيد
+              </div>
+              <div
+                @click="isprogress()"
+                :class="{
+                  'text-amber-400': isProgress,
+                  'opacity-30': isNew,
+                  'opacity-20': isDone,
+                }"
+                class="i-mdi-progress-clock hover:text-amber-300 cursor-pointer"
+              ></div>
+            </div>
+            <div ref="hoverDone">
+              <div
+                v-if="isHoveredDone"
+                absolute="~"
+                border="0.5"
+                border-color="white"
+                px="2"
+                rounded="sm"
+                bg="[#252C37]"
+                left="52"
+                text="[10px]"
+                top="13"
+              >
+                مكتملة
+              </div>
+              <div
+                relative="~"
+                @click="isdone()"
+                :class="{
+                  'text-green-400': isDone,
+                  'opacity-30': isNew,
+                  'opacity-20': isProgress,
+                }"
+                class="i-mdi-progress-check hover:text-green-400 cursor-pointer"
+              ></div>
+            </div>
           </div>
           <!-- Date -->
           <div ml="2">
@@ -117,6 +166,15 @@ const longpressoutside = ref(null);
 
 const htmlRefHook = ref<HTMLElement | null>(null);
 const longPressedHook = ref(true);
+
+const hoverPro = ref();
+const isHoveredPro = useElementHover(hoverPro);
+
+const hoverNew = ref();
+const isHoveredNew = useElementHover(hoverNew);
+
+const hoverDone = ref();
+const isHoveredDone = useElementHover(hoverDone);
 
 const hoverdate = ref();
 const isHovered = useElementHover(hoverdate);
@@ -162,7 +220,6 @@ const isdone = () => {
   isNew.value = false;
   isProgress.value = false;
 };
-
 </script>
 
 <style>
