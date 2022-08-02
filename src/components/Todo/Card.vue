@@ -60,7 +60,7 @@
             @click="isnew()"
               :class="{
                 'text-white':isNew,
-                'opacity-20': isProgress,
+                'opacity-30': isProgress,
                 'opacity-20': isDone,
               }"
               class="i-clarity-new-line hover:text-w-90 text-lg cursor-pointer"
@@ -69,7 +69,7 @@
             @click="isprogress()"
               :class="{
                 'text-amber-400': isProgress,
-                'opacity-20': isNew,
+                'opacity-30': isNew,
                 'opacity-20': isDone,
               }"
               class="i-mdi-progress-clock hover:text-amber-300 cursor-pointer"
@@ -78,8 +78,8 @@
             @click="isdone()"
               :class="{
                 'text-green-400': isDone,
-                'opacity-20': isNew,
-                'opacity-40': isProgress,
+                'opacity-30': isNew,
+                'opacity-20': isProgress,
               }"
               class="i-mdi-progress-check hover:text-green-400 cursor-pointer"
             ></div>
@@ -162,6 +162,7 @@ const isdone = () => {
   isNew.value = false;
   isProgress.value = false;
 };
+
 </script>
 
 <style>
