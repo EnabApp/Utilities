@@ -16,7 +16,7 @@
       ref="htmlRefHook"
       border-r="7"
       cursor="pointer"
-      duration="200"
+      duration="700"
     >
       <div gap="1">
         <div flex="~ col">
