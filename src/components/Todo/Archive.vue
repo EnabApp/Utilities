@@ -1,7 +1,5 @@
 <template>
-  <div h="[40rem]" w="full" m="3">
-    <div flex="~">
-      <div text="4xl">الارشيف</div>
-    </div>
+  <div flex="~">
+    <div mt="2.7" mr="7" text="3xl">ارشيف المهام المكتمله</div>
   </div>
 </template>

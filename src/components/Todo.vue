@@ -17,7 +17,6 @@
           <template #tab-1>
             <!-- ===========>>  UiMenu Content <<=========== -->
             <div flex="~">
-              
               <div>
                 <UiMenu w="30" bg="[#252c37]" mt="2" mr="3" title="الفلاتر">
                   <UiMenuItem
@@ -108,6 +107,13 @@
 
           <template #tab-2>
             <TodoArchive />
+            <div class="overflow-y-scroll h-[85%]">
+              <div class="grid grid-cols-1 md:grid-cols-2">
+                <div v-for="item in tasks" :key="item">
+                  <TodoCard :task="item" />
+                </div>
+              </div>
+            </div>
           </template>
         </UiTabGroup>
         <!-- ===========>> Model Content <<=========== -->
@@ -135,16 +141,6 @@
             </template>
             <div flex="~ col">
               <div flex="~" class="items-center">
-                <h5>تاريخ البدء</h5>
-                <div mx="4">
-                  <input
-                    v-model="startDate"
-                    bg="transparent"
-                    text="primary"
-                    type="date"
-                    class="w-full border-0 cursor-pointer text-sm rounded p-0.5"
-                  />
-                </div>
                 <h5 mx="4" text="primary">تاريخ الانتهاء</h5>
                 <div mx="4">
                   <input
@@ -182,6 +178,11 @@
 <script setup>
 import { ref } from "vue";
 import { useDraggable } from "@vueuse/core";
+import moment from "moment/min/moment-with-locales";
+import ar from "moment/locale/ar-sa";
+
+moment.locale("ar", ar);
+
 // import { useElementBounding } from '@vueuse/core'
 
 let search = ref(null);
@@ -192,6 +193,7 @@ const tasks = ref([]);
 const content = ref("");
 const startDate = ref("");
 const endDate = ref("");
+const diff = ref("");
 
 const { textarea, input } = useTextareaAutosize();
 
@@ -202,7 +204,6 @@ const [stateModal, toggleModal] = useToggle(false);
 const [stateSidebar, toggleSidebar] = useToggle(false);
 
 const [stateTitle, toggleTitle] = useToggle(false);
-
 // const el = ref(null);
 // const elSize = ref(null)
 // const {x:elX , y:elY} = useElementBounding(elSize)
@@ -239,12 +240,11 @@ const addTask = () => {
   tasks.value.push({
     title: title.value,
     content: content.value,
-    startDate: startDate.value,
     endDate: endDate.value,
+    curdiff: moment(endDate.value).format("MM/Do , h:mm a"),
     state: 0,
   });
   content.value = "";
-  startDate.value = "";
   endDate.value = "";
   title.value = "";
   toggleModal();

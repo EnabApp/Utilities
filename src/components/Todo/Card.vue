@@ -1,5 +1,5 @@
 <template>
-  <div flex="~" ref="hoverdate">
+  <div flex="~" ref="hoverdate" m="6">
     <div
       :class="{
         shake: disabled,
@@ -7,7 +7,6 @@
         'border-amber-400': isProgress,
         'border-green-400': isDone,
       }"
-      m="6"
       w="[90%]"
       h="[100%]"
       bg="[#252C37]"
@@ -143,18 +142,14 @@
           <!--=======>> Date <<======= -->
           <div ml="2">
             <span
-              v-if="isHovered == true"
               :class="{
                 'text-gray-400': isNew,
                 'text-amber-400': isProgress,
                 'text-green-400': isDone,
               }"
             >
-              {{ task.endDate }}</span
+              {{ task.curdiff }} </span
             >
-            <span v-if="isHovered == false" text="g-90"
-              >{{ task.startDate }}
-            </span>
             <!-- <span>{{ isHovered ? task.endDate : task.startDate }}</span> -->
           </div>
         </div>
