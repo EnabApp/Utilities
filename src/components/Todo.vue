@@ -17,6 +17,7 @@
           <template #tab-1>
             <!-- ===========>>  UiMenu Content <<=========== -->
             <div flex="~">
+              
               <div>
                 <UiMenu w="30" bg="[#252c37]" mt="2" mr="3" title="الفلاتر">
                   <UiMenuItem
@@ -76,15 +77,16 @@
                 </div>
               </div>
             </div>
-            <!-- Flowing Button -->
+            <!-- ==========>> Flowing Button <<========== -->
             <div
-              bg="[#4eaccf]"
-              hover="bg-[#3c92b2]"
+              bg="transparent"
+              border="0.5"
+              hover="bg-w-10"
               duration="200"
-              rounded="full"
+              rounded="md"
               m="15"
-              w="[55px]"
-              h="[55px]"
+              w="[58px]"
+              h="[58px]"
               text="white"
               flex="~"
               justify="center"

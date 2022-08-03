@@ -58,7 +58,7 @@
             text="sm"
             px="0.5"
           >
-            Category
+            الفئه
           </div>
           <div flex="~" items="center" gap="3" border="0.5" rounded="~" px="2">
             <div ref="hoverNew">
