@@ -61,7 +61,15 @@
             الفئه
           </div>
           <!-- =======>> Small Icon Buttons <<======= -->
-          <div flex="~" items="center" gap="3" border="0.5" rounded="~" px="2">
+          <div
+            flex="~"
+            items="center"
+            gap="3"
+            border="0.5"
+            rounded="~"
+            px="2"
+            right="5"
+          >
             <div ref="hoverNew">
               <div
                 v-if="isHoveredNew"
@@ -142,15 +150,15 @@
           <!--=======>> Date <<======= -->
           <div ml="2">
             <span
+              duration="700"
               :class="{
-                'text-gray-400': isNew,
+                'text-gray-300': isNew,
                 'text-amber-400': isProgress,
                 'text-green-400': isDone,
               }"
             >
-              {{ task.curdiff }} </span
-            >
-            <!-- <span>{{ isHovered ? task.endDate : task.startDate }}</span> -->
+              {{ task.curdiff }}
+            </span>
           </div>
         </div>
       </div>

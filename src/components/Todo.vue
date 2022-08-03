@@ -193,7 +193,6 @@ const tasks = ref([]);
 const content = ref("");
 const startDate = ref("");
 const endDate = ref("");
-const diff = ref("");
 
 const { textarea, input } = useTextareaAutosize();
 
