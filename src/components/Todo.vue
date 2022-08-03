@@ -84,7 +84,7 @@
               hover="bg-w-10"
               duration="200"
               rounded="md"
-              m="15"
+              m="24"
               w="[58px]"
               h="[58px]"
               text="white"

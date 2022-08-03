@@ -12,7 +12,6 @@
       h="[100%]"
       bg="[#252C37]"
       rounded="lg"
-      hover="shadow-md -translate-y-1"
       ref="htmlRefHook"
       border-r="7"
       cursor="pointer"
@@ -21,19 +20,21 @@
       <div gap="1">
         <div flex="~ col">
           <div flex="~" items="center" justify="between">
-            <!-- Title -->
+            <!-- =======>> Title <<=======  -->
             <h3 class="font-semibold" text="white" p="1" mr="2">
               {{ task.title ? task.title : "لم يذكر" }}
             </h3>
+            <!-- =======>> Ui X Button / Delete Button <<======= -->
             <UiCloseButton
               v-if="longPressedHook == false"
               ml="2"
               mt="1"
               ref="longpressoutside"
               color="primary"
+              @click="deleteTask()"
             />
           </div>
-          <!-- Description -->
+          <!-- =======>> Description <<======= -->
           <div>
             <p text="gray-300 md" px="4">
               {{ task.content.substring(0, 75) + "..." }}
@@ -49,7 +50,7 @@
           mt="4"
           mb="2"
         >
-          <!-- Category -->
+          <!-- =======>> Category <<======= -->
           <div
             hover="bg-w-10"
             mr="3"
@@ -60,6 +61,7 @@
           >
             الفئه
           </div>
+          <!-- =======>> Small Icon Buttons <<======= -->
           <div flex="~" items="center" gap="3" border="0.5" rounded="~" px="2">
             <div ref="hoverNew">
               <div
@@ -138,9 +140,22 @@
               ></div>
             </div>
           </div>
-          <!-- Date -->
+          <!--=======>> Date <<======= -->
           <div ml="2">
-            <span>{{ isHovered ? task.endDate : task.startDate }}</span>
+            <span
+              v-if="isHovered == true"
+              :class="{
+                'text-gray-400': isNew,
+                'text-amber-400': isProgress,
+                'text-green-400': isDone,
+              }"
+            >
+              {{ task.endDate }}</span
+            >
+            <span v-if="isHovered == false" text="g-90"
+              >{{ task.startDate }}
+            </span>
+            <!-- <span>{{ isHovered ? task.endDate : task.startDate }}</span> -->
           </div>
         </div>
       </div>
@@ -153,7 +168,7 @@ import { ref } from "vue";
 import { onLongPress } from "@vueuse/core";
 import { onClickOutside } from "@vueuse/core";
 import { useElementHover } from "@vueuse/core";
-import { tryUseNuxt } from "~~/../node_modules/@nuxt/kit/dist";
+// import { tryUseNuxt } from "~~/../node_modules/@nuxt/kit/dist";
 
 const props = defineProps({
   task: Object,
@@ -172,16 +187,16 @@ const longpressoutside = ref(null);
 const htmlRefHook = ref<HTMLElement | null>(null);
 const longPressedHook = ref(true);
 
-const hoverPro = ref();
+const hoverPro = ref(); // ref to Progress icon
 const isHoveredPro = useElementHover(hoverPro);
 
-const hoverNew = ref();
+const hoverNew = ref(); // ref to New  icon
 const isHoveredNew = useElementHover(hoverNew);
 
-const hoverDone = ref();
+const hoverDone = ref(); // ref to Done icon
 const isHoveredDone = useElementHover(hoverDone);
 
-const hoverdate = ref();
+const hoverdate = ref(); // ref to the date div
 const isHovered = useElementHover(hoverdate);
 
 //===Card Long Press Function====//
