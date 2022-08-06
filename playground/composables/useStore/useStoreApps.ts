@@ -31,7 +31,7 @@ export const useStoreApps = defineStore("apps", {
               maximized: false,
               solid: true,
               owned: true,
-              size: "w-3xl h-4xl max-w-xl max-h-xl",
+              size: "min-w-[350px] min-h-[550px] max-w-[350px] max-h-[550px]",
               // widgets: [
               //   new Widget({
               //     id: 1,
