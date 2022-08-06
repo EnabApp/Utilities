@@ -1,32 +1,28 @@
 <template>
     <!-- Main -->
-    <div v-if="barState" w="full" h="60px" flex="~" justify="center" items="center" bg="primaryOp" z="200">
+    <div v-if="barState" w="full" h="60px" flex="~" justify="center" items="center" bg="primary dark:primaryOp" z="200">
 
       <!-- Content -->
       <div h="46px" flex="~" items="center" w="full" m="x-70px">
 
-        <!-- Icon -->
-        <div>
-          <UiIconsEnab h="45px" />
-        </div>
+        <!-- Menu Icon -->
+        <BottomBarMenu />
 
         <!-- Divider -->
-        <div h="32px" w="1px" bg="secondaryOp" m="x-16px"></div>
-
-        <!-- Search -->
-        <BottomBarSearch />
-
-        <!-- Divider -->
-        <div h="32px" w="1px" bg="secondaryOp" m="x-16px"></div>
+        <div h="32px" w="1px" bg="secondary dark:secondaryOp" m="x-16px"></div>
 
         <!-- Applications -->
         <div flex="~ gap-7px grow">
           <TransitionGroup>
             <!-- Application loop -->
             <div v-for="app in appsStore.getRunningApps" :key="'bottom-bar-app-' + app.id" @click="minimizeApp(app)"  :class="[
-              app.id == appsStore.focused ? 'text-white' : 'text-secondary hover:text-white'
-            ]" cursor="pointer" p="x-15px" w="200px" h="43px" flex="~ gap-7px" items="center" justify="start" bg="secondaryOp" border="rounded-10px" transition="all 0.025s ease-in-out">
+              app.id == appsStore.focused
+              ? 'text-primaryOp dark:text-primary'
+              : 'text-secondaryOp dark:text-secondary hover:text-primaryOp dark:hover:text-primary',
+            ]" cursor="pointer" p="x-15px" w="200px" h="43px" flex="~ gap-7px" items="center" justify="start" bg="secondary dark:secondaryOp" border="rounded-5px" transition="all 0.025s ease-in-out">
+              <!-- Application Icon -->
               <div h="16px" w="16px" :class="app.icon"></div>
+              <!-- Application Title -->
               <span un-text="xl">
                 {{ app.title }}
               </span>
@@ -35,30 +31,30 @@
         </div>
 
         <!-- Divider -->
-        <div h="32px" w="1px" bg="secondaryOp" m="x-16px"></div>
+        <div h="32px" w="1px" bg="secondary dark:secondaryOp" m="x-16px"></div>
 
-        <div flex="~ gap-24px" items="center" bg="hover:secondaryOp" p="y-2 x-4" border="rounded-10px" cursor="pointer" un-text="white">
-            <!-- Calendar -->
-            <div h="32px" w="32px" class="i-bxs-calendar"></div>
-
-            <!-- Datetime -->
-            <div un-text="xl">2022 \ 8 \ 1 - 11:18</div>
-        </div>
+        <BottomBarDatetime />
 
         <!-- Divider -->
-        <div h="32px" w="1px" bg="secondaryOp" m="x-16px"></div>
+        <div h="32px" w="1px" bg="secondary dark:secondaryOp" m="x-16px"></div>
+
+        <!-- Notifications -->
+        <BottomBarNotifications />
+
+        <!-- Divider -->
+        <!-- <div h="32px" w="1px" bg="secondary dark:secondaryOp" m="x-16px"></div> -->
         
         <!-- Bottombar minimize -->
-        <div un-text="white">
+        <!-- <div un-text="primaryOp dark:primary">
             <div cursor="pointer" @dblclick="barToggle()" h="32px" w="32px" class="i-bi-arrow-down-right-square-fill"></div>
-        </div>
+        </div> -->
       </div>
 
     </div>
 
     <!-- Floating Button -->
     <div ref="floatingButton" v-else p="20px" position="fixed" left="0" bottom="0" :style="style" z="200">
-      <div un-text="white" bg="secondaryOp" border="rounded-10px" w="60px" h="60px" flex="~" items="center" justify="center">
+      <div un-text="primaryOp dark:primary" bg="primary dark:primaryOp" border="rounded-10px" w="60px" h="60px" flex="~" items="center" justify="center">
         <div @dblclick="barToggle()" cursor="pointer" h="32px" w="32px" class="i-bi-arrow-up-right-square-fill"></div>
       </div>
     </div>
