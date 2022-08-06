@@ -1,0 +1,52 @@
+<template>
+  <div flex="~ col gap-6px">
+    <div flex="~ gap-9px" items="center">
+      <input cursor="pointer" type="checkbox" w="12px" v-model="checked" />
+      <span cursor="pointer" font="bold" text="white">{{ title }}</span>
+    </div>
+    <div flex="~ gap-9px" items="center">
+      <div position="relative">
+        <div
+          w="12px"
+          h="12px"
+          z="10"
+          text="white"
+          class="i-material-symbols-date-range"
+        ></div>
+        <input
+          v-model="date"
+          opacity="0"
+          z="20"
+          type="date"
+          position="absolute"
+          top="0"
+          right="0"
+          h="full"
+          w="full"
+        />
+      </div>
+      <span font="thin" text="xs">{{ ddate }}</span>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import moment from "moment/min/moment-with-locales";
+import ar from "moment/locale/ar-sa";
+
+moment.updateLocale("ar", ar);
+// moment(endDate.value).format("MM/Do , h:mm a"),
+
+import { ref } from "vue";
+const title = ref("مهمة معينة");
+const date = ref("");
+const ddate = moment(date).format("MMM , Do , h:mm A");
+
+const checked = ref(false);
+</script>
+
+<style scoped>
+input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+</style>
