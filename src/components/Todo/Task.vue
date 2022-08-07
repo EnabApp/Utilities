@@ -1,8 +1,13 @@
 <template>
   <div flex="~ col gap-6px">
     <div flex="~ gap-9px" items="center">
-      <input cursor="pointer" type="checkbox" w="12px" v-model="checked" />
-      <span cursor="pointer" font="bold" text="white">{{ title }}</span>
+      <input cursor="pointer" type="checkbox" w="12px" v-model="todo.done" />
+      <input
+        font="bold"
+        w="full"
+        text="white"
+        v-model="todo.title"
+      />
     </div>
     <div flex="~ gap-9px" items="center">
       <div position="relative">
@@ -14,7 +19,7 @@
           class="i-material-symbols-date-range"
         ></div>
         <input
-          v-model="date"
+          v-model="todo.date"
           opacity="0"
           z="20"
           type="date"
@@ -25,7 +30,7 @@
           w="full"
         />
       </div>
-      <span font="thin" text="xs">{{ ddate }}</span>
+      <span font="thin" text="xs">{{ todo.date }}</span>
     </div>
   </div>
 </template>
@@ -35,18 +40,22 @@ import moment from "moment/min/moment-with-locales";
 import ar from "moment/locale/ar-sa";
 
 moment.updateLocale("ar", ar);
-// moment(endDate.value).format("MM/Do , h:mm a"),
+// moment().format("MM/Do , h:mm a"),
 
-import { ref } from "vue";
-const title = ref("مهمة معينة");
-const date = ref("");
-const ddate = moment(date).format("MMM , Do , h:mm A");
-
-const checked = ref(false);
+const props = defineProps({
+  todo: Object,
+});
 </script>
 
 <style scoped>
 input::-webkit-calendar-picker-indicator {
   cursor: pointer;
+}
+input:not([type="radio"]):not([type="checkbox"]) {
+  appearance: none;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: initial;
 }
 </style>

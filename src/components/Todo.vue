@@ -5,11 +5,115 @@
       <div flex="~ col grow gap-2" w="full">
         <UiTabGroup p="x-20px" :col="false" :tabs="['جميع المهام', 'المؤرشفة']">
           <template #tab-1>
-            <TodoAll />
+            <div flex="~ col">
+              <!-- ===========>> Add InPut Content <<=========== -->
+              <div>
+                <UiInput
+                  m="y-20px"
+                  placeholder="اضافه مهمة ..."
+                  v-model="title"
+                  @keydown.enter="addTodo()"
+                />
+              </div>
+              <div
+                m="t-5px"
+                flex="~ col gap-30px"
+                w="full"
+                overflow="y-scroll"
+                h="315px"
+              >
+                <!-- ===========>> Todo Content <<=========== -->
+                <div v-for="todo in todos_a" :key="todo">
+                  <div
+                    v-if="todo"
+                    flex="~"
+                    class=""
+                    justify="between"
+                    items="center"
+                    @mouseover="hover = true"
+                    @mouseleave="hover = false"
+                  >
+                    <TodoTask :todo="todo" />
+                    <div
+                      v-if="hover"
+                      duration="200"
+                      hover="bg-white"
+                      class="i-bi-x-square-fill"
+                      @click="removeTodo(todo)"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </template>
-
+          <!-- =========>> End Template <<========= -->
           <template #tab-2>
-            <TodoArchive />
+            <div flex="~ col">
+              <div flex="~ col">
+                <!-- ===========>> Add InPut Content <<=========== -->
+                <UiInput
+                  m="y-20px"
+                  placeholder="ابحث هنا..."
+                  icon="i-akar-icons-search"
+                  v-model="searchQuery"
+                />
+                <div
+                v-if="searchQuery != ''"
+                  flex="~ col gap-5px"
+                  w="full"
+                  bg="white opacity-10"
+                  rounded="5px"
+                  class=""
+                  overflow="y-scroll"
+                  h="75px"
+                >
+                  <div v-for="todo in searchedTodos" :key="todo">
+                    <div flex="~" w="full" justify="between" items="center">
+                      <TodoTask
+                        :todo="todo"
+                        v-if="todo.done == true && searchQuery != ''"
+                      />
+                      <div
+                        v-if="todo.done == true && searchQuery != ''"
+                        duration="200"
+                        bg="white opacity-30"
+                        hover="bg-white"
+                        class="i-bi-x-square-fill"
+                        @click="removeTodo(todo)"
+                      ></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                m="t-5px"
+                flex="~ col gap-30px"
+                w="full"
+                overflow="y-scroll"
+                h="315px"
+              >
+                <!-- ===========>> Todo Content <<=========== -->
+                <div v-for="todo in todos_a" :key="todo">
+                  <div
+                    flex="~"
+                    class=""
+                    justify="between"
+                    items="center"
+                    @mouseover="hover = true"
+                    @mouseleave="hover = false"
+                  >
+                    <TodoTask :todo="todo" v-if="todo.done == true" />
+                    <div
+                      v-if="hover && todo.done == true"
+                      duration="200"
+                      hover="bg-white"
+                      class="i-bi-x-square-fill"
+                      @click="removeTodo(todo)"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </template>
         </UiTabGroup>
       </div>
@@ -18,7 +122,62 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, computed, watch } from "vue";
+
+const todos = ref([]);
+const searchQuery = ref("");
+const title = ref("");
+const date = ref("قم باختيار التاريخ");
+
+const hover = ref();
+
+const todos_a = computed(() =>
+  todos.value.sort((a, b) => {
+    return b.createdAt - a.createdAt;
+  })
+);
+
+watch(
+  todos,
+  (newVal) => {
+    localStorage.setItem("todos", JSON.stringify(newVal));
+  },
+  {
+    deep: true,
+  }
+);
+
+const addTodo = () => {
+  if (title.value.trim() === "") {
+    return;
+  }
+  todos.value.push({
+    title: title.value,
+    date: date.value,
+    done: false,
+    createdAt: new Date().getTime(),
+  });
+  console.log("Todo Added");
+  title.value = "";
+};
+
+const removeTodo = (todo) => {
+  todos.value = todos.value.filter((t) => t !== todo);
+  console.log("Todo Deleted");
+};
+
+const searchedTodos = computed(() => {
+  return todos.value.filter((todo) => {
+    return (
+      todo.title.toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1
+    );
+  });
+});
+console.log(searchedTodos);
+
+onMounted(() => {
+  todos.value = JSON.parse(localStorage.getItem("todos")) || [];
+});
 
 const props = defineProps({
   app: {
