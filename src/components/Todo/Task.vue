@@ -30,7 +30,7 @@
           w="full"
         />
       </div>
-      <span font="thin" text="xs">{{ todo.date }}</span>
+      <span font="thin" text="xs">{{ moment(todo.date).format("MMM / Do / YYYY") }}</span>
     </div>
   </div>
 </template>
@@ -40,7 +40,7 @@ import moment from "moment/min/moment-with-locales";
 import ar from "moment/locale/ar-sa";
 
 moment.updateLocale("ar", ar);
-// moment().format("MM/Do , h:mm a"),
+// ,
 
 const props = defineProps({
   todo: Object,

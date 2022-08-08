@@ -58,14 +58,14 @@
                   v-model="searchQuery"
                 />
                 <div
-                v-if="searchQuery != ''"
-                  flex="~ col gap-5px"
+                  v-if="searchQuery != ''"
+                  p="t-15px b-15px"
+                  flex="~ col gap-15px"
                   w="full"
                   bg="white opacity-10"
                   rounded="5px"
-                  class=""
                   overflow="y-scroll"
-                  h="75px"
+                  h="65px"
                 >
                   <div v-for="todo in searchedTodos" :key="todo">
                     <div flex="~" w="full" justify="between" items="center">
@@ -93,10 +93,9 @@
                 h="315px"
               >
                 <!-- ===========>> Todo Content <<=========== -->
-                <div v-for="todo in todos_a" :key="todo">
+                <div v-for="todo in todos_f" :key="todo">
                   <div
                     flex="~"
-                    class=""
                     justify="between"
                     items="center"
                     @mouseover="hover = true"
@@ -127,13 +126,21 @@ import { ref, onMounted, computed, watch } from "vue";
 const todos = ref([]);
 const searchQuery = ref("");
 const title = ref("");
-const date = ref("قم باختيار التاريخ");
+const date = ref("");
 
 const hover = ref();
 
+//All Todos (Active and Done)
 const todos_a = computed(() =>
   todos.value.sort((a, b) => {
     return b.createdAt - a.createdAt;
+  })
+);
+
+// Todos Filleted by Done
+const todos_f = computed(() =>
+  todos.value.filter((todo) => {
+    return todo.done == true;
   })
 );
 
@@ -147,6 +154,7 @@ watch(
   }
 );
 
+//Add Todo Function
 const addTodo = () => {
   if (title.value.trim() === "") {
     return;
@@ -161,11 +169,13 @@ const addTodo = () => {
   title.value = "";
 };
 
+//Remove Todo Function
 const removeTodo = (todo) => {
   todos.value = todos.value.filter((t) => t !== todo);
   console.log("Todo Deleted");
 };
 
+//Search Todo Function
 const searchedTodos = computed(() => {
   return todos.value.filter((todo) => {
     return (
@@ -173,7 +183,6 @@ const searchedTodos = computed(() => {
     );
   });
 });
-console.log(searchedTodos);
 
 onMounted(() => {
   todos.value = JSON.parse(localStorage.getItem("todos")) || [];
