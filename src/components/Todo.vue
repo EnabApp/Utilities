@@ -34,6 +34,7 @@
                     @mouseleave="hover = false"
                   >
                     <TodoTask :todo="todo" />
+                <!-- ===========>> Remove Button Content <<=========== -->
                     <div
                       v-if="hover"
                       duration="200"
@@ -50,7 +51,7 @@
           <template #tab-2>
             <div flex="~ col">
               <div flex="~ col">
-                <!-- ===========>> Add InPut Content <<=========== -->
+                <!-- ===========>> Search InPut Content <<=========== -->
                 <UiInput
                   m="y-20px"
                   placeholder="ابحث هنا..."
@@ -73,8 +74,9 @@
                         :todo="todo"
                         v-if="todo.done == true && searchQuery != ''"
                       />
+                      <!-- ===========>> Remove Button Content <<=========== -->
                       <div
-                        v-if="todo.done == true && searchQuery != ''"
+                        v-if="todo.done == true"
                         duration="200"
                         bg="white opacity-30"
                         hover="bg-white"
@@ -102,6 +104,8 @@
                     @mouseleave="hover = false"
                   >
                     <TodoTask :todo="todo" v-if="todo.done == true" />
+
+                    <!-- ===========>> Search InPut Content <<=========== -->
                     <div
                       v-if="hover && todo.done == true"
                       duration="200"

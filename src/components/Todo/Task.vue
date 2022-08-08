@@ -2,15 +2,10 @@
   <div flex="~ col gap-6px">
     <div flex="~ gap-9px" items="center">
       <input cursor="pointer" type="checkbox" w="12px" v-model="todo.done" />
-      <input
-        font="bold"
-        w="full"
-        text="white"
-        v-model="todo.title"
-      />
+      <input font="bold" w="full" text="white" v-model="todo.title" />
     </div>
     <div flex="~ gap-9px" items="center">
-      <div position="relative">
+      <div relative="~">
         <div
           w="12px"
           h="12px"
@@ -22,15 +17,15 @@
           v-model="todo.date"
           opacity="0"
           z="20"
-          type="date"
-          position="absolute"
+          type="datetime-local"
+          absolute="~"
           top="0"
           right="0"
           h="full"
           w="full"
         />
       </div>
-      <span font="thin" text="xs">{{ moment(todo.date).format("MMM / Do / YYYY") }}</span>
+      <span font="thin" text="xs">{{ moment(todo.date).calendar() }}</span>
     </div>
   </div>
 </template>
