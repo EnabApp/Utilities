@@ -25,7 +25,6 @@
                 <!-- ===========>> Todo Content <<=========== -->
                 <div v-for="todo in todos_a" :key="todo">
                   <div
-                    v-if="todo"
                     id="todoDiv"
                     flex="~"
                     class=""
