@@ -1,0 +1,8 @@
+{
+    "name": "Todo",
+    "title": "مهامي",
+    "icon": "i-ri-todo-line",
+    "owned":true,
+    "size": "min-w-[350px] min-h-[550px] max-w-[350px] max-h-[550px]",
+    "maximized": false
+}
