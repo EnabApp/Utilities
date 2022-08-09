@@ -11,6 +11,7 @@ export default defineNuxtConfig({
 
     modules: [
         MyModule,
+        '@enab/ui',
         '@enab/core',
         '@pinia/nuxt',
         '@vueuse/nuxt',

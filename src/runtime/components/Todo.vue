@@ -117,7 +117,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, computed, watch } from "vue";
+import { ref, watch } from "#imports";
 
 const todos = ref([]);
 const searchQuery = ref("");
@@ -190,8 +190,6 @@ const props = defineProps({
     required: true,
   },
 });
-
-const getApp = props.app.getSubApp(1);
 </script>
 
 <style>
