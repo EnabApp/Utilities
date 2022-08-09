@@ -25,7 +25,7 @@
           w="full"
         />
       </div>
-      <span font="thin" text="xs">{{ moment(todo.date).calendar() }}</span>
+      <span font="thin" text="xs">{{ moment(todo.date).format('MMMM / Do / YYYY , h:mm a') }}</span>
     </div>
   </div>
 </template>

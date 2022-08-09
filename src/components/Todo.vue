@@ -26,17 +26,16 @@
                 <div v-for="todo in todos_a" :key="todo">
                   <div
                     v-if="todo"
+                    id="todoDiv"
                     flex="~"
                     class=""
                     justify="between"
                     items="center"
-                    @mouseover="hover = true"
-                    @mouseleave="hover = false"
                   >
                     <TodoTask :todo="todo" />
-                <!-- ===========>> Remove Button Content <<=========== -->
+                    <!-- ===========>> Remove Button Content <<=========== -->
                     <div
-                      v-if="hover"
+                      id="markHover"
                       duration="200"
                       hover="bg-white"
                       class="i-bi-x-square-fill"
@@ -96,18 +95,12 @@
               >
                 <!-- ===========>> Todo Content <<=========== -->
                 <div v-for="todo in todos_f" :key="todo">
-                  <div
-                    flex="~"
-                    justify="between"
-                    items="center"
-                    @mouseover="hover = true"
-                    @mouseleave="hover = false"
-                  >
+                  <div flex="~" justify="between" items="center" id="todoDiv">
                     <TodoTask :todo="todo" v-if="todo.done == true" />
 
-                    <!-- ===========>> Search InPut Content <<=========== -->
+                    <!-- ===========>> Remove Bottom Content <<=========== -->
                     <div
-                      v-if="hover && todo.done == true"
+                      id="markHover"
                       duration="200"
                       hover="bg-white"
                       class="i-bi-x-square-fill"
@@ -201,3 +194,12 @@ const props = defineProps({
 
 const getApp = props.app.getSubApp(1);
 </script>
+
+<style>
+#markHover {
+  opacity: 0;
+}
+#todoDiv:hover #markHover {
+  opacity: 1;
+}
+</style>
