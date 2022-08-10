@@ -31,14 +31,15 @@
 </template>
 
 <script setup>
-import moment from "moment/min/moment-with-locales";
-import ar from "moment/locale/ar-sa";
-
-moment.updateLocale("ar", ar);
+import { useMoment } from '#imports' 
 
 const props = defineProps({
   todo: Object,
 });
+
+const moment = useMoment()
+
+
 </script>
 
 <style scoped>
