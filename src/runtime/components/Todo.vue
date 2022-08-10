@@ -72,7 +72,7 @@
                         :todo="todo"
                         v-if="todo.done == true && searchQuery != ''"
                       />
-                      <!-- ===========>> Remove Button Content <<=========== -->
+                      <!-- ===========>> Remove Button Content in Search <<=========== -->
                       <div
                         v-if="todo.done == true"
                         duration="200"
@@ -97,7 +97,7 @@
                   <div flex="~" justify="between" items="center" id="todoDiv">
                     <TodoTask :todo="todo" v-if="todo.done == true" />
 
-                    <!-- ===========>> Remove Bottom Content <<=========== -->
+                    <!-- ===========>> Remove Botton Content <<=========== -->
                     <div
                       id="markHover"
                       duration="200"
