@@ -117,7 +117,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from "#imports";
+import { ref, watch, computed, onMounted } from "#imports";
 
 const todos = ref([]);
 const searchQuery = ref("");
