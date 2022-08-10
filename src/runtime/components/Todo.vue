@@ -39,7 +39,6 @@
                       w="70px"
                       title="حذف"
                       color="error"
-                      :loading="false"
                       @click="removeTodo(todo)"
                     />
                   </div>
@@ -62,7 +61,7 @@
                   p="t-15px b-15px"
                   flex="~ col gap-15px"
                   w="full"
-                  bg="white opacity-10"
+                  bg="secondaryOp dark:Secondary opacity-10"
                   rounded="5px"
                   overflow="y-scroll"
                   h="65px"
@@ -78,7 +77,6 @@
                         w="70px"
                         title="حذف"
                         color="error"
-                        :loading="false"
                         @click="removeTodo(todo)"
                       />
                     </div>
