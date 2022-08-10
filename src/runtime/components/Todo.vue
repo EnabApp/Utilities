@@ -33,13 +33,15 @@
                   >
                     <TodoTask :todo="todo" />
                     <!-- ===========>> Remove Button Content <<=========== -->
-                    <div
+                    <UiButton
                       id="markHover"
-                      duration="200"
-                      hover="bg-white"
-                      class="i-bi-x-square-fill"
+                      duration="250"
+                      w="70px"
+                      title="حذف"
+                      color="error"
+                      :loading="false"
                       @click="removeTodo(todo)"
-                    ></div>
+                    />
                   </div>
                 </div>
               </div>
@@ -53,7 +55,6 @@
                 <UiInput
                   m="y-20px"
                   placeholder="ابحث هنا..."
-                  icon="i-akar-icons-search"
                   v-model="searchQuery"
                 />
                 <div
@@ -73,14 +74,13 @@
                         v-if="todo.done == true && searchQuery != ''"
                       />
                       <!-- ===========>> Remove Button Content in Search <<=========== -->
-                      <div
-                        v-if="todo.done == true"
-                        duration="200"
-                        bg="white opacity-30"
-                        hover="bg-white"
-                        class="i-bi-x-square-fill"
+                      <UiButton
+                        w="70px"
+                        title="حذف"
+                        color="error"
+                        :loading="false"
                         @click="removeTodo(todo)"
-                      ></div>
+                      />
                     </div>
                   </div>
                 </div>
@@ -98,13 +98,15 @@
                     <TodoTask :todo="todo" v-if="todo.done == true" />
 
                     <!-- ===========>> Remove Botton Content <<=========== -->
-                    <div
+                    <UiButton
                       id="markHover"
-                      duration="200"
-                      hover="bg-white"
-                      class="i-bi-x-square-fill"
+                      duration="250"
+                      w="70px"
+                      title="حذف"
+                      color="error"
+                      :loading="false"
                       @click="removeTodo(todo)"
-                    ></div>
+                    />
                   </div>
                 </div>
               </div>

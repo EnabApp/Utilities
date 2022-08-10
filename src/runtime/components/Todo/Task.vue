@@ -2,7 +2,7 @@
   <div flex="~ col gap-6px">
     <div flex="~ gap-9px" items="center">
       <input cursor="pointer" type="checkbox" w="12px" v-model="todo.done" />
-      <input font="bold" w="full" text="white" v-model="todo.title" />
+      <input font="bold" w="full" text="dark:white" v-model="todo.title" />
     </div>
     <div flex="~ gap-9px" items="center">
       <div relative="~">
@@ -10,7 +10,7 @@
           w="12px"
           h="12px"
           z="10"
-          text="white"
+          text="dark:white"
           class="i-material-symbols-date-range"
         ></div>
         <input
