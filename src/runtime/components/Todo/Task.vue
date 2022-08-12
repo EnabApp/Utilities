@@ -1,8 +1,8 @@
 <template>
   <div flex="~ col gap-6px">
     <div flex="~ gap-9px" items="center">
-      <input cursor="pointer" type="checkbox" w="12px" v-model="todo.done" />
-      <input font="bold" w="full" text="white" v-model="todo.title" />
+      <input cursor="pointer" type="checkbox" text="primaryOp dark:secondary"  w="12px" v-model="todo.done" />
+      <input font="bold" w="full" text="primaryop dark:primary" v-model="todo.title" />
     </div>
     <div flex="~ gap-9px" items="center">
       <div relative="~">
@@ -10,7 +10,7 @@
           w="12px"
           h="12px"
           z="10"
-          text="white"
+          text="primaryOp dark:secondary"
           class="i-material-symbols-date-range"
         ></div>
         <input
@@ -25,7 +25,7 @@
           w="full"
         />
       </div>
-      <span font="thin" text="xs">{{ moment(todo.date).calendar() }}</span>
+      <span font="thin" text="primaryOp dark:secondary xs">{{ moment(todo.date).calendar() }}</span>
     </div>
   </div>
 </template>
