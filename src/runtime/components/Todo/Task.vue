@@ -1,8 +1,21 @@
 <template>
   <div flex="~ col gap-6px">
     <div flex="~ gap-9px" items="center">
-      <input cursor="pointer" type="checkbox" text="primaryOp dark:secondary"  w="12px" v-model="todo.is_complete" />
-      <input font="bold" w="full" text="primaryop dark:primary" v-model="todo.task" />
+      <input
+        @change="changeComplete(todo)"
+        v-model="todo.is_complete"
+        cursor="pointer"
+        type="checkbox"
+        text="primaryOp dark:secondary"
+        w="12px"
+      />
+      <input
+        @change="changeTask(todo)"
+        v-model="todo.task"
+        font="bold"
+        w="full"
+        text="primaryop dark:primary"
+      />
     </div>
     <div flex="~ gap-9px" items="center">
       <div relative="~">
@@ -14,6 +27,7 @@
           class="i-material-symbols-date-range"
         ></div>
         <input
+          @change="changeDate(todo)"
           v-model="todo.inserted_at"
           opacity="0"
           z="20"
@@ -25,21 +39,40 @@
           w="full"
         />
       </div>
-      <span font="thin" text="primaryOp dark:secondary xs">{{ moment(todo.inserted_at).calendar() }}</span>
+      <span font="thin" text="primaryOp dark:secondary xs">{{
+        moment(todo.inserted_at).calendar()
+      }}</span>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useMoment } from '#imports' 
+import {
+  useSupabaseClient,
+  useMoment,
+} from "#imports";
+
+const moment = useMoment();
+const supabase = useSupabaseClient();
+
+//=========>>Update Task Function<<=========
+const changeTask = async (todo) => {
+
+};
+
+//=========>>Update complete Function<<=========
+const changeComplete = async (todo) => {
+
+};
+
+//=========>>Update inserted Function<<=========
+const changeDate = async (todo) => {
+
+};
 
 const props = defineProps({
   todo: Object,
 });
-
-const moment = useMoment()
-
-
 </script>
 
 <style scoped>
