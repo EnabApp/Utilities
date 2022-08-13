@@ -36,25 +36,80 @@ export const useTodoStore = defineStore("todo-store", {
       });
     },
 
-    // FIXME: this is not working
-    async removeTask(id) {
+    async changeDate(task) {
+      const { $toast } = useNuxtApp();
       const supabase = useSupabaseClient();
-      const { data, error } = await supabase
-        .from("add_todo")
+
+      let { error, data } = await supabase
+        .from("app_todo")
+        .update({
+          inserted_at: task.inserted_at,
+        })
+        .select("id")
+        .single();
+
+      if (error) {
+        $toast.error("حدثت مشكله اثناء التغيير");
+        return;
+      }
+      this.inserted_at = task.inserted_at;
+    },
+
+    async changeTask(task){
+      const { $toast } = useNuxtApp();
+      const supabase = useSupabaseClient();
+
+      let { error, data } = await supabase
+        .from("app_todo")
+        .update({
+          task: task.task,
+        })
+        .select("id")
+        .single();
+
+      if (error) {
+        $toast.error("حدثت مشكله اثناء التغيير");
+        return;
+      }
+      this.task = task.task;
+    },
+    
+    async changeComplete(task) {
+      const { $toast } = useNuxtApp();
+      const supabase = useSupabaseClient();
+
+      let { error, data } = await supabase
+        .from("app_todo")
+        .update({
+          is_complete: task.is_complete,
+        })
+        .select("id")
+        .single();
+
+      if (error) {
+        $toast.error("حدثت مشكله اثناء التغيير");
+        return;
+      }
+      this.is_complete = data;
+    },
+
+    //FIXME: this is not working
+    async deleteTask(task) {
+      const { $toast } = useNuxtApp();
+      const supabase = useSupabaseClient();
+
+      let { error } = await supabase
+        .from("app_todo")
         .delete()
-        .match({ id: id });
-    },
-    // TODO: make the ability to update the task
-    async changeTask() {
-      const supabase = useSupabaseClient();
-    },
+        .where("id", id)
+        .single();
 
-    async changeComplete() {
-      const supabase = useSupabaseClient();
-    },
-
-    async changeDate() {
-      const supabase = useSupabaseClient();
+      if (error) {
+        $toast.error("حدثت مشكلة أثناء الحذف");
+        return;
+      }
+      this.task = this.task.filter((t) => t.id !== id);
+      $toast.success("تم الحذف بنجاح");
     },
 
     async fetchTasks() {

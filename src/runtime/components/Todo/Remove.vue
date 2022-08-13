@@ -7,19 +7,20 @@
     title="حذف"
     color="error"
     :loading="false"
-    @click="removeTask(id)"
+    @click="removeTask(todo)"
   />
 </template>
 
 <script setup>
 import { useTodoStore } from "../../composables/useTodoStore";
-import { useSupabaseClient } from "#imports";
 
-const supabase = useSupabaseClient();
 const todoStore = useTodoStore();
 
 //Remove Todo Function
-const removeTask = async (id) => {
-  await todoStore.removeTask(id);
+const removeTask = async () => {
+  await todoStore.deleteTask(todo);
 };
+const props = defineProps({
+  todo: Object,
+});
 </script>

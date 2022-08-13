@@ -47,27 +47,38 @@
 </template>
 
 <script setup>
-import {
-  useSupabaseClient,
-  useMoment,
-} from "#imports";
+import { useSupabaseClient, useMoment } from "#imports";
+import { useTodoStore } from "../../composables/useTodoStore";
 
+const todoStore = useTodoStore();
 const moment = useMoment();
 const supabase = useSupabaseClient();
 
 //=========>>Update Task Function<<=========
-const changeTask = async (todo) => {
 
+const changeTask = async (todo) => {
+  const taskData = {
+    task: todo.task,
+  };
+  await todoStore.changeTask(taskData);
 };
 
 //=========>>Update complete Function<<=========
-const changeComplete = async (todo) => {
 
+const changeComplete = async (todo) => {
+  const completeData = {
+    is_complete: todo.is_complete,
+  };
+  await todoStore.changeComplete(completeData);
 };
 
 //=========>>Update inserted Function<<=========
-const changeDate = async (todo) => {
 
+const changeDate = async (todo) => {
+  const dateData = {
+    inserted_at: todo.inserted_at,
+  };
+  await todoStore.changeDate(dateData);
 };
 
 const props = defineProps({
