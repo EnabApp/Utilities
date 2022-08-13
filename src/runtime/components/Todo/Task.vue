@@ -1,8 +1,8 @@
 <template>
   <div flex="~ col gap-6px">
     <div flex="~ gap-9px" items="center">
-      <input cursor="pointer" type="checkbox" text="primaryOp dark:secondary"  w="12px" v-model="todo.done" />
-      <input font="bold" w="full" text="primaryop dark:primary" v-model="todo.title" />
+      <input cursor="pointer" type="checkbox" text="primaryOp dark:secondary"  w="12px" v-model="todo.is_complete" />
+      <input font="bold" w="full" text="primaryop dark:primary" v-model="todo.task" />
     </div>
     <div flex="~ gap-9px" items="center">
       <div relative="~">
@@ -14,7 +14,7 @@
           class="i-material-symbols-date-range"
         ></div>
         <input
-          v-model="todo.date"
+          v-model="todo.inserted_at"
           opacity="0"
           z="20"
           type="datetime-local"
@@ -25,7 +25,7 @@
           w="full"
         />
       </div>
-      <span font="thin" text="primaryOp dark:secondary xs">{{ moment(todo.date).calendar() }}</span>
+      <span font="thin" text="primaryOp dark:secondary xs">{{ moment(todo.inserted_at).calendar() }}</span>
     </div>
   </div>
 </template>
