@@ -12,7 +12,7 @@ import { useTodoStore } from "../../composables/useTodoStore";
 const todoStore = useTodoStore();
 </script>
 
-
+<!-- TODO: Idea... make the todo  -->
 <style scoped>
 /* CLOSE TRANSITION */
 .v-enter-active {

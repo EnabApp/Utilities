@@ -1,6 +1,6 @@
 <template>
   <div flex="~ col">
-    <div flex="~" items="center" justify="betweem" w="full">
+    <div id="taskHover" flex="~" items="center" justify="betweem" w="full">
       <div w="full">
         <div flex="~ gap-9px" items="center">
           <!-- ===========>> Toggle complete Content <<=========== -->
@@ -50,6 +50,7 @@
       </div>
       <!-- ===========>> Remove Button Content <<=========== -->
       <UiButton
+        id="deleteHover"
         duration="250"
         w="70px"
         title="حذف"
@@ -94,5 +95,11 @@ input:not([type="radio"]):not([type="checkbox"]) {
   outline: none;
   background: none;
   cursor: initial;
+}
+#deleteHover {
+  opacity: 0;
+}
+#taskHover:hover #deleteHover {
+  opacity: 1;
 }
 </style>

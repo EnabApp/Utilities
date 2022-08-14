@@ -78,6 +78,7 @@ export const useTodoStore = defineStore("todo-store", {
       }
     },
 
+    //=======>> Get Task <<=======//
     async fetchTasks() {
       const supabase = useSupabaseClient();
       const { data, error } = await supabase
