@@ -25,6 +25,7 @@ export const useTodoStore = defineStore("todo-store", {
       if (error) {
         $toast.error("حدثت مشكلة أثناء الإضافة");
         return;
+        console.log(error);
       }
 
       this.tasks.unshift({
@@ -36,26 +37,31 @@ export const useTodoStore = defineStore("todo-store", {
       });
     },
 
+    //FIXME: the id is missing! (FIX: pass the correct id)
+    async deleteTask(task) {
+      const { $toast } = useNuxtApp();
+      const supabase = useSupabaseClient();
+      const { data, error } = await supabase
+        .from("app_todo")
+        .delete()
+        .eq( "id", task.id);
+      if (error) {
+        $toast.error("حدثت مشكله اثناء الحذف");
+        return;
+      }
+      $toast.success("تم الحذف بنجاح");
+    },
+
     async changeDate(task) {
       const { $toast } = useNuxtApp();
       const supabase = useSupabaseClient();
 
-      let { error, data } = await supabase
+      const { data, error } = await supabase
         .from("app_todo")
-        .update({
-          inserted_at: task.inserted_at,
-        })
-        .select("id")
-        .single();
-
-      if (error) {
-        $toast.error("حدثت مشكله اثناء التغيير");
-        return;
-      }
-      this.inserted_at = task.inserted_at;
+        .update({ task: task.task });
     },
 
-    async changeTask(task){
+    async changeTask() {
       const { $toast } = useNuxtApp();
       const supabase = useSupabaseClient();
 
@@ -73,43 +79,14 @@ export const useTodoStore = defineStore("todo-store", {
       }
       this.task = task.task;
     },
-    
-    async changeComplete(task) {
+
+    async changeCheckBox(task) {
       const { $toast } = useNuxtApp();
       const supabase = useSupabaseClient();
-
-      let { error, data } = await supabase
-        .from("app_todo")
-        .update({
-          is_complete: task.is_complete,
-        })
-        .select("id")
-        .single();
-
-      if (error) {
-        $toast.error("حدثت مشكله اثناء التغيير");
-        return;
-      }
-      this.is_complete = data;
-    },
-
-    //FIXME: this is not working
-    async deleteTask(task) {
-      const { $toast } = useNuxtApp();
-      const supabase = useSupabaseClient();
-
-      let { error } = await supabase
-        .from("app_todo")
-        .delete()
-        .where("id", id)
-        .single();
-
-      if (error) {
-        $toast.error("حدثت مشكلة أثناء الحذف");
-        return;
-      }
-      this.task = this.task.filter((t) => t.id !== id);
-      $toast.success("تم الحذف بنجاح");
+      const { data, error } = await supabase
+        .from("cities")
+        .update({ is_complete: "Middle Earth" })
+        .match({ name: "Auckland" });
     },
 
     async fetchTasks() {

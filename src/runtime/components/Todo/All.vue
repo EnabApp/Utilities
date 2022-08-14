@@ -4,8 +4,6 @@
     <div v-for="todo in todoStore.tasks" :key="todo.id">
       <div id="todoDiv" flex="~" class="" justify="between" items="center">
         <TodoTask :todo="todo" />
-        <!-- ===========>> Remove Button Content <<=========== -->
-        <TodoRemove />
       </div>
     </div>
   </div>

@@ -13,6 +13,7 @@
             <div flex="~ col">
               <TodoAdd />
               <TodoAll />
+              
             </div>
           </template>
           <!-- =========>> End Template <<========= -->
@@ -39,7 +40,6 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  todo: Object,
 });
 </script>
 

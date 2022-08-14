@@ -7,7 +7,7 @@
     title="حذف"
     color="error"
     :loading="false"
-    @click="removeTask(todo)"
+    @click="removeTask()"
   />
 </template>
 
@@ -15,12 +15,6 @@
 import { useTodoStore } from "../../composables/useTodoStore";
 
 const todoStore = useTodoStore();
+const tasks = todoStore.tasks;
 
-//Remove Todo Function
-const removeTask = async () => {
-  await todoStore.deleteTask(todo);
-};
-const props = defineProps({
-  todo: Object,
-});
 </script>
