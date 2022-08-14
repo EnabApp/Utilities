@@ -748,7 +748,7 @@
     pathe "^0.2.0"
     unbuild "^0.6.7"
 
-"@nuxt/schema@3.0.0-rc.8":
+"@nuxt/schema@3.0.0-rc.8", "@nuxt/schema@^3.0.0-rc.8":
   version "3.0.0-rc.8"
   resolved "https://registry.yarnpkg.com/@nuxt/schema/-/schema-3.0.0-rc.8.tgz#d8fab177f4b58fcdb83bd530a887d3b4acea90b7"
   integrity sha512-ODl9cmjH8fupvXjzITIvYT4OzapNvLrvWq9QUUgLhgv3Uxl2iX2J03oLj2aCQgfhte4mJhgHsBrtXvDLF/1GwA==

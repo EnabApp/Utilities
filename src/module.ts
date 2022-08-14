@@ -20,7 +20,6 @@ export default defineNuxtModule<ModuleOptions>({
     const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
     nuxt.options.build.transpile.push(runtimeDir)
     addPlugin(resolve(runtimeDir, 'registerer'))
-    addPlugin(resolve(runtimeDir, 'plugin'))
 
     nuxt.hook('components:dirs', (dirs) => {
       dirs.push({
@@ -31,7 +30,6 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.hook('autoImports:dirs', (dirs) => {
       dirs.push(resolve(runtimeDir, 'composables'))
-      dirs.push(resolve(runtimeDir, 'stores'))
     })
   }
 })
