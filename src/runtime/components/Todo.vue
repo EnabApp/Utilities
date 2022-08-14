@@ -36,13 +36,3 @@ const props = defineProps({
   },
 });
 </script>
-
-<style>
-#markHover {
-  opacity: 0;
-}
-
-#todoDiv:hover #markHover {
-  opacity: 1;
-}
-</style>

@@ -7,16 +7,18 @@ export const useTodoStore = defineStore("todo-store", {
   }),
   getters: {
     getTasks: (state) => state.tasks,
-    getArchivedTasks: state => state.tasks.filter(task => task.is_complete),
-    getNotArchivedTasks: state => state.tasks.filter(task => !task.is_complete)
+    getArchivedTasks: (state) => state.tasks.filter((task) => task.is_complete),
+    getNotArchivedTasks: (state) =>
+      state.tasks.filter((task) => !task.is_complete),
   },
   actions: {
+    //=======>> Update Task <<=======//
     async addTask(task) {
       const { $toast } = useNuxtApp();
       const supabase = useSupabaseClient();
 
-      if (task.task.length <= 3) {
-        $toast.error("عنوان المهمة لا يمكن ان يكون اقل من 4 حروف");
+      if (task.task.length <= 2) {
+        $toast.error("عنوان المهمة لا يمكن ان يكون اقل من 3 حروف");
         return;
       }
       let { error, data } = await supabase
@@ -30,17 +32,17 @@ export const useTodoStore = defineStore("todo-store", {
         return;
         console.log(error);
       }
-
-      this.tasks.unshift({
-        id: data.id,
-        user_id: task.user_id,
-        task: task.task,
-        inserted_at: data.inserted_at,
-        is_complete: task.is_complete,
-      });
+      if (!error) {
+        this.tasks.unshift({
+          id: data.id,
+          user_id: task.user_id,
+          task: task.task,
+          inserted_at: data.inserted_at,
+          is_complete: task.is_complete,
+        });
+      }
     },
-
-    //FIXME: the id is missing! (FIX: pass the correct id)
+    //=======>> Update Task <<=======//
     async deleteTask(task) {
       const { $toast } = useNuxtApp();
       const supabase = useSupabaseClient();
@@ -52,24 +54,15 @@ export const useTodoStore = defineStore("todo-store", {
         $toast.error("حدثت مشكله اثناء الحذف");
         return;
       }
-      this.tasks = this.tasks.filter(t => t.id !== task.id);
+      this.tasks = this.tasks.filter((t) => t.id !== task.id);
     },
 
-    async changeDate(task) {
-      const { $toast } = useNuxtApp();
-      const supabase = useSupabaseClient();
-
-      console.log(task)
-      // const { data, error } = await supabase
-      //   .from("app_todo")
-      //   .update({ inserted_at: task.inserted_at });
-    },
-
+    //=======>> Update Task <<=======//
     async updateTask(task) {
       const { $toast } = useNuxtApp();
       const supabase = useSupabaseClient();
       let cloneTask = { ...task };
-      delete cloneTask.id
+      delete cloneTask.id;
 
       let { error, data } = await supabase
         .from("app_todo")

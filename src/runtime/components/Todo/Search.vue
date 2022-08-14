@@ -19,8 +19,6 @@
             :todo="todo"
             v-if="todo.is_complete == true && searchQuery != ''"
           />
-          <!-- ===========>> Remove Button Content in Search <<=========== -->
-          <TodoRemove />
         </div>
       </div>
     </div>

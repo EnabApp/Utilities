@@ -1,26 +1,62 @@
 <template>
-  <div flex="~ col gap-6px">
-    <div flex="~ gap-9px" items="center">
-      <!-- Toggle complete -->
-      <input v-model="task.is_complete" cursor="pointer" type="checkbox"
-        text="primaryOp dark:secondary" w="12px" />
-      
-      <!-- Title -->
-      <input v-model.lazy="task.task" font="bold" w="full" text="primaryop dark:primary" />
-    </div>
-    <div flex="~ gap-9px" items="center">
-      <div relative="~">
-        <div w="12px" h="12px" z="10" text="primaryOp dark:secondary" class="i-material-symbols-date-range"></div>
-        <!-- Date -->
-        <input v-model="task.inserted_at" opacity="0" z="20" type="datetime-local" 
-              absolute="~" top="0" right="0" h="full" w="full" />
+  <div flex="~ col">
+    <div flex="~" items="center" justify="betweem" w="full">
+      <div w="full">
+        <div flex="~ gap-9px" items="center">
+          <!-- ===========>> Toggle complete Content <<=========== -->
+          <input
+            v-model="task.is_complete"
+            cursor="pointer"
+            type="checkbox"
+            text="primaryOp dark:secondary"
+            w="12px"
+          />
+          <!-- ===========>> Title Content <<=========== -->
+
+          <input
+            v-model.lazy="task.task"
+            font="bold"
+            w="full"
+            text="primaryop dark:primary"
+          />
+        </div>
+        <div flex="~ gap-9px" items="center">
+          <div relative="~">
+            <div
+              w="12px"
+              h="12px"
+              z="10"
+              text="primaryOp dark:secondary"
+              class="i-material-symbols-date-range"
+            ></div>
+
+            <!-- ===========>> Date Content <<=========== -->
+            <input
+              v-model="task.inserted_at"
+              opacity="0"
+              z="20"
+              type="datetime-local"
+              absolute="~"
+              top="0"
+              right="0"
+              h="full"
+              w="full"
+            />
+          </div>
+          <span font="thin" text="primaryOp dark:secondary xs">{{
+            moment(task.inserted_at).calendar()
+          }}</span>
+        </div>
       </div>
-      <span font="thin" text="primaryOp dark:secondary xs">{{
-          moment(task.inserted_at).calendar()
-      }}</span>
+      <!-- ===========>> Remove Button Content <<=========== -->
+      <UiButton
+        duration="250"
+        w="70px"
+        title="حذف"
+        color="error"
+        @click="todoStore.deleteTask(task)"
+      />
     </div>
-    <!-- ===========>> Remove Button Content <<=========== -->
-    <UiButton duration="250" w="70px" title="حذف" color="error" @click="todoStore.deleteTask(task)" />
   </div>
 </template>
 
@@ -40,10 +76,12 @@ const moment = useMoment();
 const supabase = useSupabaseClient();
 
 //=========>>Update Task Function<<=========
-watch (() => props.task, (updatedTask) => todoStore.updateTask(updatedTask), { deep: true })
-
+watch(
+  () => props.task,
+  (updatedTask) => todoStore.updateTask(updatedTask),
+  { deep: true }
+);
 </script>
-
 
 <style scoped>
 input::-webkit-calendar-picker-indicator {

@@ -2,7 +2,7 @@
   <div m="t-5px" flex="~ col gap-30px" w="full" overflow="y-scroll" h="315px">
     <!-- ===========>> Todo Content <<=========== -->
     <TransitionGroup>
-      <TodoTask :task="task" v-for="task in todoStore.tasks" :key="task.id" />
+      <TodoTask :task="task" v-for="task in todoStore.getNotArchivedTasks" :key="task.id" />
     </TransitionGroup>
   </div>
 </template>

@@ -17,7 +17,7 @@ const user = useUser();
 const { $toast } = useNuxtApp();
 const task = ref("");
 
-//Add Todo Function
+//=========>> Add Todo Function <<=========//
 const addTodo = async () => {
   const taskData = {
     user_id: user.value.id,
@@ -26,7 +26,6 @@ const addTodo = async () => {
     inserted_at: new Date(),
   };
   await todoStore.addTask(taskData);
-
   task.value = "";
 };
 
