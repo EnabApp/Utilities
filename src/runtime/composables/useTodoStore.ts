@@ -1,11 +1,14 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
 import { useSupabaseClient, useNuxtApp } from "#imports";
+import { setTransitionHooks } from "nuxt/dist/app/compat/capi";
 export const useTodoStore = defineStore("todo-store", {
   state: () => ({
     tasks: [],
   }),
   getters: {
     getTasks: (state) => state.tasks,
+    getArchivedTasks: state => state.tasks.filter(task => task.is_complete),
+    getNotArchivedTasks: state => state.tasks.filter(task => !task.is_complete)
   },
   actions: {
     async addTask(task) {
@@ -19,7 +22,7 @@ export const useTodoStore = defineStore("todo-store", {
       let { error, data } = await supabase
         .from("app_todo")
         .insert(task)
-        .select("id")
+        .select("id, inserted_at")
         .single();
 
       if (error) {
@@ -32,7 +35,7 @@ export const useTodoStore = defineStore("todo-store", {
         id: data.id,
         user_id: task.user_id,
         task: task.task,
-        inserted_at: task.inserted_at,
+        inserted_at: data.inserted_at,
         is_complete: task.is_complete,
       });
     },
@@ -44,49 +47,42 @@ export const useTodoStore = defineStore("todo-store", {
       const { data, error } = await supabase
         .from("app_todo")
         .delete()
-        .eq( "id", task.id);
+        .eq("id", task.id);
       if (error) {
         $toast.error("حدثت مشكله اثناء الحذف");
         return;
       }
-      $toast.success("تم الحذف بنجاح");
+      this.tasks = this.tasks.filter(t => t.id !== task.id);
     },
 
     async changeDate(task) {
       const { $toast } = useNuxtApp();
       const supabase = useSupabaseClient();
 
-      const { data, error } = await supabase
-        .from("app_todo")
-        .update({ task: task.task });
+      console.log(task)
+      // const { data, error } = await supabase
+      //   .from("app_todo")
+      //   .update({ inserted_at: task.inserted_at });
     },
 
-    async changeTask() {
+    async updateTask(task) {
       const { $toast } = useNuxtApp();
       const supabase = useSupabaseClient();
+      let cloneTask = { ...task };
+      delete cloneTask.id
 
       let { error, data } = await supabase
         .from("app_todo")
         .update({
-          task: task.task,
+          ...cloneTask,
         })
-        .select("id")
+        .eq("id", task.id)
         .single();
 
       if (error) {
-        $toast.error("حدثت مشكله اثناء التغيير");
+        $toast.error("حدثت مشكله اثناء الحفظ");
         return;
       }
-      this.task = task.task;
-    },
-
-    async changeCheckBox(task) {
-      const { $toast } = useNuxtApp();
-      const supabase = useSupabaseClient();
-      const { data, error } = await supabase
-        .from("cities")
-        .update({ is_complete: "Middle Earth" })
-        .match({ name: "Auckland" });
     },
 
     async fetchTasks() {

@@ -3,17 +3,11 @@
   <Transition>
     <UiDesktopWindow v-if="app.running" v-show="!app.minimized" :app="app">
       <div flex="~ col grow gap-2" w="full">
-        <UiTabGroup
-          p="x-20px"
-          text="21px"
-          :col="false"
-          :tabs="['جميع المهام', 'المؤرشفة']"
-        >
+        <UiTabGroup p="x-20px" text="21px" :col="false" :tabs="['جميع المهام', 'المؤرشفة']">
           <template #tab-1>
             <div flex="~ col">
               <TodoAdd />
               <TodoAll />
-              
             </div>
           </template>
           <!-- =========>> End Template <<========= -->
@@ -47,6 +41,7 @@ const props = defineProps({
 #markHover {
   opacity: 0;
 }
+
 #todoDiv:hover #markHover {
   opacity: 1;
 }
