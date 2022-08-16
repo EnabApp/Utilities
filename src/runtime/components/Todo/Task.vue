@@ -52,8 +52,6 @@
       <UiButton
         id="deleteHover"
         duration="250"
-        w="70px"
-        title="حذف"
         color="error"
         @click="todoStore.deleteTask(task)"
       />
