@@ -53,6 +53,8 @@
         id="deleteHover"
         duration="250"
         color="error"
+        title="حذف"
+        size="sm"
         @click="todoStore.deleteTask(task)"
       />
     </div>
@@ -60,7 +62,7 @@
 </template>
 
 <script setup>
-import { useSupabaseClient, useMoment } from "#imports";
+import { useSupabaseClient, useMoment,watch } from "#imports";
 import { useTodoStore } from "../../composables/useTodoStore";
 
 const props = defineProps({
