@@ -18,7 +18,6 @@
           <!-- =========>> End Template <<========= -->
           <template #tab-2>
             <div flex="~ col">
-              <TodoSearch />
               <TodoArchived />
             </div>
           </template>

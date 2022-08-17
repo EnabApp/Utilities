@@ -1,17 +1,34 @@
 <template>
-  <div m="t-5px" flex="~ col gap-30px" w="full" overflow="y-scroll" h="315px">
-    <!-- ===========>> Todo Content <<=========== -->
-    <TransitionGroup>
-      <TodoTask :task="task" v-for="task in todoStore.getArchivedTasks" :key="task.id" />
-    </TransitionGroup>
+  <div flex="~ col">
+    <!-- ========>> Search Input Content <<======== -->
+    <UiInput m="y-20px" placeholder="ابحث هنا..." v-model="searchQuery" />
+
+    <div m="t-5px" flex="~ col gap-30px" w="full" overflow="y-scroll" h="315px">
+      <!-- ===========>> Todo Content <<=========== -->
+      <TransitionGroup>
+        <TodoTask :task="task" v-for="task in searchedTodos" :key="task.id" />
+      </TransitionGroup>
+    </div>
   </div>
 </template>
 <script setup>
 import { useTodoStore } from "../../composables/useTodoStore";
+import { ref, computed } from "#imports";
 
 const todoStore = useTodoStore();
-</script>
+const searchQuery = ref("");
 
+const props = defineProps({
+  task: Object,
+});
+
+//========>> Search Todo Function <<========//
+const searchedTodos = computed(() => {
+  return todoStore.getArchivedTasks.filter((task) => {
+    return task.task.toLowerCase().includes(searchQuery.value.toLowerCase());
+  });
+});
+</script>
 
 <style scoped>
 /* CLOSE TRANSITION */
