@@ -2,8 +2,7 @@
   <div flex="~ col">
     <!-- ===========>> Search InPut Content <<=========== -->
     <UiInput m="y-20px" placeholder="ابحث هنا..." v-model="searchQuery" />
-
-    <!-- Content of the search should be in that dev below       
+    <div
       v-if="searchQuery != ''"
       p="t-15px b-15px"
       flex="~ col gap-15px"
@@ -11,15 +10,14 @@
       bg="secondaryOp dark:Secondary opacity-10"
       rounded="5px"
       overflow="y-scroll"
-      h="65px" -->
-    <div>
-      <div v-for="todo in searchedTodos" :key="todo">
-        <div flex="~" w="full" justify="between" items="center">
-          <TodoTask
-            :todo="todo"
-            v-if="todo.is_complete == true && searchQuery != ''"
-          />
-        </div>
+      h="65px"
+    >
+      <div flex="~ col" w="full" justify="between" items="center">
+        <TodoTask
+          :task="task"
+          v-for="task in searchedTodos"
+          :key="task.id"
+        />
       </div>
     </div>
   </div>
@@ -27,19 +25,20 @@
 
 <script setup>
 import { ref, computed } from "#imports";
+import { useTodoStore } from "../../composables/useTodoStore";
 
-const todos = ref([]);
+const todoStore = useTodoStore();
 const searchQuery = ref("");
 
-//Search Todo Function
+const props = defineProps({
+  task: Object,
+});
+
+//========>> Search Todo Function <<========//
 const searchedTodos = computed(() => {
-  return todos.value.filter((todo) => {
-    return (
-      todo.task.toLowerCase().indexOf(searchQuery.value.toLowerCase()) != -1
-    );
+  return todoStore.getArchivedTasks.filter((task) => {
+    return task.task.toLowerCase().includes(searchQuery.value.toLowerCase());
   });
 });
-const props = defineProps({
-  todo: Object,
-});
+console.log(searchedTodos.value);
 </script>

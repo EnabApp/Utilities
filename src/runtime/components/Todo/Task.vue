@@ -62,7 +62,7 @@
 </template>
 
 <script setup>
-import { useSupabaseClient, useMoment,watch } from "#imports";
+import { useSupabaseClient, useMoment, watch } from "#imports";
 import { useTodoStore } from "../../composables/useTodoStore";
 
 const props = defineProps({

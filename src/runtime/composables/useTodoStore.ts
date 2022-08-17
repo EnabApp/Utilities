@@ -1,6 +1,6 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
-import { useSupabaseClient, useNuxtApp } from "#imports";
-import { setTransitionHooks } from "nuxt/dist/app/compat/capi";
+import { useSupabaseClient, useNuxtApp, useMoment } from "#imports";
+
 export const useTodoStore = defineStore("todo-store", {
   state: () => ({
     tasks: [],
@@ -12,7 +12,7 @@ export const useTodoStore = defineStore("todo-store", {
       state.tasks.filter((task) => !task.is_complete),
   },
   actions: {
-    //=======>> Update Task <<=======//
+    //=======>> Add Task <<=======//
     async addTask(task) {
       const { $toast } = useNuxtApp();
       const supabase = useSupabaseClient();
@@ -42,7 +42,8 @@ export const useTodoStore = defineStore("todo-store", {
         });
       }
     },
-    //=======>> Update Task <<=======//
+
+    //=======>> Delete Task <<=======//
     async deleteTask(task) {
       const { $toast } = useNuxtApp();
       const supabase = useSupabaseClient();
@@ -61,6 +62,8 @@ export const useTodoStore = defineStore("todo-store", {
     async updateTask(task) {
       const { $toast } = useNuxtApp();
       const supabase = useSupabaseClient();
+      const moment = useMoment();
+
       let cloneTask = { ...task };
       delete cloneTask.id;
 
@@ -76,9 +79,13 @@ export const useTodoStore = defineStore("todo-store", {
         $toast.error("حدثت مشكله اثناء الحفظ");
         return;
       }
+      if (moment(task.inserted_at).calendar() == moment().calendar()) {
+        $toast.warning("لديك مهمة لانجازها اليوم");
+        return;
+      }
     },
 
-    //=======>> Get Task <<=======//
+    //=======>> Get Tasks <<=======//
     async fetchTasks() {
       const supabase = useSupabaseClient();
       const { data, error } = await supabase
