@@ -9,10 +9,10 @@ export const useTodoStore = defineStore("todo-store", {
     //=====>> Gets all Tasks <<=====//
     getTasks: (state) => state.tasks,
 
-    //=====>> Gets the tasks that they are not completed <<=====//
+    //=====>> Gets the tasks that they are completed <<=====//
     getArchivedTasks: (state) => state.tasks.filter((task) => task.is_complete),
 
-    //=====>> Gets the tasks that they are completed <<=====//
+    //=====>> Gets the tasks that they are not completed <<=====//
     getNotArchivedTasks: (state) =>
       state.tasks.filter((task) => !task.is_complete),
   },
