@@ -1,18 +1,24 @@
 <template>
   <div m="t-5px" flex="~ col gap-30px" w="full" overflow="y-scroll" h="315px">
-    <!-- ===========>> Todo Content <<=========== -->
+    <!-- ===========>> All Tasks Content <<=========== -->
     <TransitionGroup>
-      <TodoTask :task="task" v-for="task in todoStore.getNotArchivedTasks" :key="task.id" />
+      <TodoTask
+        :task="task"
+        v-for="task in todoStore.getNotArchivedTasks"
+        :key="task.id"
+      />
     </TransitionGroup>
   </div>
 </template>
+
+
 <script setup>
 import { useTodoStore } from "../../composables/useTodoStore";
 
 const todoStore = useTodoStore();
 </script>
 
-<!-- TODO: Idea... make the todo  -->
+
 <style scoped>
 /* CLOSE TRANSITION */
 .v-enter-active {

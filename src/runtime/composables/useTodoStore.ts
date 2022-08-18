@@ -6,8 +6,13 @@ export const useTodoStore = defineStore("todo-store", {
     tasks: [],
   }),
   getters: {
+    //=====>> Gets all Tasks <<=====//
     getTasks: (state) => state.tasks,
+
+    //=====>> Gets the tasks that they are not completed <<=====//
     getArchivedTasks: (state) => state.tasks.filter((task) => task.is_complete),
+
+    //=====>> Gets the tasks that they are completed <<=====//
     getNotArchivedTasks: (state) =>
       state.tasks.filter((task) => !task.is_complete),
   },
@@ -77,10 +82,6 @@ export const useTodoStore = defineStore("todo-store", {
 
       if (error) {
         $toast.error("حدثت مشكله اثناء الحفظ");
-        return;
-      }
-      if (moment(task.inserted_at).calendar() == moment().calendar()) {
-        $toast.warning("لديك مهمة لانجازها اليوم");
         return;
       }
     },

@@ -17,7 +17,7 @@
             v-model.lazy="task.task"
             font="bold"
             w="full"
-            text="primaryop dark:primary"
+            text="primaryOp dark:primary"
           />
         </div>
         <div flex="~ gap-9px" items="center">
@@ -53,7 +53,6 @@
         id="deleteHover"
         duration="250"
         color="error"
-        title="حذف"
         size="sm"
         @click="todoStore.deleteTask(task)"
       />
