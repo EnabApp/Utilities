@@ -1,6 +1,6 @@
 <template>
   <div flex="~ col">
-    <div flex="~" items="center" justify="betweem" w="full">
+    <div id="taskHover" flex="~" items="center" justify="betweem" w="full">
       <div w="full">
         <div flex="~ gap-9px" items="center">
           <!-- ===========>> Toggle complete Content <<=========== -->
@@ -17,7 +17,7 @@
             v-model.lazy="task.task"
             font="bold"
             w="full"
-            text="primaryop dark:primary"
+            text="primaryOp dark:primary"
           />
         </div>
         <div flex="~ gap-9px" items="center">
@@ -50,10 +50,10 @@
       </div>
       <!-- ===========>> Remove Button Content <<=========== -->
       <UiButton
+        id="deleteHover"
         duration="250"
-        w="70px"
-        title="حذف"
         color="error"
+        size="sm"
         @click="todoStore.deleteTask(task)"
       />
     </div>
@@ -61,7 +61,7 @@
 </template>
 
 <script setup>
-import { useSupabaseClient, useMoment } from "#imports";
+import { useSupabaseClient, useMoment, watch } from "#imports";
 import { useTodoStore } from "../../composables/useTodoStore";
 
 const props = defineProps({
@@ -94,5 +94,11 @@ input:not([type="radio"]):not([type="checkbox"]) {
   outline: none;
   background: none;
   cursor: initial;
+}
+#deleteHover {
+  opacity: 0;
+}
+#taskHover:hover #deleteHover {
+  opacity: 1;
 }
 </style>

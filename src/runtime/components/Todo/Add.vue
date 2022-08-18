@@ -2,21 +2,23 @@
   <div>
     <UiInput
       m="y-20px"
-      placeholder="اضافه مهمة ..."
+      placeholder="اضافة مهمة"
       v-model="task"
       @keydown.enter="addTodo()"
     />
   </div>
 </template>
 <script setup>
-import { useUser, useNuxtApp, ref } from "#imports";
+import { useUser, ref } from "#imports";
 import { useTodoStore } from "../../composables/useTodoStore";
 
 const todoStore = useTodoStore();
 const user = useUser();
-const { $toast } = useNuxtApp();
 const task = ref("");
 
+const props = defineProps({
+  task: Object,
+});
 //=========>> Add Todo Function <<=========//
 const addTodo = async () => {
   const taskData = {
@@ -28,8 +30,4 @@ const addTodo = async () => {
   await todoStore.addTask(taskData);
   task.value = "";
 };
-
-const props = defineProps({
-  todo: Object,
-});
 </script>
