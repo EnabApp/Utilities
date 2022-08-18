@@ -53,9 +53,12 @@
         id="deleteHover"
         duration="250"
         color="error"
-        size="sm"
+        outline="true"
         @click="todoStore.deleteTask(task)"
-      />
+        size="sm"
+      >
+        حذف
+      </UiButton>
     </div>
   </div>
 </template>
