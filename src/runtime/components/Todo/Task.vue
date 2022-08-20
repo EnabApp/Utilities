@@ -1,6 +1,6 @@
 <template>
   <div flex="~ col">
-    <div id="taskHover" flex="~" items="center" justify="betweem" w="full">
+    <div id="taskHover" flex="~" items="center" justify="between" w="full">
       <div w="full">
         <div flex="~ gap-9px" items="center">
           <!-- ===========>> Toggle complete Content <<=========== -->

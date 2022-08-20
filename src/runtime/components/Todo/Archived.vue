@@ -3,7 +3,7 @@
     <!-- ========>> Search Input Content <<======== -->
     <UiInput m="y-20px" placeholder="ابحث هنا..." v-model="searchQuery" />
 
-    <div m="t-5px" flex="~ col gap-30px" w="full" overflow="y-scroll" h="315px">
+    <div m="t-5px" flex="~ col gap-30px" w="full" overflow="y-scroll" h="315px" p="b-10px">
       <!-- ===========>> Todo Content <<=========== -->
       <TransitionGroup>
         <TodoTask :task="task" v-for="task in searchedTodos" :key="task.id" />

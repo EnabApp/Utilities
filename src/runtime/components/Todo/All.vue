@@ -1,5 +1,5 @@
 <template>
-  <div m="t-5px" flex="~ col gap-30px" w="full" overflow="y-scroll" h="315px">
+  <div m="t-5px" flex="~ col gap-30px" w="full" overflow="y-scroll" h="315px" p="b-10px">
     <!-- ===========>> All Tasks Content <<=========== -->
     <TransitionGroup>
       <TodoTask
