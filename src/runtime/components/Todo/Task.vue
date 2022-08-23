@@ -53,7 +53,7 @@
         id="deleteHover"
         duration="250"
         color="error"
-        outline="true"
+        :outline="true"
         @click="todoStore.deleteTask(task)"
         size="sm"
       >
@@ -78,7 +78,7 @@ const todoStore = useTodoStore();
 const moment = useMoment();
 const supabase = useSupabaseClient();
 
-//=========>>Update Task Function<<=========
+//=========>> Update Task Function <<=========
 watch(
   () => props.task,
   (updatedTask) => todoStore.updateTask(updatedTask),
