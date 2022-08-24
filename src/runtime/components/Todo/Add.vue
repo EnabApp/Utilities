@@ -16,7 +16,7 @@ const todoStore = useTodoStore();
 const user = useUser();
 const task = ref("");
 const moment = useMoment();
-let AddedDate = moment(new Date()).format("HH:mm:ss DD-MM-YYYY")
+
 const props = defineProps({
   task: Object,
 });
@@ -26,7 +26,7 @@ const addTodo = async () => {
     user_id: user.value.id,
     task: task.value,
     is_complete: false,
-    inserted_at: AddedDate,
+    inserted_at: new Date(),
   };
   await todoStore.addTask(taskData);
   task.value = "";
