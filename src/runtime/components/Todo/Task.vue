@@ -17,7 +17,7 @@
             v-model.lazy="task.task"
             font="bold"
             w="full"
-            text="primaryOp dark:primary md:sm lg:md xl:lg 3xl:xl"
+            text="primaryOp dark:primary md:sm lg:md 3xl:xl"
             caret="error"
           />
         </div>
@@ -46,7 +46,7 @@
           </div>
           <span
             font="thin"
-            text="primaryOp dark:secondary xs md:sm lg:sm xl:md 3xl:lg"
+            text="primaryOp dark:secondary xs md:sm lg:sm 3xl:lg"
             >{{ moment(task.inserted_at).calendar() }}</span
           >
         </div>
