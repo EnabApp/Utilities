@@ -44,9 +44,11 @@
               w="full"
             />
           </div>
-          <span font="thin" text="primaryOp dark:secondary xs md:sm lg:sm xl:md 3xl:lg">{{
-            moment(task.inserted_at).format("LL")
-          }}</span>
+          <span
+            font="thin"
+            text="primaryOp dark:secondary xs md:sm lg:sm xl:md 3xl:lg"
+            >{{ moment(task.inserted_at).calendar() }}</span
+          >
         </div>
       </div>
       <!-- ===========>> Remove Button Content <<=========== -->

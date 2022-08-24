@@ -9,13 +9,12 @@
   </div>
 </template>
 <script setup>
-import { useUser, ref, useMoment } from "#imports";
+import { useUser, ref } from "#imports";
 import { useTodoStore } from "../../composables/useTodoStore";
 
 const todoStore = useTodoStore();
 const user = useUser();
 const task = ref("");
-const moment = useMoment();
 
 const props = defineProps({
   task: Object,
