@@ -5,7 +5,7 @@
       <div flex="~ col grow gap-2" w="full">
         <UiTabGroup
           p="x-20px"
-          text="21px"
+          text="21px "
           :col="false"
           :tabs="['جميع المهام', 'المؤرشفة']"
         >

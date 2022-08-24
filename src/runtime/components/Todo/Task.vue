@@ -5,6 +5,7 @@
         <div flex="~ gap-9px" items="center">
           <!-- ===========>> Toggle complete Content <<=========== -->
           <input
+            class="accent-primaryOp dark:accent-primary"
             v-model="task.is_complete"
             cursor="pointer"
             type="checkbox"
@@ -12,12 +13,12 @@
             w="12px"
           />
           <!-- ===========>> Title Content <<=========== -->
-
           <input
             v-model.lazy="task.task"
             font="bold"
             w="full"
-            text="primaryOp dark:primary"
+            text="primaryOp dark:primary md:sm lg:md xl:lg 3xl:xl"
+            caret="error"
           />
         </div>
         <div flex="~ gap-9px" items="center">
@@ -43,7 +44,7 @@
               w="full"
             />
           </div>
-          <span font="thin" text="primaryOp dark:secondary xs">{{
+          <span font="thin" text="primaryOp dark:secondary xs md:sm lg:sm xl:md 3xl:lg">{{
             moment(task.inserted_at).calendar()
           }}</span>
         </div>

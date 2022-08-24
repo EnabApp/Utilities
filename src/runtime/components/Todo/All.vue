@@ -1,11 +1,12 @@
 <template>
     <div
       m="t-5px"
-      flex="~ col gap-30px"
+      flex="~ col gap-28px"
       w="full"
       overflow="y-scroll"
-      h="315px"
-      p="b-10px"
+      h="300px md:310px lg:340px xl:360px 2xl:370px 3xl:400px"
+      p="b-15px"
+      snap="y"
     >
       <!-- ===========>> All Tasks Content <<=========== -->
       <TransitionGroup>
@@ -13,6 +14,7 @@
           :task="task"
           v-for="task in todoStore.getNotArchivedTasks"
           :key="task.id"
+          snap="center"
         />
       </TransitionGroup>
     </div>
