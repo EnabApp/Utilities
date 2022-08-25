@@ -44,8 +44,8 @@
             />
           </div>
           <span font="thin" text="primaryOp dark:secondary xs lg:sm 3xl:lg">{{
-            moment(task.inserted_at).format("DD MMM YY , hh:mm a ")
-          }}</span>
+            moment(task.inserted_at).calendar()
+          }}</span> <!-- format("yyyy-MM-dd hh:mm a ")-->
         </div>
       </div>
       <!-- ===========>> Remove Button Content <<=========== -->
