@@ -1,6 +1,6 @@
 {
   "name": "@enab/utilities",
-  "version": "1.0.1",
+  "version": "1.0.11",
   "license": "MIT",
   "type": "module",
   "exports": {
