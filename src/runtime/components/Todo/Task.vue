@@ -11,7 +11,7 @@
             type="checkbox"
             text="primaryOp dark:secondary"
             w="12px"
-          />
+          /> <!-- xs:w-6px md:w-12px xl:w-18px 3xl:w-16px-->
           <!-- ===========>> Title Content <<=========== -->
           <input
             v-model.lazy="task.task"
@@ -44,7 +44,7 @@
             />
           </div>
           <span font="thin" text="primaryOp dark:secondary xs lg:sm 3xl:lg">{{
-            moment(task.inserted_at).calendar()
+            moment(task.inserted_at).format("DD MMM YY , hh:mm a ")
           }}</span>
         </div>
       </div>
@@ -53,7 +53,6 @@
         id="deleteHover"
         duration="250"
         color="error"
-        :outline="true"
         @click="todoStore.deleteTask(task)"
         size="sm"
       >
@@ -64,9 +63,17 @@
 </template>
 
 <script setup>
-import { useSupabaseClient, useMoment, watch } from "#imports";
+import {
+  useSupabaseClient,
+  useMoment,
+  watch,
+  useBreakpointWindow,
+} from "#imports";
 import { useTodoStore } from "../../composables/useTodoStore";
 
+const windowRef = ref(null);
+const { size, towXs, xs, sm, md, lg, xl, twoXl } =
+  useBreakpointWindow(windowRef);
 const props = defineProps({
   task: {
     type: Object,

@@ -2,7 +2,7 @@
   <!-- Application -->
   <Transition>
     <UiDesktopWindow v-if="app.running" v-show="!app.minimized" :app="app">
-      <div flex="~ col grow gap-2" ref="windowRef">
+      <div flex="~ col grow gap-2">
         <UiTabGroup
           p="x-20px"
           text="21px "
@@ -29,13 +29,7 @@
 
 <script setup>
 import { useTodoStore } from "../composables/useTodoStore";
-import { useBreakpointWindow } from "#imports";
-
-const windowRef = ref(null);
 const todoStore = useTodoStore();
-const { size, towXs, xs, sm, md, lg, xl, twoXl } =
-  useBreakpointWindow(windowRef);
-
 todoStore.fetchTasks();
 
 const props = defineProps({
