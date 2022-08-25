@@ -241,7 +241,7 @@
 </template>
 
 <script setup>
-import { useAppManager, ref, useToggle, onKeyStroke } from "#imports";
+import { useAppManager, ref, useToggle, onKeyStroke, useBreakpointWindow } from "#imports";
 
 const AppManager = useAppManager();
 
