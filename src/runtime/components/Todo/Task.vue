@@ -17,21 +17,20 @@
             v-model.lazy="task.task"
             font="bold"
             w="full"
-            text="primaryOp dark:primary md:sm lg:md 3xl:xl"
+            text="primaryOp dark:primary sm lg:md 3xl:xl"
             caret="error"
           />
         </div>
+        <!-- ===========>> Date Content <<=========== -->
         <div flex="~ gap-9px" items="center">
           <div relative="~">
             <div
-              w="12px"
-              h="12px"
+              w="14px"
+              h="14px"
               z="10"
-              text="primaryOp dark:secondary"
+              text="secondaryOp dark:secondary"
               class="i-material-symbols-date-range"
             ></div>
-
-            <!-- ===========>> Date Content <<=========== -->
             <input
               v-model="task.inserted_at"
               opacity="0"
@@ -44,11 +43,9 @@
               w="full"
             />
           </div>
-          <span
-            font="thin"
-            text="primaryOp dark:secondary xs md:sm lg:sm 3xl:lg"
-            >{{ moment(task.inserted_at).calendar() }}</span
-          >
+          <span font="thin" text="primaryOp dark:secondary xs lg:sm 3xl:lg">{{
+            moment(task.inserted_at).calendar()
+          }}</span>
         </div>
       </div>
       <!-- ===========>> Remove Button Content <<=========== -->

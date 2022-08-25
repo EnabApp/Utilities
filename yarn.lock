@@ -602,13 +602,13 @@
     unbuild "^0.7.6"
     vue-toastification "^2.0.0-rc.5"
 
-"@enab/core@^1.6.6", "@enab/core@^1.6.7":
-  version "1.6.7"
-  resolved "https://registry.yarnpkg.com/@enab/core/-/core-1.6.7.tgz#c2c48a5744a507017c2fc4396ed04ef8f2939231"
-  integrity sha512-0l/ZCsaaJu4r6Ru1xC6BRTJqcwN4dZyecPEJEr5r5a6xzRr2XsJuBJxS4sYNCKBk+Or/e/Y3HNg1nb8yneA2Sg==
+"@enab/core@^1.6.95", "@enab/core@^1.6.96":
+  version "1.6.96"
+  resolved "https://registry.yarnpkg.com/@enab/core/-/core-1.6.96.tgz#25ad0cca21531fb848293f3584265acc7481482a"
+  integrity sha512-pjBY2vcGh+b0t1n1WzrjBeIY+/hfEmvr0UPmdoJmHin/d/2L9zVCtABJ74DPt3Md862xNR1HSbQBxKJMmMGpWw==
   dependencies:
     "@enab/appstore" "^1.0.6"
-    "@enab/core" "^1.6.6"
+    "@enab/core" "^1.6.95"
     "@enab/todo" "^1.0.8"
     "@enab/ui" "^1.4.8"
     "@iconify/json" "^2.1.77"

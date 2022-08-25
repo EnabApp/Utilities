@@ -8,7 +8,7 @@
       flex="~ col gap-28px"
       w="full"
       overflow="y-scroll"
-      h="315px 3xl:350px"
+      h="315px 3xl:330px"
       p="b-15px"
       snap="y"
     >

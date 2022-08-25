@@ -1,5 +1,5 @@
-import moment from "moment/src/moment";
-import ar from "moment/src/locale/ar-sa";
+import moment from "moment/moment.js";
+import ar from "moment/locale/ar";
 
 moment.updateLocale("ar", ar);
 
