@@ -5,13 +5,12 @@
       <!-- IMPORT ALL THE COMPONENT -->
       <div
         flex="~"
-        justify="end"
         items="center"
         w="full"
         h="full"
         ref="windowRef"
         text="white"
-        :class="{'justify-center': twoXs}"
+        :class="{ 'justify-center': twoXs,}"
       >
         <div
           flex="~ "
@@ -168,7 +167,7 @@
                         text="info xl"
                         rounded="5px"
                         @click="Backspace()"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-info 2xl:text-5xl"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
                       >
                         <div class="i-akar-icons-backspace-fill" />
                       </div>
@@ -191,7 +190,7 @@
                         md:text="info 4xl"
                         text="info 3xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-info 2xl:text-5xl 2xl:items-center"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl 2xl:items-center"
                         @click="Operation('/')"
                       >
                         ÷
@@ -216,7 +215,7 @@
                         text="info xl"
                         font="black"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-info 2xl:text-5xl"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
                         @click="Operation('%')"
                       >
                         %
@@ -241,7 +240,7 @@
                         md:text="error 2xl"
                         text="error 2xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-error 2xl:text-5xl"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-error 2xl:text-5xl"
                         @click="Clear('-')"
                       >
                         C
@@ -265,7 +264,7 @@
                         duration="150"
                         text="info 4xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-info 2xl:text-5xl 2xl:items-center"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl 2xl:items-center"
                         @click="Operation('*')"
                       >
                         ×
@@ -290,7 +289,7 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-5xl"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
                         @click="ButtonClicked('9')"
                       >
                         9
@@ -315,7 +314,7 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-5xl"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
                         @click="ButtonClicked('8')"
                       >
                         8
@@ -340,7 +339,7 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-5xl"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
                         @click="ButtonClicked('7')"
                       >
                         7
@@ -364,7 +363,7 @@
                         duration="150"
                         text="info 4xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-info 2xl:text-5xl 2xl:items-center"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl 2xl:items-center"
                         @click="Operation('+')"
                       >
                         +
@@ -389,7 +388,7 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-5xl"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
                         @click="ButtonClicked('6')"
                       >
                         6
@@ -414,7 +413,7 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-5xl"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
                         @click="ButtonClicked('5')"
                       >
                         5
@@ -439,7 +438,7 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-5xl"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
                         @click="ButtonClicked('4')"
                       >
                         4
@@ -469,7 +468,7 @@
                         text="info 2xl"
                         font="black"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-info 2xl:text-5xl 2xl:items-center"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl 2xl:items-center"
                         @click="Operation('-')"
                       >
                         –
@@ -494,7 +493,7 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-5xl"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
                         @click="ButtonClicked('3')"
                       >
                         3
@@ -519,7 +518,7 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-5xl"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
                         @click="ButtonClicked('2')"
                       >
                         2
@@ -544,7 +543,7 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-5xl"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
                         @click="ButtonClicked('1')"
                       >
                         1
@@ -569,7 +568,7 @@
                         hover="bg-opacity-50"
                         text="primaryOp dark:primary 4xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-info 2xl:text-5xl 2xl:items-center"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl 2xl:items-center"
                         @click="Operation('=')"
                       >
                         =
@@ -594,7 +593,7 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-5xl"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-4xl"
                         @click="ButtonClicked('000')"
                       >
                         000
@@ -619,7 +618,7 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-5xl"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
                         @click="ButtonClicked('0')"
                       >
                         0
@@ -641,7 +640,7 @@
                         duration="150"
                         text="primaryOp dark:primary 6xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-5.5rem 2xl:h-5.5rem 2xl:text-6xl"
+                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-6xl"
                         @click="Operation('.')"
                       >
                         .

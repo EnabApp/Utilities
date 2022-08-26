@@ -37,9 +37,5 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-  size: {
-    type: String,
-    required: true,
-  },
 });
 </script>
