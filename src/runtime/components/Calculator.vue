@@ -12,7 +12,7 @@
         'justify-between items-center w-[100%] h-[100%] ': xl,
         'justify-start w-[100%] h-[100%]  py-[2rem]': twoXl,
       }">
-        <div flex="~ " p="x-2" bg="red-600" :class="{
+        <div flex="~ " p="x-2" :class="{
           'justify-between items-center w-[100%] h-[100%%]': twoXs,
           'justify-between items-center w-[100%] h-[100%]': xs,
           'justify-between items-center w-[99%] h-[100%]': sm,
@@ -39,7 +39,7 @@
                         ? 'text-xl'
                         : 'text-lg',
                 ]" w="full" p="x-4 y-2" text="primaryOp dark:primary" dir="ltr">
-                  {{ screen }} {{ size }}
+                  {{ screen }}
                 </div>
                 <div v-if="!(twoXl || xl || lg || md)" p="1" m="1" border="0" rounded="lg"
                   hover="bg-secondary dark:secondaryOp dark:bg-opacity-25">
@@ -83,7 +83,7 @@
                   </UiModal>
                 </Teleport>
                 <!-- ======>> Numbers / Operations <<====== -->
-                <calculatorButtons />
+                <CalculatorButtons :windowBreakpoint="windowBreakpoint" />
               </div>
             </div>
           </div>
@@ -92,7 +92,7 @@
         <div v-if="twoXl || xl || lg || md" :class="{
           'w-[20%] h-[100%]': twoXl,
           'w-[25%] h-[90%]': xl,
-          'w-[25%] h-[100%]': md || lg
+          'w-[25%] h-[100%]': md || lg,
         }" bg="white" text-black>
           sigil
         </div>
@@ -102,15 +102,7 @@
 </template>
 
 <script setup>
-import {
-  useAppManager,
-  ref,
-  useToggle,
-  onKeyStroke,
-  useBreakpointWindow,
-} from "#imports";
-
-
+import { useAppManager, ref, useToggle, useBreakpointWindow } from "#imports";
 
 const AppManager = useAppManager();
 
@@ -133,19 +125,8 @@ const modalCanceled = () => {
 
 const windowRef = ref(null);
 
-const windowBreakpoint = useBreakpointWindow(windowRef)
+const windowBreakpoint = useBreakpointWindow(windowRef);
 
-const {
-        size,
-        twoXs,
-        xs,
-        sm,
-        md,
-        lg,
-        xl,
-        twoXl
-      } = windowBreakpoint
-
-
+const { size, twoXs, xs, sm, md, lg, xl, twoXl } = windowBreakpoint;
 
 </script>
