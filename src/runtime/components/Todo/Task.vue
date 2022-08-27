@@ -11,14 +11,23 @@
             type="checkbox"
             text="primaryOp dark:secondary"
             w="12px"
-          /> <!-- xs:w-6px md:w-12px xl:w-18px 3xl:w-16px-->
+          />
           <!-- ===========>> Title Content <<=========== -->
           <input
             v-model.lazy="task.task"
             font="bold"
             w="full"
-            text="primaryOp dark:primary sm lg:md 3xl:xl"
+            text="primaryOp dark:primary"
             caret="error"
+            :class="{
+              'text-0.80rem': twoXs,
+              'text-0.90rem': xs,
+              'text-1.00rem': sm,
+              'text-1.10rem': md,
+              'text-1.20rem': lg,
+              'text-1.30rem': xl,
+              'text-1.40rem': twoXl,
+            }"
           />
         </div>
         <!-- ===========>> Date Content <<=========== -->
@@ -43,9 +52,21 @@
               w="full"
             />
           </div>
-          <span font="thin" text="primaryOp dark:secondary xs lg:sm 3xl:lg">{{
-            moment(task.inserted_at).calendar()
-          }}</span> <!-- format("yyyy-MM-dd hh:mm a ")-->
+          <span
+            font="thin"
+            text="primaryOp dark:secondary "
+            :class="{
+              'text-0.70rem': twoXs,
+              'text-0.75rem': xs,
+              'text-0.80rem': sm,
+              'text-0.85rem': md,
+              'text-0.90rem': lg,
+              'text-0.95rem': xl,
+              'text-0.99rem': twoXl,
+            }"
+            >{{ moment(task.inserted_at).calendar() }}</span
+          >
+          <!-- format("yyyy-MM-dd hh:mm a ")-->
         </div>
       </div>
       <!-- ===========>> Remove Button Content <<=========== -->
@@ -63,26 +84,25 @@
 </template>
 
 <script setup>
-import {
-  useSupabaseClient,
-  useMoment,
-  watch,
-  useBreakpointWindow,
-} from "#imports";
+import { useSupabaseClient, useMoment, watch } from "#imports";
 import { useTodoStore } from "../../composables/useTodoStore";
 
-const windowRef = ref(null);
-const { size, towXs, xs, sm, md, lg, xl, twoXl } =
-  useBreakpointWindow(windowRef);
 const props = defineProps({
   task: {
     type: Object,
     required: true,
   },
+  BreakpointWindow: {
+    type: Object,
+  },
 });
 
+const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
+
 const todoStore = useTodoStore();
+
 const moment = useMoment();
+
 const supabase = useSupabaseClient();
 
 //=========>> Update Task Function <<=========
