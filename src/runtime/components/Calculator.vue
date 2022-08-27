@@ -3,120 +3,65 @@
   <Transition>
     <UiDesktopWindow v-if="app.running" v-show="!app.minimized" :app="app">
       <!-- IMPORT ALL THE COMPONENT -->
-      <div
-        flex="~"
-        ref="windowRef"
-        text="white"
-        :class="{
-          'justify-center items-center w-[100%] h-[100%]': twoXs,
-          'justify-between  w-[100%] h-[100%]': xs,
-          'justify-between items-center w-[100%] h-[100%]': sm,
-          'justify-start items-center w-[100%] h-[100%]': md,
-          'items-center justify-between w-[100%] h-[100%]': lg,
-          'justify-between items-center w-[100%] h-[100%] ': xl,
-          'justify-between items-center w-[80%] h-[100%]  py-[2rem]': twoXl,
-        }"
-      >
-        <div
-          flex="~ "
-          p="x-2"
-          :class="{
-            'justify-between items-center w-[100%] h-[100%%]': twoXs,
-            'justify-between items-center w-[100%] h-[100%]': xs,
-            'justify-between items-center w-[99%] h-[100%]': sm,
-            'items-center justify-between w-[75%] h-[100%]': md,
-            'justify-between items-center w-[80%] h-[100%]': lg,
-            'justify-center items-center w-[80%] h-[90%] ': xl,
-            'items-center w-[100%] h-[70%]': twoXl,
-          }"
-        >
+      <div flex="~" ref="windowRef" text="white" :class="{
+        'justify-center items-center w-[100%] h-[100%]': twoXs,
+        'justify-between  w-[100%] h-[100%]': xs,
+        'justify-between items-center w-[100%] h-[100%]': sm,
+        'justify-start items-center w-[100%] h-[100%]': md,
+        'items-center justify-between w-[100%] h-[100%]': lg,
+        'justify-between items-center w-[100%] h-[100%] ': xl,
+        'justify-start w-[100%] h-[100%]  py-[2rem]': twoXl,
+      }">
+        <div flex="~ " p="x-2" bg="red-600" :class="{
+          'justify-between items-center w-[100%] h-[100%%]': twoXs,
+          'justify-between items-center w-[100%] h-[100%]': xs,
+          'justify-between items-center w-[99%] h-[100%]': sm,
+          'items-center justify-between w-[75%] h-[100%]': md,
+          'justify-between items-center w-[80%] h-[100%]': lg,
+          'justify-between items-center w-[80%] h-[90%] ': xl,
+          'justify-start w-[80%] h-[100%]': twoXl,
+        }">
           <div m="y-2" xl:h="full" flex="grow">
             <div xl:h="100%" flex="col" divide="y-1 dark:secondaryOp secondary">
               <!-- ======>> Screen <<====== -->
-              <div
-                id="calculation-result-bar"
-                flex="~"
-                border="rounded-lg"
-                w="full"
-                text="right"
-                :class="{
-                  'h-[2.6875rem]': md,
-                  'h-[3.4375rem]': lg,
-                  'h-[3.5rem]': xl,
-                  'py-[3rem] h-[6rem]': twoXl,
-                }"
-              >
-                <div
-                  :class="[
-                    screen.length < 8
-                      ? 'text-4xl'
-                      : screen.length < 12
+              <div id="calculation-result-bar" flex="~" border="rounded-lg" w="full" text="right" :class="{
+                'h-[2.6875rem]': md,
+                'h-[3.4375rem]': lg,
+                'h-[3.5rem]': xl,
+                'py-[3rem] h-[6rem]': twoXl,
+              }">
+                <div :class="[
+                  screen.length < 8
+                    ? 'text-4xl'
+                    : screen.length < 12
                       ? 'text-2xl'
                       : screen.length < 16
-                      ? 'text-xl'
-                      : 'text-lg',
-                  ]"
-                  w="full"
-                  p="x-4 y-2"
-                  text="primaryOp dark:primary"
-                  dir="ltr"
-                >
+                        ? 'text-xl'
+                        : 'text-lg',
+                ]" w="full" p="x-4 y-2" text="primaryOp dark:primary" dir="ltr">
                   {{ screen }} {{ size }}
                 </div>
-                <div
-                  v-if="!(twoXl || xl || lg || md)"
-                  p="1"
-                  m="1"
-                  border="0"
-                  rounded="lg"
-                  hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                >
-                  <div
-                    class="i-codicon-history visible"
-                    m="1"
-                    text="24px primaryOp dark:primary"
-                    cursor="pointer"
-                    @click="historyToggle()"
-                  />
+                <div v-if="!(twoXl || xl || lg || md)" p="1" m="1" border="0" rounded="lg"
+                  hover="bg-secondary dark:secondaryOp dark:bg-opacity-25">
+                  <div class="i-codicon-history visible" m="1" text="24px primaryOp dark:primary" cursor="pointer"
+                    @click="historyToggle()" />
                 </div>
               </div>
               <!-- ======>> History Model <<====== -->
-              <div
-                position="relative"
-                text="primaryOp dark:primary"
-                w="full"
-                h="full"
-              >
+              <div position="relative" text="primaryOp dark:primary" w="full" h="full">
                 <Teleport to="body">
                   <UiModal v-model="historyState" @cancel="modalCanceled">
                     <template #title> سجل الحاسبة </template>
-                    <div
-                      v-if="historyState"
-                      opacity="93%"
-                      z="20"
-                      border="rounded-5px"
-                      h="full"
-                      w="full"
-                    >
-                      <h3
-                        v-if="screenHistory.length == 0"
-                        m="10"
-                        text="center primaryOp dark:primary"
-                      >
+                    <div v-if="historyState" opacity="93%" z="20" border="rounded-5px" h="full" w="full">
+                      <h3 v-if="screenHistory.length == 0" m="10" text="center primaryOp dark:primary">
                         لا يوجد سجل
                       </h3>
                       <div flex="~ col" justify="center">
                         <div class="overflow-y-auto h-429px">
-                          <div
-                            v-for="h in screenHistory.reverse()"
-                            :key="h.history"
-                            text="primaryOp dark:primary"
-                            m="2"
-                            flex="~ col gap-2"
-                          >
+                          <div v-for="h in screenHistory.reverse()" :key="h.history" text="primaryOp dark:primary" m="2"
+                            flex="~ col gap-2">
                             <div
-                              class="border-0 rounded-lg border-w-5 hover:bg-secondary bg-opacity-10 dark:secondaryOp dark:bg-opacity-25"
-                            >
+                              class="border-0 rounded-lg border-w-5 hover:bg-secondary bg-opacity-10 dark:secondaryOp dark:bg-opacity-25">
                               <div m="3" text="xl primaryOp dark:primary">
                                 <h5>{{ " = " }} {{ h.history }}</h5>
                               </div>
@@ -129,540 +74,27 @@
                       </div>
                       <div flex="~" justify="center">
                         <div class="p-1 border-0 rounded-lg">
-                          <div
-                            v-if="screenHistory.length > 0"
-                            text="2xl primaryOp dark:primary"
-                            border="2 transparent"
-                            cursor="pointer"
-                            class="i-ant-design-delete-outlined"
-                            hover="border-gray-700"
-                            z="30"
-                            bottom="1"
-                            left="45%"
-                            @click="screenHistory = []"
-                          />
+                          <div v-if="screenHistory.length > 0" text="2xl primaryOp dark:primary" border="2 transparent"
+                            cursor="pointer" class="i-ant-design-delete-outlined" hover="border-gray-700" z="30"
+                            bottom="1" left="45%" @click="screenHistory = []" />
                         </div>
                       </div>
                     </div>
                   </UiModal>
                 </Teleport>
                 <!-- ======>> Numbers / Operations <<====== -->
-                <div>
-                  <div
-                    xl:class="grid gap-6px grid-rows-5 justify-between"
-                    :class="{ 'gap-16 ': twoXs }"
-                  >
-                    <!-- =====>> First Row <<===== -->
-                    <div flex="~" justify="around" md:justify="evenly">
-                      <div
-                        flex="~"
-                        justify="center"
-                        items="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        xl:text="info 4xl"
-                        lg:text="info 2xl"
-                        md:text="info xl"
-                        text="info xl"
-                        rounded="5px"
-                        @click="Backspace()"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2': md,
-                          'w-[3.5rem] h-[2.5rem] p-2': sm,
-                          'w-[3rem] h-[3rem] p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
-                        }"
-                      >
-                        <div class="i-akar-icons-backspace-fill" />
-                      </div>
-                      <div
-                        flex="~"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] text-info text-7xl p-2 items-end':
-                            twoXl,
-                          'w-[7.5rem] h-[3.8rem] text-info text-6xl p-2 items-end':
-                            xl,
-                          'w-[6.3rem] h-[3.4rem] text-info text-7xl p-2 items-end':
-                            lg,
-                          'w-[5.8rem] h-[3.2rem] text-info text-6xl p-2 items-end':
-                            md,
-                          'w-[3.5rem] h-[2.5rem] text-info text-5xl p-2 items-end':
-                            sm,
-                          'w-[3rem] h-[3rem] text-info text-4xl p-2 items-center':
-                            xs,
-                          'w-[2.5rem] h-[2.2rem] text-info text-4xl p-2 items-end':
-                            twoXs,
-                        }"
-                        @click="Operation('/')"
-                      >
-                        ÷
-                      </div>
-                      <div
-                        flex="~"
-                        items="center"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        font="black"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2 text-info text-5xl': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2 text-info text-4xl': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2 text-info text-4xl': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2 text-info text-3xl': md,
-                          'w-[3.5rem] h-[2.5rem] p-2 text-info text-2xl': sm,
-                          'w-[3rem] h-[3rem] p-2 text-info text-2xl': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2 text-info text-xl': twoXs,
-                        }"
-                        @click="Operation('%')"
-                      >
-                        %
-                      </div>
-                      <div
-                        flex="~"
-                        items="center"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        xl:text="error 4xl"
-                        lg:text="error 3xl"
-                        md:text="error 2xl"
-                        text="error 2xl"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2': md,
-                          'w-[3.5rem] h-[2.5rem] p-2': sm,
-                          'w-[3rem] h-[3rem] p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
-                        }"
-                        @click="Clear('-')"
-                      >
-                        C
-                      </div>
-                    </div>
-                    <!-- =====>> Second Row <<===== -->
-                    <div flex="~" justify="around" md:justify="evenly">
-                      <div
-                        flex="~"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        text="info 4xl"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2 text-info text-7xl': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2 text-info text-6xl': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2 text-info text-5xl': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2 text-info text-4xl': md,
-                          'w-[3.5rem] h-[2.5rem] p-2 text-info text-3xl': sm,
-                          'w-[3rem] h-[3rem] p-2 text-info text-3xl': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2 text-info text-2xl': twoXs,
-                        }"
-                        @click="Operation('*')"
-                      >
-                        ×
-                      </div>
-                      <div
-                        flex="~"
-                        items="center"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        xl:text="primaryOp dark:primary 4xl"
-                        lg:text="primaryOp dark:primary 3xl"
-                        md:text="primaryOp dark:primary 2xl"
-                        text="primaryOp dark:primary xl"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2': md,
-                          'w-[3.5rem] h-[2.5rem] p-2': sm,
-                          'w-[3rem] h-[3rem] p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
-                        }"
-                        @click="ButtonClicked('9')"
-                      >
-                        9
-                      </div>
-                      <div
-                        flex="~"
-                        items="center"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        xl:text="primaryOp dark:primary 4xl"
-                        lg:text="primaryOp dark:primary 3xl"
-                        md:text="primaryOp dark:primary 2xl"
-                        text="primaryOp dark:primary xl"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2': md,
-                          'w-[3.5rem] h-[2.5rem] p-2': sm,
-                          'w-[3rem] h-[3rem] p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
-                        }"
-                        @click="ButtonClicked('8')"
-                      >
-                        8
-                      </div>
-                      <div
-                        flex="~"
-                        items="center"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        xl:text="primaryOp dark:primary 4xl"
-                        lg:text="primaryOp dark:primary 3xl"
-                        md:text="primaryOp dark:primary 2xl"
-                        text="primaryOp dark:primary xl"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2': md,
-                          'w-[3.5rem] h-[2.5rem] p-2': sm,
-                          'w-[3rem] h-[3rem] p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
-                        }"
-                        @click="ButtonClicked('7')"
-                      >
-                        7
-                      </div>
-                    </div>
-                    <!-- =====>> Third Row <<===== -->
-                    <div flex="~" justify="around" md:justify="evenly">
-                      <div
-                        flex="~"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] text-info text-7xl items-center p-2':
-                            twoXl,
-                          'w-[7.5rem] h-[3.8rem] text-info text-6xl items-center p-2 ':
-                            xl,
-                          'w-[6.3rem] h-[3.4rem] text-info text-5xl items-center p-2':
-                            lg,
-                          'w-[5.8rem] h-[3.2rem] text-info text-4xl items-center p-2':
-                            md,
-                          'w-[3.5rem] h-[2.5rem] text-info text-3xl items-center p-2':
-                            sm,
-                          'w-[3rem] h-[3rem] text-info text-2xl p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] text-info text-2xl p-2': twoXs,
-                        }"
-                        @click="Operation('+')"
-                      >
-                        +
-                      </div>
-                      <div
-                        flex="~"
-                        items="center"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        xl:text="primaryOp dark:primary 4xl"
-                        lg:text="primaryOp dark:primary 3xl"
-                        md:text="primaryOp dark:primary 2xl"
-                        text="primaryOp dark:primary xl"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2': md,
-                          'w-[3.5rem] h-[2.5rem] p-2': sm,
-                          'w-[3rem] h-[3rem] p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
-                        }"
-                        @click="ButtonClicked('6')"
-                      >
-                        6
-                      </div>
-                      <div
-                        flex="~"
-                        items="center"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        xl:text="primaryOp dark:primary 4xl"
-                        lg:text="primaryOp dark:primary 3xl"
-                        md:text="primaryOp dark:primary 2xl"
-                        text="primaryOp dark:primary xl"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2': md,
-                          'w-[3.5rem] h-[2.5rem] p-2': sm,
-                          'w-[3rem] h-[3rem] p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
-                        }"
-                        @click="ButtonClicked('5')"
-                      >
-                        5
-                      </div>
-                      <div
-                        flex="~"
-                        items="center"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        xl:text="primaryOp dark:primary 4xl"
-                        lg:text="primaryOp dark:primary 3xl"
-                        md:text="primaryOp dark:primary 2xl"
-                        text="primaryOp dark:primary xl"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2': md,
-                          'w-[3.5rem] h-[2.5rem] p-2': sm,
-                          'w-[3rem] h-[3rem] p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
-                        }"
-                        @click="ButtonClicked('4')"
-                      >
-                        4
-                      </div>
-                    </div>
-                    <!-- =====>> Forth Row <<===== -->
-                    <div flex="~" justify="around" md:justify="evenly">
-                      <div
-                        flex="~"
-                        justify="center"
-                        lg:items="center"
-                        items="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        xl:text="info 4xl"
-                        lg:text="info 3xl"
-                        md:text="info 3xl"
-                        text="info 2xl"
-                        font="black"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2': md,
-                          'w-[3.5rem] h-[2.5rem] p-2': sm,
-                          'w-[3rem] h-[3rem] p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
-                        }"
-                        @click="Operation('-')"
-                      >
-                        –
-                      </div>
-                      <div
-                        flex="~"
-                        items="center"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        xl:text="primaryOp dark:primary 4xl"
-                        lg:text="primaryOp dark:primary 3xl"
-                        md:text="primaryOp dark:primary 2xl"
-                        text="primaryOp dark:primary xl"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2': md,
-                          'w-[3.5rem] h-[2.5rem] p-2': sm,
-                          'w-[3rem] h-[3rem] p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
-                        }"
-                        @click="ButtonClicked('3')"
-                      >
-                        3
-                      </div>
-                      <div
-                        flex="~"
-                        items="center"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        xl:text="primaryOp dark:primary 4xl"
-                        lg:text="primaryOp dark:primary 3xl"
-                        md:text="primaryOp dark:primary 2xl"
-                        text="primaryOp dark:primary xl"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2': md,
-                          'w-[3.5rem] h-[2.5rem] p-2': sm,
-                          'w-[3rem] h-[3rem] p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
-                        }"
-                        @click="ButtonClicked('2')"
-                      >
-                        2
-                      </div>
-                      <div
-                        flex="~"
-                        items="center"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        xl:text="primaryOp dark:primary 4xl"
-                        lg:text="primaryOp dark:primary 3xl"
-                        md:text="primaryOp dark:primary 2xl"
-                        text="primaryOp dark:primary xl"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2': md,
-                          'w-[3.5rem] h-[2.5rem] p-2': sm,
-                          'w-[3rem] h-[3rem] p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
-                        }"
-                        @click="ButtonClicked('1')"
-                      >
-                        1
-                      </div>
-                    </div>
-                    <!-- =====>> Fifth Row <<===== -->
-                    <div flex="~ " justify="around" md:justify="evenly">
-                      <div
-                        flex="~"
-                        items="center"
-                        justify="center"
-                        cursor="pointer"
-                        bg="info"
-                        hover="bg-opacity-50"
-                        text="primaryOp dark:primary 4xl"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2': md,
-                          'w-[3.5rem] h-[2.5rem] p-2': sm,
-                          'w-[3rem] h-[3rem] p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
-                        }"
-                        @click="Operation('=')"
-                      >
-                        =
-                      </div>
-                      <div
-                        flex="~"
-                        items="center"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        xl:text="primaryOp dark:primary 2xl"
-                        lg:text="primaryOp dark:primary 2xl"
-                        md:text="primaryOp dark:primary 2xl"
-                        text="primaryOp dark:primary xl"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2': md,
-                          'w-[3.5rem] h-[2.5rem] p-2': sm,
-                          'w-[3rem] h-[3rem] p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
-                        }"
-                        @click="ButtonClicked('000')"
-                      >
-                        000
-                      </div>
-                      <div
-                        flex="~"
-                        items="center"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        xl:text="primaryOp dark:primary 4xl"
-                        lg:text="primaryOp dark:primary 3xl"
-                        md:text="primaryOp dark:primary 2xl"
-                        text="primaryOp dark:primary xl"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2': md,
-                          'w-[3.5rem] h-[2.5rem] p-2': sm,
-                          'w-[3rem] h-[3rem] p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
-                        }"
-                        @click="ButtonClicked('0')"
-                      >
-                        0
-                      </div>
-                      <div
-                        flex="~"
-                        items="center"
-                        justify="center"
-                        cursor="pointer"
-                        hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
-                        duration="150"
-                        text="primaryOp dark:primary 6xl"
-                        rounded="5px"
-                        :class="{
-                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
-                          'w-[7.5rem] h-[3.8rem] p-2': xl,
-                          'w-[6.3rem] h-[3.4rem] p-2': lg,
-                          'w-[5.8rem] h-[3.2rem] p-2': md,
-                          'w-[3.5rem] h-[2.5rem] p-2': sm,
-                          'w-[3rem] h-[3rem] p-2': xs,
-                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
-                        }"
-                        @click="Operation('.')"
-                      >
-                        .
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <calculatorButtons />
               </div>
             </div>
           </div>
+        </div>
+        <!-- DISPLAY THE HISTORY ON LARGE SCREEN SIZES -->
+        <div v-if="twoXl || xl || lg || md" :class="{
+          'w-[20%] h-[100%]': twoXl,
+          'w-[25%] h-[90%]': xl,
+          'w-[25%] h-[100%]': md || lg
+        }" bg="white" text-black>
+          sigil
         </div>
       </div>
     </UiDesktopWindow>
@@ -678,6 +110,8 @@ import {
   useBreakpointWindow,
 } from "#imports";
 
+
+
 const AppManager = useAppManager();
 
 const props = defineProps({
@@ -691,94 +125,6 @@ const screen = ref("0");
 const screenHistory = ref([]);
 const [historyState, historyToggle] = useToggle(false);
 //= ====>> Buttons Clicked Function <<=====//
-const ButtonClicked = (number) => {
-  if (screen.value.length > 13) return;
-  if (screen.value == "0" && number == "000") return;
-  if (screen.value == "0") {
-    screen.value = number;
-  } else {
-    screen.value += number;
-  }
-};
-//= ====>> Operations Function <<=====//
-const Operation = (operation) => {
-  const lastChar = screen.value.slice(-1);
-  if (lastChar == operation) {
-    return;
-  }
-  if (
-    lastChar == "*" ||
-    lastChar == "+" ||
-    lastChar == "-" ||
-    lastChar == "/"
-  ) {
-    screen.value += lastChar;
-  }
-  if (operation === "=" || operation === "Enter") {
-    const history = screen.value.toString();
-    screen.value = eval(screen.value).toString().substring(0, 19);
-    screenHistory.value.push({
-      history,
-      result: screen.value,
-    });
-  } else if (operation === "%") {
-    screen.value = (eval(screen.value) / 100).toString().substring(0, 19);
-  } else {
-    screen.value += operation;
-  }
-};
-
-//= ====>> Clear / Deletes All Numbers <<=====//
-const Clear = () => {
-  screen.value = "0";
-};
-
-//= ====>> BackSpace / Delete One Number  <<=====//
-const Backspace = () => {
-  screen.value = screen.value.length <= 1 ? "0" : screen.value.slice(0, -1);
-};
-
-//= ====>> keyboard <<=====//
-onKeyStroke(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."], (e) => {
-  if (!(props.app.id == AppManager.focused)) {
-    return;
-  }
-
-  if (screen.value.length > 19) {
-    return;
-  }
-  if (screen.value == "0") {
-    screen.value = e.key;
-  } else {
-    screen.value += e.key;
-  }
-  e.preventDefault();
-});
-
-onKeyStroke(["+", "-", "*", "/", "%", "Enter"], (e) => {
-  if (!(props.app.id == AppManager.focused)) {
-    return;
-  }
-  Operation(e.key);
-
-  e.preventDefault();
-});
-
-onKeyStroke(["Backspace"], (e) => {
-  if (!(props.app.id == AppManager.focused)) {
-    return;
-  }
-  Backspace();
-  e.preventDefault();
-});
-
-onKeyStroke(["Delete"], (e) => {
-  if (!(props.app.id == AppManager.focused)) {
-    return;
-  }
-  Clear();
-  e.preventDefault();
-});
 
 const modalCanceled = () => {
   console.log("Canceled");
@@ -787,12 +133,19 @@ const modalCanceled = () => {
 
 const windowRef = ref(null);
 
-const { size, twoXs, xs, sm, md, lg, xl, twoXl } =
-  useBreakpointWindow(windowRef);
+const windowBreakpoint = useBreakpointWindow(windowRef)
 
-const clearEsc = (event) => {
-  if (screen.value === "Escape") {
-    screen.value = "0";
-  }
-};
+const {
+        size,
+        twoXs,
+        xs,
+        sm,
+        md,
+        lg,
+        xl,
+        twoXl
+      } = windowBreakpoint
+
+
+
 </script>
