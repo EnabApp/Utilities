@@ -21,7 +21,7 @@
     "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground"
   },
   "dependencies": {
-    "@enab/core": "^1.6.99",
+    "@enab/core": "^1.7.11",
     "@enab/ui": "^1.4.93",
     "@iconify/json": "^2.1.77",
     "@nuxt/kit": "^3.0.0-rc.8",

@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     ssr: false,
 
     autoImports: {
-        global: true
+        global: false
     },
 
     modules: [

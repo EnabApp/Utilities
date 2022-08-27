@@ -5,28 +5,30 @@
       <!-- IMPORT ALL THE COMPONENT -->
       <div
         flex="~"
-        items="center"
-        w="full"
-        h="full"
         ref="windowRef"
         text="white"
-        :class="{ 'justify-center': twoXs,}"
+        :class="{
+          'justify-center items-center w-[100%] h-[100%]': twoXs,
+          'justify-between  w-[100%] h-[100%]': xs,
+          'justify-between items-center w-[100%] h-[100%]': sm,
+          'justify-start items-center w-[100%] h-[100%]': md,
+          'items-center justify-between w-[100%] h-[100%]': lg,
+          'justify-between items-center w-[100%] h-[100%] ': xl,
+          'justify-between items-center w-[80%] h-[100%]  py-[2rem]': twoXl,
+        }"
       >
         <div
           flex="~ "
-          xl:h="100%"
-          xl:w="full"
-          lg:h="full"
-          lg:w="75%"
-          md:h="full"
-          md:w="78%"
-          sm:h="full"
-          sm:w="full"
-          h="full"
-          w="full"
-          justify="center"
-          items="center"
           p="x-2"
+          :class="{
+            'justify-between items-center w-[100%] h-[100%%]': twoXs,
+            'justify-between items-center w-[100%] h-[100%]': xs,
+            'justify-between items-center w-[99%] h-[100%]': sm,
+            'items-center justify-between w-[75%] h-[100%]': md,
+            'justify-between items-center w-[80%] h-[100%]': lg,
+            'justify-center items-center w-[80%] h-[90%] ': xl,
+            'items-center w-[100%] h-[70%]': twoXl,
+          }"
         >
           <div m="y-2" xl:h="full" flex="grow">
             <div xl:h="100%" flex="col" divide="y-1 dark:secondaryOp secondary">
@@ -35,13 +37,14 @@
                 id="calculation-result-bar"
                 flex="~"
                 border="rounded-lg"
-                items="end"
                 w="full"
-                xl:h="4.6875rem"
-                lg:h="3.4375rem"
-                md:h="2.6875rem"
-                h="2.1875rem"
                 text="right"
+                :class="{
+                  'h-[2.6875rem]': md,
+                  'h-[3.4375rem]': lg,
+                  'h-[3.5rem]': xl,
+                  'py-[3rem] h-[6rem]': twoXl,
+                }"
               >
                 <div
                   :class="[
@@ -58,7 +61,7 @@
                   text="primaryOp dark:primary"
                   dir="ltr"
                 >
-                  {{ screen }}
+                  {{ screen }} {{ size }}
                 </div>
                 <div
                   v-if="!(twoXl || xl || lg || md)"
@@ -78,7 +81,12 @@
                 </div>
               </div>
               <!-- ======>> History Model <<====== -->
-              <div position="relative" text="primaryOp dark:primary" w="full">
+              <div
+                position="relative"
+                text="primaryOp dark:primary"
+                w="full"
+                h="full"
+              >
                 <Teleport to="body">
                   <UiModal v-model="historyState" @cancel="modalCanceled">
                     <template #title> سجل الحاسبة </template>
@@ -141,23 +149,15 @@
                 <!-- ======>> Numbers / Operations <<====== -->
                 <div>
                   <div
-                    xl:class="grid gap-6px grid-rows-5 justify-center"
-                    md:gap="0px"
+                    xl:class="grid gap-6px grid-rows-5 justify-between"
+                    :class="{ 'gap-16 ': twoXs }"
                   >
                     <!-- =====>> First Row <<===== -->
-                    <div flex="~" justify="around" xl:justify="evenly">
+                    <div flex="~" justify="around" md:justify="evenly">
                       <div
                         flex="~"
-                        items="center"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
+                        items="center"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
@@ -167,30 +167,41 @@
                         text="info xl"
                         rounded="5px"
                         @click="Backspace()"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2': md,
+                          'w-[3.5rem] h-[2.5rem] p-2': sm,
+                          'w-[3rem] h-[3rem] p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
+                        }"
                       >
                         <div class="i-akar-icons-backspace-fill" />
                       </div>
                       <div
                         flex="~"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
-                        xl:text="info 6xl"
-                        lg:text="info 5xl"
-                        md:text="info 4xl"
-                        text="info 3xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl 2xl:items-center"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] text-info text-7xl p-2 items-end':
+                            twoXl,
+                          'w-[7.5rem] h-[3.8rem] text-info text-6xl p-2 items-end':
+                            xl,
+                          'w-[6.3rem] h-[3.4rem] text-info text-7xl p-2 items-end':
+                            lg,
+                          'w-[5.8rem] h-[3.2rem] text-info text-6xl p-2 items-end':
+                            md,
+                          'w-[3.5rem] h-[2.5rem] text-info text-5xl p-2 items-end':
+                            sm,
+                          'w-[3rem] h-[3rem] text-info text-4xl p-2 items-center':
+                            xs,
+                          'w-[2.5rem] h-[2.2rem] text-info text-4xl p-2 items-end':
+                            twoXs,
+                        }"
                         @click="Operation('/')"
                       >
                         ÷
@@ -199,23 +210,20 @@
                         flex="~"
                         items="center"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
-                        lg:text="info 3xl"
-                        md:text="info 2xl"
-                        text="info xl"
                         font="black"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2 text-info text-5xl': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2 text-info text-4xl': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2 text-info text-4xl': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2 text-info text-3xl': md,
+                          'w-[3.5rem] h-[2.5rem] p-2 text-info text-2xl': sm,
+                          'w-[3rem] h-[3rem] p-2 text-info text-2xl': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2 text-info text-xl': twoXs,
+                        }"
                         @click="Operation('%')"
                       >
                         %
@@ -224,14 +232,6 @@
                         flex="~"
                         items="center"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
@@ -240,31 +240,39 @@
                         md:text="error 2xl"
                         text="error 2xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-error 2xl:text-5xl"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2': md,
+                          'w-[3.5rem] h-[2.5rem] p-2': sm,
+                          'w-[3rem] h-[3rem] p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
+                        }"
                         @click="Clear('-')"
                       >
                         C
                       </div>
                     </div>
                     <!-- =====>> Second Row <<===== -->
-                    <div flex="~" justify="around" xl:justify="evenly">
+                    <div flex="~" justify="around" md:justify="evenly">
                       <div
                         flex="~"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
                         text="info 4xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl 2xl:items-center"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2 text-info text-7xl': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2 text-info text-6xl': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2 text-info text-5xl': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2 text-info text-4xl': md,
+                          'w-[3.5rem] h-[2.5rem] p-2 text-info text-3xl': sm,
+                          'w-[3rem] h-[3rem] p-2 text-info text-3xl': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2 text-info text-2xl': twoXs,
+                        }"
                         @click="Operation('*')"
                       >
                         ×
@@ -273,14 +281,6 @@
                         flex="~"
                         items="center"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
@@ -289,7 +289,15 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2': md,
+                          'w-[3.5rem] h-[2.5rem] p-2': sm,
+                          'w-[3rem] h-[3rem] p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
+                        }"
                         @click="ButtonClicked('9')"
                       >
                         9
@@ -298,14 +306,6 @@
                         flex="~"
                         items="center"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
@@ -314,7 +314,15 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2': md,
+                          'w-[3.5rem] h-[2.5rem] p-2': sm,
+                          'w-[3rem] h-[3rem] p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
+                        }"
                         @click="ButtonClicked('8')"
                       >
                         8
@@ -323,14 +331,6 @@
                         flex="~"
                         items="center"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
@@ -339,31 +339,43 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2': md,
+                          'w-[3.5rem] h-[2.5rem] p-2': sm,
+                          'w-[3rem] h-[3rem] p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
+                        }"
                         @click="ButtonClicked('7')"
                       >
                         7
                       </div>
                     </div>
                     <!-- =====>> Third Row <<===== -->
-                    <div flex="~" justify="around" xl:justify="evenly">
+                    <div flex="~" justify="around" md:justify="evenly">
                       <div
                         flex="~"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
-                        text="info 4xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl 2xl:items-center"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] text-info text-7xl items-center p-2':
+                            twoXl,
+                          'w-[7.5rem] h-[3.8rem] text-info text-6xl items-center p-2 ':
+                            xl,
+                          'w-[6.3rem] h-[3.4rem] text-info text-5xl items-center p-2':
+                            lg,
+                          'w-[5.8rem] h-[3.2rem] text-info text-4xl items-center p-2':
+                            md,
+                          'w-[3.5rem] h-[2.5rem] text-info text-3xl items-center p-2':
+                            sm,
+                          'w-[3rem] h-[3rem] text-info text-2xl p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] text-info text-2xl p-2': twoXs,
+                        }"
                         @click="Operation('+')"
                       >
                         +
@@ -372,14 +384,6 @@
                         flex="~"
                         items="center"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
@@ -388,7 +392,15 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2': md,
+                          'w-[3.5rem] h-[2.5rem] p-2': sm,
+                          'w-[3rem] h-[3rem] p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
+                        }"
                         @click="ButtonClicked('6')"
                       >
                         6
@@ -397,14 +409,6 @@
                         flex="~"
                         items="center"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
@@ -413,7 +417,15 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2': md,
+                          'w-[3.5rem] h-[2.5rem] p-2': sm,
+                          'w-[3rem] h-[3rem] p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
+                        }"
                         @click="ButtonClicked('5')"
                       >
                         5
@@ -422,14 +434,6 @@
                         flex="~"
                         items="center"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
@@ -438,27 +442,27 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2': md,
+                          'w-[3.5rem] h-[2.5rem] p-2': sm,
+                          'w-[3rem] h-[3rem] p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
+                        }"
                         @click="ButtonClicked('4')"
                       >
                         4
                       </div>
                     </div>
                     <!-- =====>> Forth Row <<===== -->
-                    <div flex="~" justify="around" xl:justify="evenly">
+                    <div flex="~" justify="around" md:justify="evenly">
                       <div
                         flex="~"
                         justify="center"
                         lg:items="center"
                         items="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
@@ -468,7 +472,15 @@
                         text="info 2xl"
                         font="black"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl 2xl:items-center"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2': md,
+                          'w-[3.5rem] h-[2.5rem] p-2': sm,
+                          'w-[3rem] h-[3rem] p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
+                        }"
                         @click="Operation('-')"
                       >
                         –
@@ -477,14 +489,6 @@
                         flex="~"
                         items="center"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
@@ -493,7 +497,15 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2': md,
+                          'w-[3.5rem] h-[2.5rem] p-2': sm,
+                          'w-[3rem] h-[3rem] p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
+                        }"
                         @click="ButtonClicked('3')"
                       >
                         3
@@ -502,14 +514,6 @@
                         flex="~"
                         items="center"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
@@ -518,7 +522,15 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2': md,
+                          'w-[3.5rem] h-[2.5rem] p-2': sm,
+                          'w-[3rem] h-[3rem] p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
+                        }"
                         @click="ButtonClicked('2')"
                       >
                         2
@@ -527,14 +539,6 @@
                         flex="~"
                         items="center"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
@@ -543,32 +547,40 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2': md,
+                          'w-[3.5rem] h-[2.5rem] p-2': sm,
+                          'w-[3rem] h-[3rem] p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
+                        }"
                         @click="ButtonClicked('1')"
                       >
                         1
                       </div>
                     </div>
                     <!-- =====>> Fifth Row <<===== -->
-                    <div flex="~ " justify="around" xl:justify="evenly">
+                    <div flex="~ " justify="around" md:justify="evenly">
                       <div
                         flex="~"
                         items="center"
                         justify="center"
                         cursor="pointer"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         bg="info"
                         hover="bg-opacity-50"
                         text="primaryOp dark:primary 4xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl 2xl:items-center"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2': md,
+                          'w-[3.5rem] h-[2.5rem] p-2': sm,
+                          'w-[3rem] h-[3rem] p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
+                        }"
                         @click="Operation('=')"
                       >
                         =
@@ -577,14 +589,6 @@
                         flex="~"
                         items="center"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
@@ -593,7 +597,15 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-4xl"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2': md,
+                          'w-[3.5rem] h-[2.5rem] p-2': sm,
+                          'w-[3rem] h-[3rem] p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
+                        }"
                         @click="ButtonClicked('000')"
                       >
                         000
@@ -602,14 +614,6 @@
                         flex="~"
                         items="center"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
@@ -618,7 +622,15 @@
                         md:text="primaryOp dark:primary 2xl"
                         text="primaryOp dark:primary xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-5xl"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2': md,
+                          'w-[3.5rem] h-[2.5rem] p-2': sm,
+                          'w-[3rem] h-[3rem] p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
+                        }"
                         @click="ButtonClicked('0')"
                       >
                         0
@@ -627,20 +639,20 @@
                         flex="~"
                         items="center"
                         justify="center"
-                        lg:w="3.75rem"
-                        lg:h="3.75rem"
-                        md:h="3.2rem"
-                        md:w="3.2rem"
-                        sm:h="2.5rem"
-                        sm:w="2.5rem"
-                        h="2rem"
-                        w="2rem"
                         cursor="pointer"
                         hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
                         duration="150"
                         text="primaryOp dark:primary 6xl"
                         rounded="5px"
-                        class="xl:w-4.5rem xl:h-4.5rem 2xl:w-4.5rem 2xl:h-4.5rem 2xl:text-6xl"
+                        :class="{
+                          'w-[8.5rem] h-[4.5rem] p-2': twoXl,
+                          'w-[7.5rem] h-[3.8rem] p-2': xl,
+                          'w-[6.3rem] h-[3.4rem] p-2': lg,
+                          'w-[5.8rem] h-[3.2rem] p-2': md,
+                          'w-[3.5rem] h-[2.5rem] p-2': sm,
+                          'w-[3rem] h-[3rem] p-2': xs,
+                          'w-[2.5rem] h-[2.2rem] p-2': twoXs,
+                        }"
                         @click="Operation('.')"
                       >
                         .
@@ -680,10 +692,9 @@ const screenHistory = ref([]);
 const [historyState, historyToggle] = useToggle(false);
 //= ====>> Buttons Clicked Function <<=====//
 const ButtonClicked = (number) => {
-  if (screen.value.length > 13) {
-    return;
-  }
-  if (screen.value === "0") {
+  if (screen.value.length > 13) return;
+  if (screen.value == "0" && number == "000") return;
+  if (screen.value == "0") {
     screen.value = number;
   } else {
     screen.value += number;
@@ -778,4 +789,10 @@ const windowRef = ref(null);
 
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } =
   useBreakpointWindow(windowRef);
+
+const clearEsc = (event) => {
+  if (screen.value === "Escape") {
+    screen.value = "0";
+  }
+};
 </script>
