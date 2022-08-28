@@ -108,7 +108,22 @@ const AppManager = useAppManager();
 const props = defineProps({
   app: {
     type: Object,
-    required: true,
+    required: true
+  },
+  ButtonClicked: {
+    type: Function
+  },
+  Operation: {
+    type: Function
+  },
+  Clear: {
+    type: Function
+  },
+  Backspace: {
+    type: Function
+  },
+  onKeyStroke: {
+    type: Function
   },
 });
 

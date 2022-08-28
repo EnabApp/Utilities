@@ -1,6 +1,6 @@
 <template>
-  <div h='[15%]'>
-    <div h-full xl:class="grid gap-6px grid-rows-5 justify-between items-start" >
+  <div h="[15%]">
+    <div h-full xl:class="grid gap-6px grid-rows-5 justify-between items-start">
       <!-- =====>> First Row <<===== -->
       <div flex="~" justify="around" md:justify="evenly" h-full>
         <div flex="~" justify="center" items="center" cursor="pointer"
@@ -300,10 +300,7 @@ import { onKeyStroke } from "#imports";
 // const props = defineProps(['windowBreakpoint'])
 
 const props = defineProps({
-  screen: {
-    type: String,
-    required: true,
-  },
+  screen,
   windowBreakpoint: {
     type: Object,
   },
@@ -402,9 +399,4 @@ onKeyStroke(["Delete"], (e) => {
   Clear();
   e.preventDefault();
 });
-
-const modalCanceled = () => {
-  console.log("Canceled");
-  historyState.value = false;
-};
 </script>
