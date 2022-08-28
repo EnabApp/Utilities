@@ -2,23 +2,22 @@
   <!-- Application -->
   <Transition>
     <UiDesktopWindow v-if="app.running" v-show="!app.minimized" :app="app">
-      <!-- IMPORT ALL THE COMPONENT -->
       <div flex="~" ref="windowRef" text="white" :class="{
         'justify-center items-center w-[100%] h-[100%]': twoXs,
         'justify-between  w-[100%] h-[100%]': xs,
         'justify-between items-center w-[100%] h-[100%]': sm,
         'justify-start items-center w-[100%] h-[100%]': md,
-        'items-center justify-between w-[100%] h-[100%]': lg,
-        'justify-between items-center w-[100%] h-[100%] ': xl,
+        'justify-between items-center w-[100%] h-[100%]': lg,
+        'justify-between items-end w-[100%] h-[100%] ': xl,
         'justify-start w-[100%] h-[100%]  py-[2rem]': twoXl,
       }">
-        <div flex="~ " p="x-2" :class="{
+        <div flex="~" p="x-2" :class="{
           'justify-between items-center w-[100%] h-[100%%]': twoXs,
           'justify-between items-center w-[100%] h-[100%]': xs,
           'justify-between items-center w-[99%] h-[100%]': sm,
           'items-center justify-between w-[75%] h-[100%]': md,
-          'justify-between items-center w-[80%] h-[100%]': lg,
-          'justify-between items-center w-[80%] h-[90%] ': xl,
+          'justify-between items-start w-[80%] h-[100%]': lg,
+          'justify-between items-center w-[80%] h-[80%] ': xl,
           'justify-start w-[80%] h-[100%]': twoXl,
         }">
           <div m="y-2" xl:h="full" flex="grow">
@@ -26,7 +25,7 @@
               <!-- ======>> Screen <<====== -->
               <div id="calculation-result-bar" flex="~" border="rounded-lg" w="full" text="right" :class="{
                 'h-[2.6875rem]': md,
-                'h-[3.4375rem]': lg,
+                'h-[3.8rem] py-9': lg,
                 'h-[3.5rem]': xl,
                 'py-[3rem] h-[6rem]': twoXl,
               }">
@@ -39,7 +38,7 @@
                         ? 'text-xl'
                         : 'text-lg',
                 ]" w="full" p="x-4 y-2" text="primaryOp dark:primary" dir="ltr">
-                  {{ screen }}
+                  {{ screen }} {{ size }}
                 </div>
                 <div v-if="!(twoXl || xl || lg || md)" p="1" m="1" border="0" rounded="lg"
                   hover="bg-secondary dark:secondaryOp dark:bg-opacity-25">
@@ -83,7 +82,7 @@
                   </UiModal>
                 </Teleport>
                 <!-- ======>> Numbers / Operations <<====== -->
-                <CalculatorButtons :windowBreakpoint="windowBreakpoint" />
+                <CalculatorButtons :windowBreakpoint="windowBreakpoint" :screen="screen" />
               </div>
             </div>
           </div>
@@ -93,8 +92,8 @@
           'w-[20%] h-[100%]': twoXl,
           'w-[25%] h-[90%]': xl,
           'w-[25%] h-[100%]': md || lg,
-        }" bg="white" text-black>
-          sigil
+        }" bg="white" text-black text-5xl text-center >
+          SIGIL
         </div>
       </div>
     </UiDesktopWindow>
@@ -128,5 +127,4 @@ const windowRef = ref(null);
 const windowBreakpoint = useBreakpointWindow(windowRef);
 
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = windowBreakpoint;
-
 </script>
