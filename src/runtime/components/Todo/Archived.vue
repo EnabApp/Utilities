@@ -1,7 +1,7 @@
 <template>
   <div flex="~ col">
     <!-- ========>> Search Input Content <<======== -->
-    <UiInput m="y-20px" placeholder="ابحث هنا..." v-model="searchQuery" />
+    <UiInput m="y-20px" placeholder="ابحث.." v-model="searchQuery" />
     <!-- ===========>> All Tasks Content <<=========== -->
     <div m="t-5px" p="b-15px">
       <div

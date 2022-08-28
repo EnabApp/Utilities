@@ -1,6 +1,5 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
-import { useSupabaseClient, useNuxtApp, useMoment } from "#imports";
-import { equal } from "assert";
+import { useSupabaseClient, useNuxtApp } from "#imports";
 
 export const useTodoStore = defineStore("todo-store", {
   state: () => ({
@@ -92,8 +91,7 @@ export const useTodoStore = defineStore("todo-store", {
       const { data, error } = await supabase
         .from("app_todo")
         .select("*")
-        .order('id', { ascending: false })
-        ;
+        .order("id", { ascending: false });
       if (!error) this.tasks = data;
     },
   },

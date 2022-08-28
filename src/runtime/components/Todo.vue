@@ -52,7 +52,8 @@ const windowRef = ref(null);
 const BreakpointWindow = useBreakpointWindow(windowRef);
 
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = BreakpointWindow;
-
+var n = 1530.345;
+console.log(n.toLocaleString() , ".toLocaleString() find me in TODO");
 const todoStore = useTodoStore();
 todoStore.fetchTasks();
 
