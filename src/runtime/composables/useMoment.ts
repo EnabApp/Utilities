@@ -3,7 +3,7 @@ import ar from "moment/locale/ar";
 
 moment.updateLocale("ar", {
   longDateFormat: {
-    LT: "h:mm A"
+    LT: "h:mm A" 
   },
 });
 
