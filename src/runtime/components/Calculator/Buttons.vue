@@ -1,69 +1,69 @@
 <template>
-  <div class="h-5/6">
-    <div class="flex flex-col  h-5/5 gap-0">
+  <div h="[15%]">
+    <div h-full xl:class="grid gap-6px grid-rows-5 justify-between items-start">
       <!-- =====>> First Row <<===== -->
-      <div flex="~" justify="around" md:justify="evenly" class="h-1/5">
+      <div flex="~" justify="around" md:justify="evenly" h-full>
         <div flex="~" justify="center" items="center" cursor="pointer"
           hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" rounded="5px" @click="Backspace()"
           :class="{
-            'w-full h-full text-info text-5xl ': twoXl,
-            'w-full h-full text-info text-4xl px': xl,
-            'w-full h-full text-info text-3xl ': lg,
-            'w-full  text-info text-3xl ': md,
-            'w-full h-full text-info text-2xl py-1': sm,
-            'w-full h-full text-info text-2xl ': xs,
-            'w-full h-full text-info text-xl ': twoXs,
+            'w-full h-[full text-info text-5xl p-2': twoXl,
+            'w-full h-full text-info text-4xl p-2': xl,
+            'w-full h-[5rem] text-info text-3xl p-2': lg,
+            'w-full h-[3.2rem] text-info text-3xl p-2': md,
+            'w-full h-full] text-info text-2xl p-2': sm,
+            'w-full h-[3rem] text-info text-2xl p-2': xs,
+            'w-full h-[2.2rem] text-info text-xl p-2': twoXs,
           }">
           <div class="i-akar-icons-backspace-fill" />
         </div>
         <div flex="~" justify="center" cursor="pointer" hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
           duration="150" rounded="5px" :class="{
-            'w-full h-[full] text-info text-7xl  items-center': twoXl,
-            'w-full h-full text-info text-6xl items-center px': xl,
-            'w-full h-full text-info text-7xl  items-center': lg,
-            'w-full  text-info text-6xl  items-center': md,
-            'w-[99%] h-[full] text-info text-5xl  items-center': sm,
-            'w-full h-h-full text-info text-4xl  items-center': xs,
-            'w-full items-center text-info text-4xl  items-end': twoXs,
+            'w-full h-[full] text-info text-7xl p-2 items-center': twoXl,
+            'w-full h-full text-info text-6xl p-2 items-center': xl,
+            'w-full h-[5rem] text-info text-7xl p-2 items-center': lg,
+            'w-full h-[3.2rem] text-info text-6xl p-2 items-end': md,
+            'w-[99%] h-[3rem] text-info text-5xl p-2 items-end': sm,
+            'w-full h-[3.2rem] text-info text-4xl p-2 items-start': xs,
+            'w-full h-[2.2rem] text-info text-4xl p-2 items-end': twoXs,
           }" @click="Operation('/')">
           ÷
         </div>
         <div flex="~" items="center" justify="center" cursor="pointer"
           hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" font="black" rounded="5px" :class="{
-            'w-full h-full text-info text-5xl': twoXl,
-            'w-full h-full  text-info text-4xl px': xl,
-            'w-full h-full  text-info text-4xl ': lg,
-            'w-full   text-info text-3xl ': md,
-            'w-[99%] h-[full] text-info text-3xl  items-end ': sm,
-            'w-full h-full  text-info text-2xl ': xs,
-            'w-full items-center  text-info text-xl ': twoXs,
+            'w-full h-[full] p-2 text-info text-5xl': twoXl,
+            'w-full h-full p-2 text-info text-4xl': xl,
+            'w-full h-[5rem] p-2 text-info text-4xl': lg,
+            'w-full h-[3.2rem] p-2 text-info text-3xl': md,
+            'w-[99%] h-[3.2rem] text-info text-3xl p-2 items-end': sm,
+            'w-full h-[2rem] p-2 text-info text-2xl py-[1rem]': xs,
+            'w-full h-[2.2rem] p-2 text-info text-xl': twoXs,
           }" @click="Operation('%')">
           %
         </div>
         <div flex="~" items="center" justify="center" cursor="pointer"
           hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" rounded="5px" :class="{
-            'w-full h-full text-error text-5xl': twoXl,
-            'w-full h-full text-error text-4xl px': xl,
-            'w-full h-full text-error text-4xl ': lg,
-            'w-full  text-error text-3xl ': md,
-            'w-[99%] h-[full] text-error text-3xl  items-end': sm,
-            'w-full h-full text-error text-2xl ': xs,
-            'w-full items-center text-error text-xl ': twoXs,
+            'w-full h-[full] text-error text-5xl p-2': twoXl,
+            'w-full h-full text-error text-4xl p-2': xl,
+            'w-full h-[5rem] text-error text-4xl p-2': lg,
+            'w-full h-[3.2rem] text-error text-3xl p-2': md,
+            'w-[99%] h-[3.2rem] text-error text-3xl p-2 items-end': sm,
+            'w-full h-[3rem] text-error text-2xl p-2': xs,
+            'w-full h-[2.2rem] text-error text-xl p-2': twoXs,
           }" @click="Clear('-')">
           C
         </div>
       </div>
       <!-- =====>> Second Row <<===== -->
-      <div flex="~" justify="around" md:justify="evenly" class="h-1/5">
+      <div flex="~" justify="around" md:justify="evenly" h-full>
         <div flex="~" justify="center" cursor="pointer" hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
           duration="150" rounded="5px" :class="{
-            'w-full h-full  text-info text-7xl items-center': twoXl,
-            'w-full h-[full]  text-info text-6xl items-center px': xl,
-            'w-full h-full  text-info text-5xl items-center': lg,
-            'w-full   text-info text-4xl items-center': md,
-            'w-[99%] h-[full] text-info text-4xl  items-center': sm,
-            'w-full h-full  text-info text-3xl items-center': xs,
-            'w-full items-center  text-info text-2xl': twoXs,
+            'w-full h-full p-2 text-info text-7xl items-center': twoXl,
+            'w-full h-[full] p-2 text-info text-6xl items-center': xl,
+            'w-full h-[5rem] p-2 text-info text-5xl items-center': lg,
+            'w-full h-[3.2rem] p-2 text-info text-4xl': md,
+            'w-[99%] h-[3rem] text-info text-4xl p-2 items-end': sm,
+            'w-full h-[3rem] p-2 text-info text-3xl': xs,
+            'w-full h-[2.2rem] p-2 text-info text-2xl': twoXs,
           }" @click="Operation('*')">
           ×
         </div>
@@ -71,13 +71,13 @@
           hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" xl:text="primaryOp dark:primary"
           lg:text="primaryOp dark:primary " md:text="primaryOp dark:primary" text="primaryOp dark:primary "
           rounded="5px" :class="{
-            'w-full h-full  text-4xl ': twoXl,
-            'w-full h-full text-4xl px': xl,
-            'w-full h-full text-4xl ': lg,
-            'w-full  text-4xl ': md,
-            'w-full h-[full] text-4xl ': sm,
-            'w-[99%] h-full text-4xl  ': xs,
-            'w-full items-center text-4xl ': twoXs,
+            'w-full h-full text-4xl p-2': twoXl,
+            'w-full h-[full] text-4xl p-2': xl,
+            'w-full h-[5rem] text-4xl p-2': lg,
+            'w-full h-[3.2rem] text-4xl p-2': md,
+            'w-full h-[3rem] text-4xl p-2': sm,
+            'w-[99%] h-[3rem] text-4xl p-2 ': xs,
+            'w-full h-[2.2rem] text-4xl p-2': twoXs,
           }" @click="ButtonClicked('9')">
           9
         </div>
@@ -85,13 +85,14 @@
           hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" xl:text="primaryOp dark:primary 4xl"
           lg:text="primaryOp dark:primary " md:text="primaryOp dark:primary 2xl" text="primaryOp dark:primary xl"
           rounded="5px" :class="{
-            'w-full h-full px-1 text-4xl ': twoXl,
-            'w-full text-4xl px': xl,
-            'w-full h-full text-4xl ': lg,
-            'w-full  text-3xl ': md,
-            'w-full h-[full] text-3xl ': sm,
-            'w-[99%] h-full text-2xl  ': xs,
-            'w-full items-center text-xl ': twoXs,
+            'w-full h-full text-4xl p-2': twoXl,
+            'w-full h-[full] text-4xl p-2': xl,
+            'w-full h-[5rem] text-4xl p-2': lg,
+            'w-full h-[3.2rem] text-3xl p-2': md,
+            'w-full h-[3rem] text-3xl p-2': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': xs,
+            'w-full h-[2.2rem] text-xl p-2': twoXs,
           }" @click="ButtonClicked('8')">
           8
         </div>
@@ -99,28 +100,29 @@
           hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" xl:text="primaryOp dark:primary 4xl"
           lg:text="primaryOp dark:primary 3xl" md:text="primaryOp dark:primary 2xl" text="primaryOp dark:primary xl"
           rounded="5px" :class="{
-            'w-full h-full px-1 text-4xl ': twoXl,
-            'w-full h-full text-4xl px': xl,
-            'w-full h-full text-4xl ': lg,
-            'w-full text-3xl ': md,
-            'w-full h-full text-2xl  ': sm,
-            'w-[99%] h-full text-2xl  ': xs,
-            'w-full items-center text-xl ': twoXs,
+            'w-full h-full text-4xl p-2': twoXl,
+            'w-full h-[full] text-4xl p-2': xl,
+            'w-full h-[5rem] text-4xl p-2': lg,
+            'w-full h-[3.2rem] text-3xl p-2': md,
+            'w-full h-[3rem] text-3xl p-2': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': xs,
+            'w-full h-[2.2rem] text-xl p-2': twoXs,
           }" @click="ButtonClicked('7')">
           7
         </div>
       </div>
       <!-- =====>> Third Row <<===== -->
-      <div flex="~" justify="around" md:justify="evenly" class="h-1/5">
+      <div flex="~" justify="around" md:justify="evenly" h-full>
         <div flex="~" justify="center" cursor="pointer" hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
           duration="150" rounded="5px" :class="{
-            'w-full h-[full] text-info text-7xl items-center ': twoXl,
-            'w-full h-full text-info text-6xl items-center  ': xl,
-            'w-full h-full text-info text-5xl items-center ': lg,
-            'w-full  text-info text-4xl items-center ': md,
-            'w-full h-[full] text-info text-4xl items-center ': sm,
-            'w-full h-full text-info text-2xl items-center': xs,
-            'w-full items-center text-info text-2xl ': twoXs,
+            'w-full h-[full] text-info text-7xl items-center p-2': twoXl,
+            'w-full h-full text-info text-6xl items-center p-2 ': xl,
+            'w-full h-[5rem] text-info text-5xl items-center p-2': lg,
+            'w-full h-[3.2rem] text-info text-4xl items-center p-2': md,
+            'w-full h-[3rem] text-info text-4xl items-center p-2': sm,
+            'w-full h-[3rem] text-info text-2xl p-2': xs,
+            'w-full h-[2.2rem] text-info text-2xl p-2': twoXs,
           }" @click="Operation('+')">
           +
         </div>
@@ -128,13 +130,14 @@
           hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" xl:text="primaryOp dark:primary 4xl"
           lg:text="primaryOp dark:primary 3xl" md:text="primaryOp dark:primary 2xl" text="primaryOp dark:primary xl"
           rounded="5px" :class="{
-            'w-full h-[full] text-4xl ': twoXl,
-            'w-full h-full text-4xl px ': xl,
-            'w-full h-full text-4xl ': lg,
-            'w-full text-3xl ': md,
-            'w-full h-[full] text-3xl ': sm,
-            'w-[99%] h-full text-2xl  ': xs,
-            'w-full items-center text-xl ': twoXs,
+            'w-full h-[full] text-4xl p-2': twoXl,
+            'w-full h-full text-4xl p-2': xl,
+            'w-full h-[5rem] text-4xl p-2': lg,
+            'w-full h-[3.2rem] text-3xl p-2': md,
+            'w-full h-[3rem] text-3xl p-2': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': xs,
+            'w-full h-[2.2rem] text-xl p-2': twoXs,
           }" @click="ButtonClicked('6')">
           6
         </div>
@@ -142,13 +145,14 @@
           hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" xl:text="primaryOp dark:primary 4xl"
           lg:text="primaryOp dark:primary 3xl" md:text="primaryOp dark:primary 2xl" text="primaryOp dark:primary xl"
           rounded="5px" :class="{
-            'w-full h-[full] text-4xl ': twoXl,
-            'w-full h-full text-4xl px': xl,
-            'w-full h-full text-4xl ': lg,
-            'w-full text-3xl ': md,
-            'w-full h-full text-2xl  ': sm,
-            'w-[99%] h-full text-2xl  ': xs,
-            'w-full items-center text-xl ': twoXs,
+            'w-full h-[full] text-4xl p-2': twoXl,
+            'w-full h-full text-4xl p-2': xl,
+            'w-full h-[5rem] text-4xl p-2': lg,
+            'w-full h-[3.2rem] text-3xl p-2': md,
+            'w-full h-[3rem] text-3xl p-2': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': xs,
+            'w-full h-[2.2rem] text-xl p-2': twoXs,
           }" @click="ButtonClicked('5')">
           5
         </div>
@@ -156,29 +160,30 @@
           hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" xl:text="primaryOp dark:primary 4xl"
           lg:text="primaryOp dark:primary 3xl" md:text="primaryOp dark:primary 2xl" text="primaryOp dark:primary xl"
           rounded="5px" :class="{
-            'w-full h-[full] text-4xl ': twoXl,
-            'w-full h-full text-4xl px': xl,
-            'w-full h-full text-4xl ': lg,
-            'w-full text-3xl ': md,
-            'w-full h-full text-2xl  ': sm,
-            'w-[99%] h-full text-2xl  ': xs,
-            'w-full items-center text-xl ': twoXs,
+            'w-full h-[full] text-4xl p-2': twoXl,
+            'w-full h-full text-4xl p-2': xl,
+            'w-full h-[5rem] text-4xl p-2': lg,
+            'w-full h-[3.2rem] text-3xl p-2': md,
+            'w-full h-[3rem] text-3xl p-2': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': xs,
+            'w-full h-[2.2rem] text-xl p-2': twoXs,
           }" @click="ButtonClicked('4')">
           4
         </div>
       </div>
       <!-- =====>> Forth Row <<===== -->
-      <div flex="~" justify="around" md:justify="evenly" class="h-1/5">
+      <div flex="~" justify="around" md:justify="evenly" h-full>
         <div flex="~" justify="center" lg:items="center" items="center" cursor="pointer"
           hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" lg:text="info 3xl" md:text="info 3xl"
           text="info 2xl" font="black" rounded="5px" :class="{
-            'w-full h-full text-info text-7xl ': twoXl,
-            'w-full h-[full] text-info text-6xl px': xl,
-            'w-full h-full text-info text-6xl ': lg,
-            'w-full text-info text-5xl ': md,
-            'w-[99%] h-full  text-info text-4xl  ': sm,
-            'w-full h-full text-info text-3xl ': xs,
-            'w-full items-center text-info text-2xl ': twoXs,
+            'w-full h-full text-info text-7xl p-2': twoXl,
+            'w-full h-[full] text-info text-6xl p-2': xl,
+            'w-full h-[5rem] text-info text-6xl p-2': lg,
+            'w-full h-[3.2rem] text-info text-5xl p-2': md,
+            'w-[99%] h-[3rem]  text-info text-4xl p-2 ': sm,
+            'w-full h-[3rem] text-info text-3xl p-2': xs,
+            'w-full h-[2.2rem] text-info text-2xl p-2': twoXs,
           }" @click="Operation('-')">
           –
         </div>
@@ -186,13 +191,14 @@
           hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" xl:text="primaryOp dark:primary 4xl"
           lg:text="primaryOp dark:primary 3xl" md:text="primaryOp dark:primary 2xl" text="primaryOp dark:primary xl"
           rounded="5px" :class="{
-            'w-full h-[full] text-4xl ': twoXl,
-            'w-full h-full text-4xl px': xl,
-            'w-full h-full text-4xl ': lg,
-            'w-full text-3xl ': md,
-            'w-full h-full text-3xl ': sm,
-            'w-[99%] h-full text-2xl  ': xs,
-            'w-full items-center text-xl ': twoXs,
+            'w-full h-[full] text-4xl p-2': twoXl,
+            'w-full h-full text-4xl p-2': xl,
+            'w-full h-[5rem] text-4xl p-2': lg,
+            'w-full h-[3.2rem] text-3xl p-2': md,
+            'w-full h-[3rem] text-3xl p-2': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': xs,
+            'w-full h-[2.2rem] text-xl p-2': twoXs,
           }" @click="ButtonClicked('3')">
           3
         </div>
@@ -200,13 +206,14 @@
           hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" xl:text="primaryOp dark:primary 4xl"
           lg:text="primaryOp dark:primary 3xl" md:text="primaryOp dark:primary 2xl" text="primaryOp dark:primary xl"
           rounded="5px" :class="{
-            'w-full h-[full] text-4xl ': twoXl,
-            'w-full h-full text-4xl px': xl,
-            'w-full h-full text-4xl ': lg,
-            'w-full text-3xl ': md,
-            'w-full h-full text-3xl ': sm,
-            'w-[99%] h-full text-2xl  ': xs,
-            'w-full items-center text-xl ': twoXs,
+            'w-full h-[full] text-4xl p-2': twoXl,
+            'w-full h-full text-4xl p-2': xl,
+            'w-full h-[5rem] text-4xl p-2': lg,
+            'w-full h-[3.2rem] text-3xl p-2': md,
+            'w-full h-[3rem] text-3xl p-2': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': xs,
+            'w-full h-[2.2rem] text-xl p-2': twoXs,
           }" @click="ButtonClicked('2')">
           2
         </div>
@@ -214,28 +221,29 @@
           hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" xl:text="primaryOp dark:primary 4xl"
           lg:text="primaryOp dark:primary 3xl" md:text="primaryOp dark:primary 2xl" text="primaryOp dark:primary xl"
           rounded="5px" :class="{
-            'w-full h-[full] text-4xl ': twoXl,
-            'w-full h-full text-4xl px': xl,
-            'w-full h-full text-4xl ': lg,
-            'w-full text-3xl ': md,
-            'w-full h-full text-3xl ': sm,
-            'w-[99%] h-full text-2xl  ': xs,
-            'w-full items-center text-xl ': twoXs,
+            'w-full h-[full] text-4xl p-2': twoXl,
+            'w-full h-full text-4xl p-2': xl,
+            'w-full h-[5rem] text-4xl p-2': lg,
+            'w-full h-[3.2rem] text-3xl p-2': md,
+            'w-full h-[3rem] text-3xl p-2': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': xs,
+            'w-full h-[2.2rem] text-xl p-2': twoXs,
           }" @click="ButtonClicked('1')">
           1
         </div>
       </div>
       <!-- =====>> Fifth Row <<===== -->
-      <div flex="~" justify="around" md:justify="evenly" class="h-1/5">
+      <div flex="~ " justify="around" md:justify="evenly" h-full>
         <div flex="~" items="center" justify="center" cursor="pointer" bg="info" hover="bg-opacity-50"
           text="primaryOp dark:primary 4xl" rounded="5px" :class="{
-            'w-[99%] h-[full] text-6xl ': twoXl,
-            'w-full h-[full] text-5xl px': xl,
-            'w-full h-full text-4xl ': lg,
-            'w-full ': md,
-            'w-[99%] h-full text-5xl  items-end': sm,
-            'w-full h-full ': xs,
-            'w-full items-center ': twoXs,
+            'w-full h-[full] text-6xl p-2': twoXl,
+            'w-full h-full text-5xl p-2': xl,
+            'w-full h-[5rem] p-2': lg,
+            'w-full h-[3.2rem] p-2': md,
+            'w-[99%] h-[3rem] text-5xl p-2 items-end': sm,
+            'w-full h-[3rem] p-2': xs,
+            'w-full h-[2.2rem] p-2': twoXs,
           }" @click="Operation('=')">
           =
         </div>
@@ -243,13 +251,14 @@
           hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" xl:text="primaryOp dark:primary 2xl"
           lg:text="primaryOp dark:primary 2xl" md:text="primaryOp dark:primary 2xl" text="primaryOp dark:primary xl"
           rounded="5px" :class="{
-            'w-full h-[full] text-4xl ': twoXl,
-            'w-full h-full text-4xl px': xl,
-            'w-full h-full text-4xl ': lg,
-            'w-full text-3xl ': md,
-            'w-full h-full text-3xl ': sm,
-            'w-[99%] h-full text-2xl  ': xs,
-            'w-full items-center text-xl ': twoXs,
+            'w-full h-[full] text-4xl p-2': twoXl,
+            'w-full h-full text-4xl p-2': xl,
+            'w-full h-[5rem] text-4xl p-2': lg,
+            'w-full h-[3.2rem] text-3xl p-2': md,
+            'w-full h-[3rem] text-3xl p-2': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': xs,
+            'w-full h-[2.2rem] text-xl p-2': twoXs,
           }" @click="ButtonClicked('000')">
           000
         </div>
@@ -257,26 +266,27 @@
           hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" xl:text="primaryOp dark:primary 4xl"
           lg:text="primaryOp dark:primary 3xl" md:text="primaryOp dark:primary 2xl" text="primaryOp dark:primary xl"
           rounded="5px" :class="{
-            'w-full h-[full] text-4xl ': twoXl,
-            'w-full h-full text-4xl px': xl,
-            'w-full h-full text-4xl ': lg,
-            'w-full text-3xl ': md,
-            'w-full h-full text-3xl ': sm,
-            'w-[99%] h-full text-2xl  ': xs,
-            'w-full items-center text-xl ': twoXs,
+            'w-full h-[full] text-4xl p-2': twoXl,
+            'w-full h-full text-4xl p-2': xl,
+            'w-full h-[5rem] text-4xl p-2': lg,
+            'w-full h-[3.2rem] text-3xl p-2': md,
+            'w-full h-[3rem] text-3xl p-2': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': sm,
+            'w-[99%] h-[3rem] text-2xl p-2 ': xs,
+            'w-full h-[2.2rem] text-xl p-2': twoXs,
           }" @click="ButtonClicked('0')">
           0
         </div>
-        <div flex="~" cursor="pointer" justify-center items-center
+        <div flex="~" items="center" justify="center" cursor="pointer"
           hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" text="primaryOp dark:primary 6xl"
           rounded="5px" :class="{
-            'w-full h-[full] text-4xl ': twoXl,
-            'w-full h-full text-4xl px': xl,
-            'w-full h-full text-4xl ': lg,
-            'w-full text-3xl ': md,
-            'w-full h-full text-3xl ': sm,
-            'w-[99%] h-full text-2xl  ': xs,
-            'w-full items-center text-xl ': twoXs,
+            'w-full h-[full] p-2': twoXl,
+            'w-full h-full p-2': xl,
+            'w-full h-[5rem] p-2': lg,
+            'w-full h-[3.2rem] p-2': md,
+            'w-[99%] h-[3rem] text-5xl p-2 items-end': sm,
+            'w-full h-[3rem] p-2': xs,
+            'w-full h-[2.2rem] p-2': twoXs,
           }" @click="Operation('.')">
           .
         </div>
@@ -287,17 +297,17 @@
 <script setup>
 import { onKeyStroke } from "#imports";
 
+// const props = defineProps(['windowBreakpoint'])
+
 const props = defineProps({
-  screen: {
-    type: Function
-  },
+  screen,
   windowBreakpoint: {
     type: Object,
   },
 });
 
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.windowBreakpoint;
-//= ====>> Buttons Clicked Function <<=====//
+
 const ButtonClicked = (number) => {
   if (props.screen.value.length > 13) return;
   if (props.screen.value == "0" && number == "000") return;
@@ -389,9 +399,4 @@ onKeyStroke(["Delete"], (e) => {
   Clear();
   e.preventDefault();
 });
-
-const modalCanceled = () => {
-  console.log("Canceled");
-  historyState.value = false;
-};
 </script>

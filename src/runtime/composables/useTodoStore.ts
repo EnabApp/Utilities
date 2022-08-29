@@ -1,5 +1,5 @@
 import { acceptHMRUpdate, defineStore } from "pinia";
-import { useSupabaseClient, useNuxtApp, useMoment } from "#imports";
+import { useSupabaseClient, useNuxtApp } from "#imports";
 
 export const useTodoStore = defineStore("todo-store", {
   state: () => ({
@@ -42,7 +42,7 @@ export const useTodoStore = defineStore("todo-store", {
           id: data.id,
           user_id: task.user_id,
           task: task.task,
-          inserted_at: data.inserted_at,
+          inserted_at: new Date().toISOString().substring(0, 16),
           is_complete: task.is_complete,
         });
       }
@@ -67,7 +67,6 @@ export const useTodoStore = defineStore("todo-store", {
     async updateTask(task) {
       const { $toast } = useNuxtApp();
       const supabase = useSupabaseClient();
-      const moment = useMoment();
 
       let cloneTask = { ...task };
       delete cloneTask.id;
@@ -91,7 +90,8 @@ export const useTodoStore = defineStore("todo-store", {
       const supabase = useSupabaseClient();
       const { data, error } = await supabase
         .from("app_todo")
-        .select("id, task, is_complete, inserted_at");
+        .select("*")
+        .order("id", { ascending: false });
       if (!error) this.tasks = data;
     },
   },

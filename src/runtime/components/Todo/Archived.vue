@@ -1,26 +1,35 @@
 <template>
   <div flex="~ col">
     <!-- ========>> Search Input Content <<======== -->
-    <UiInput m="y-20px" placeholder="ابحث هنا..." v-model="searchQuery" />
-
-    <div
-      m="t-5px"
-      flex="~ col gap-28px"
-      w="full"
-      overflow="y-scroll"
-      h="315px 3xl:330px"
-      p="b-15px"
-      snap="y"
-    >
-      <!-- ===========>> Todo Content <<=========== -->
-      <TransitionGroup>
-        <TodoTask
-          :task="task"
-          v-for="task in searchedTodos"
-          :key="task.id"
-          snap="center"
-        />
-      </TransitionGroup>
+    <UiInput m="y-20px" placeholder="ابحث.." v-model="searchQuery" />
+    <!-- ===========>> All Tasks Content <<=========== -->
+    <div m="t-5px" p="b-15px">
+      <div
+        flex="~ col gap-28px"
+        w="full"
+        overflow="y-scroll"
+        snap="y"
+        :class="{
+          'h-19.5rem': twoXs,
+          'h-21.6875rem': xs,
+          'h-23.75rem': sm,
+          'h-25.3125rem': md,
+          'h-30.625rem': lg,
+          'h-31.5626rem': xl,
+          'h-36.875rem': twoXl,
+        }"
+      >
+        <!-- ===========>> Todo Content <<=========== -->
+        <TransitionGroup>
+          <TodoTask
+            :BreakpointWindow="BreakpointWindow"
+            :task="task"
+            v-for="task in searchedTodos"
+            :key="task.id"
+            snap="center"
+          />
+        </TransitionGroup>
+      </div>
     </div>
   </div>
 </template>
@@ -32,8 +41,15 @@ const todoStore = useTodoStore();
 const searchQuery = ref("");
 
 const props = defineProps({
-  task: Object,
+  task: {
+    type: Object,
+  },
+  BreakpointWindow: {
+    type: Object,
+  },
 });
+
+const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
 
 //========>> Search Todo Function <<========//
 const searchedTodos = computed(() => {
