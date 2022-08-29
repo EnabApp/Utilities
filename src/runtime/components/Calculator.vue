@@ -2,32 +2,31 @@
   <!-- Application -->
   <Transition>
     <UiDesktopWindow v-if="app.running" v-show="!app.minimized" :app="app">
-      <!-- IMPORT ALL THE COMPONENT -->
       <div flex="~" ref="windowRef" text="white" :class="{
-        'justify-center items-center w-[100%] h-[100%]': twoXs,
-        'justify-between  w-[100%] h-[100%]': xs,
-        'justify-between items-center w-[100%] h-[100%]': sm,
-        'justify-start items-center w-[100%] h-[100%]': md,
-        'items-center justify-between w-[100%] h-[100%]': lg,
-        'justify-between items-center w-[100%] h-[100%] ': xl,
-        'justify-start w-[100%] h-[100%]  py-[2rem]': twoXl,
+        'justify-center items-stretch w-[100%] h-[100%] py-8': twoXs,
+        'justify-between  w-[100%] h-[100%] py-2': xs,
+        'justify-stretch items-center w-[100%] h-[100%] py-4': sm,
+        'justify-between items-center w-[100%] h-[100%] ': md,
+        'justify-between items-center w-[100%] h-[100%]': lg,
+        'justify-between items-center w-[100%] h-[100%] pb-[6rem]': xl,
+        'justify-start items-center w-[100%] h-[100%]  pb-[8rem]': twoXl,
       }">
-        <div flex="~ " p="x-2" :class="{
-          'justify-between items-center w-[100%] h-[100%%]': twoXs,
+        <div flex="~" p="x-2" :class="{
+          'justify-between  w-[100%] h-[100%%]': twoXs,
           'justify-between items-center w-[100%] h-[100%]': xs,
           'justify-between items-center w-[99%] h-[100%]': sm,
           'items-center justify-between w-[75%] h-[100%]': md,
           'justify-between items-center w-[80%] h-[100%]': lg,
-          'justify-between items-center w-[80%] h-[90%] ': xl,
-          'justify-start w-[80%] h-[100%]': twoXl,
+          'justify-between items-center w-[80%] h-[100%] ': xl,
+          'justify-start items-center w-[80%] h-[100%]': twoXl,
         }">
-          <div m="y-2" xl:h="full" flex="grow">
-            <div xl:h="100%" flex="col" divide="y-1 dark:secondaryOp secondary">
+          <div m="y-2" h="full" flex="grow">
+            <div h="100%" flex="col" divide="y-1 dark:secondaryOp secondary">
               <!-- ======>> Screen <<====== -->
-              <div id="calculation-result-bar" flex="~" border="rounded-lg" w="full" text="right" :class="{
-                'h-[2.6875rem]': md,
-                'h-[3.4375rem]': lg,
-                'h-[3.5rem]': xl,
+              <div id="calculation-result-bar" flex="~" items-center border="rounded-lg" w="full" text="right" :class="{
+                'h-[3rem] ': md,
+                'h-[4rem]': lg,
+                'h-[6rem] py-4': xl,
                 'py-[3rem] h-[6rem]': twoXl,
               }">
                 <div :class="[
@@ -39,7 +38,7 @@
                         ? 'text-xl'
                         : 'text-lg',
                 ]" w="full" p="x-4 y-2" text="primaryOp dark:primary" dir="ltr">
-                  {{ screen }}
+                  {{ screen }} {{ size }}
                 </div>
                 <div v-if="!(twoXl || xl || lg || md)" p="1" m="1" border="0" rounded="lg"
                   hover="bg-secondary dark:secondaryOp dark:bg-opacity-25">
@@ -48,7 +47,8 @@
                 </div>
               </div>
               <!-- ======>> History Model <<====== -->
-              <div position="relative" text="primaryOp dark:primary" w="full" h="full">
+              <div position="relative" text="primaryOp dark:primary" w="full"
+                class="h-6/6 sm:h-5/6 md:h-6/6 lg:h-5/6 xl:h-6/6 ">
                 <Teleport to="body">
                   <UiModal v-model="historyState" @cancel="modalCanceled">
                     <template #title> سجل الحاسبة </template>
@@ -83,7 +83,7 @@
                   </UiModal>
                 </Teleport>
                 <!-- ======>> Numbers / Operations <<====== -->
-                <CalculatorButtons :windowBreakpoint="windowBreakpoint" />
+                <CalculatorButtons :windowBreakpoint="windowBreakpoint" :screen="screen" />
               </div>
             </div>
           </div>
@@ -93,8 +93,8 @@
           'w-[20%] h-[100%]': twoXl,
           'w-[25%] h-[90%]': xl,
           'w-[25%] h-[100%]': md || lg,
-        }" bg="white" text-black>
-          sigil
+        }" bg="white" text-black text-5xl text-center>
+          SIGIL
         </div>
       </div>
     </UiDesktopWindow>
@@ -128,5 +128,4 @@ const windowRef = ref(null);
 const windowBreakpoint = useBreakpointWindow(windowRef);
 
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = windowBreakpoint;
-
 </script>
