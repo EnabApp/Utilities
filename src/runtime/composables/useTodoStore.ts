@@ -42,7 +42,7 @@ export const useTodoStore = defineStore("todo-store", {
           id: data.id,
           user_id: task.user_id,
           task: task.task,
-          inserted_at: new Date().toISOString().substring(0, 16),
+          inserted_at: task.inserted_at,
           is_complete: task.is_complete,
         });
       }

@@ -12,13 +12,15 @@
 import { useUser, ref } from "#imports";
 import { useTodoStore } from "../../composables/useTodoStore";
 
-const todoStore = useTodoStore();
-const user = useUser();
-const task = ref("");
-
 const props = defineProps({
   task: Object,
 });
+
+const todoStore = useTodoStore();
+const user = useUser();
+const task = ref("");
+const moment = useMoment();
+
 //=========>> Add Todo Function <<=========//
 const addTodo = async () => {
   const taskData = {
