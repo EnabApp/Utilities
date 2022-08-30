@@ -104,21 +104,24 @@ const supabase = useSupabaseClient();
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
 
 const dateShow = ref(
-  new Date(props.task.inserted_at).toISOString().substring(0, 16)
+  moment(props.task.inserted_at).toISOString().substring(0, 16)
 );
+
 //Calculate shit
 // var n = 1530.345;
 // console.log(n.toLocaleString(), ".toLocaleString() find me in task.vue");
 
 //=========>> Update Task Function <<=========//
+
+watch(dateShow, (newValue) => {
+  props.task.inserted_at = moment(newValue);
+});
+
 watch(
   () => props.task,
   (updatedTask) => todoStore.updateTask(updatedTask),
   { deep: true }
 );
-watch(dateShow, (newValue) => {
-  props.task.inserted_at = new Date(newValue);
-});
 </script>
 
 <style scoped>
