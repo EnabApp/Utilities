@@ -41,7 +41,7 @@
               class="i-material-symbols-date-range"
             ></div>
             <input
-              v-model="task.inserted_at"
+              v-model="dateShow"
               opacity="0"
               z="20"
               type="datetime-local"
@@ -97,20 +97,28 @@ const props = defineProps({
   },
 });
 
-const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
-
 const todoStore = useTodoStore();
-
 const moment = useMoment();
-
 const supabase = useSupabaseClient();
 
-//=========>> Update Task Function <<=========
+const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
+
+const dateShow = ref(
+  new Date(props.task.inserted_at).toISOString().substring(0, 16)
+);
+//Calculate shit
+// var n = 1530.345;
+// console.log(n.toLocaleString(), ".toLocaleString() find me in task.vue");
+
+//=========>> Update Task Function <<=========//
 watch(
   () => props.task,
   (updatedTask) => todoStore.updateTask(updatedTask),
   { deep: true }
 );
+watch(dateShow, (newValue) => {
+  props.task.inserted_at = new Date(newValue);
+});
 </script>
 
 <style scoped>

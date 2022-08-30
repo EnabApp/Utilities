@@ -10,8 +10,8 @@
           :col="false"
           :tabs="['جميع المهام', 'المؤرشفة']"
         >
-          <template #tab-1>
-            <div flex="~ col">
+          <template #tab-1
+            ><div flex="~ col">
               <TodoAdd />
               <TodoAll :BreakpointWindow="BreakpointWindow" />
             </div>
@@ -45,18 +45,16 @@
 
 <script setup>
 import { useTodoStore } from "../composables/useTodoStore";
-import { useBreakpointWindow } from "#imports";
+import { useBreakpointWindow, ref } from "#imports";
 
 const windowRef = ref(null);
 
 const BreakpointWindow = useBreakpointWindow(windowRef);
 
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = BreakpointWindow;
-var n = 1530.345;
-console.log(n.toLocaleString() , ".toLocaleString() find me in TODO");
+
 const todoStore = useTodoStore();
 todoStore.fetchTasks();
-
 const props = defineProps({
   app: {
     type: Object,
