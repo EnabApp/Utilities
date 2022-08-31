@@ -1,7 +1,7 @@
 <template>
   <!-- Application -->
   <Transition>
-    <UiDesktopWindow v-if="app.running" v-show="!app.minimized" :app="app">
+    <UiDesktopWindow v-if="app.running" v-show="!app.minimized" :app="app" @keydown="escapeClear">
       <div flex="~" ref="windowRef" text="white" :class="{
         'justify-center items-stretch w-[100%] h-[100%] py-8': twoXs,
         'justify-between  w-[100%] h-[100%] py-2': xs,
@@ -38,7 +38,7 @@
                         ? 'text-xl'
                         : 'text-lg',
                 ]" w="full" p="x-4 y-2" text="primaryOp dark:primary" dir="ltr">
-                  {{ screen }} {{ size }}
+                  {{  screen  }} {{  size  }}
                 </div>
                 <div v-if="!(twoXl || xl || lg || md)" p="1" m="1" border="0" rounded="lg"
                   hover="bg-secondary dark:secondaryOp dark:bg-opacity-25">
@@ -63,10 +63,10 @@
                             <div
                               class="border-0 rounded-lg border-w-5 hover:bg-secondary bg-opacity-10 dark:secondaryOp dark:bg-opacity-25">
                               <div m="3" text="xl primaryOp dark:primary">
-                                <h5>{{ " = " }} {{ h.history }}</h5>
+                                <h5>{{  " = "  }} {{  h.history  }}</h5>
                               </div>
                               <div m="3" text="2xl primaryOp dark:primary">
-                                <h5>{{ h.result }}</h5>
+                                <h5>{{  h.result  }}</h5>
                               </div>
                             </div>
                           </div>
@@ -83,7 +83,8 @@
                   </UiModal>
                 </Teleport>
                 <!-- ======>> Numbers / Operations <<====== -->
-                <CalculatorButtons :windowBreakpoint="windowBreakpoint" :screen="screen" />
+                <CalculatorButtons :historyState="historyState" :windowBreakpoint="windowBreakpoint" :screen="screen"
+                  :screenHistory="screenHistory" />
               </div>
             </div>
           </div>
@@ -131,10 +132,10 @@ const props = defineProps({
 const screen = ref("0");
 const screenHistory = ref([]);
 const [historyState, historyToggle] = useToggle(false);
-//= ====>> Buttons Clicked Function <<=====//
+
 
 const modalCanceled = () => {
-  console.log("Canceled");
+  console.log("modal function clicked");
   historyState.value = false;
 };
 
@@ -143,4 +144,12 @@ const windowRef = ref(null);
 const windowBreakpoint = useBreakpointWindow(windowRef);
 
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = windowBreakpoint;
+
+
+function escapeClear(event) {
+  if (event.key === 'Escape') {
+    screen.value = '0'
+    console.log('escape clicked')
+  }
+}
 </script>

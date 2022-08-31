@@ -4,7 +4,7 @@
       <!-- =====>> First Row <<===== -->
       <div flex="~" justify="around" md:justify="evenly" class="h-1/5">
         <div flex="~" justify="center" items="center" cursor="pointer"
-          hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" rounded="5px" @click="Backspace()"
+          hover="bg-secondary dark:secondaryOp dark:bg-opacity-25" duration="150" rounded="5px" @click="calculatorStore.Backspace()"
           :class="{
             'w-full h-full text-info text-5xl ': twoXl,
             'w-full h-full text-info text-4xl px': xl,
@@ -25,7 +25,7 @@
             'w-[99%] h-[full] text-info text-5xl  items-center': sm,
             'w-full h-h-full text-info text-4xl  items-center': xs,
             'w-full items-center text-info text-4xl  items-end': twoXs,
-          }" @click="Operation('/')">
+          }" @click="calculatorStore.Operation('/')">
           ÷
         </div>
         <div flex="~" items="center" justify="center" cursor="pointer"
@@ -37,7 +37,7 @@
             'w-[99%] h-[full] text-info text-3xl  items-end ': sm,
             'w-full h-full  text-info text-2xl ': xs,
             'w-full items-center  text-info text-xl ': twoXs,
-          }" @click="Operation('%')">
+          }" @click="calculatorStore.Operation('%')">
           %
         </div>
         <div flex="~" items="center" justify="center" cursor="pointer"
@@ -49,7 +49,7 @@
             'w-[99%] h-[full] text-error text-3xl  items-end': sm,
             'w-full h-full text-error text-2xl ': xs,
             'w-full items-center text-error text-xl ': twoXs,
-          }" @click="Clear('-')">
+          }" @click="calculatorStore.Clear('-')">
           C
         </div>
       </div>
@@ -64,7 +64,7 @@
             'w-[99%] h-[full] text-info text-4xl  items-center': sm,
             'w-full h-full  text-info text-3xl items-center': xs,
             'w-full items-center  text-info text-2xl': twoXs,
-          }" @click="Operation('*')">
+          }" @click="calculatorStore.Operation('*')">
           ×
         </div>
         <div flex="~" items="center" justify="center" cursor="pointer"
@@ -78,7 +78,7 @@
             'w-full h-[full] text-4xl ': sm,
             'w-[99%] h-full text-4xl  ': xs,
             'w-full items-center text-4xl ': twoXs,
-          }" @click="ButtonClicked('9')">
+          }" @click="calculatorStore.ButtonClicked('9')">
           9
         </div>
         <div flex="~" items="center" justify="center" cursor="pointer"
@@ -92,7 +92,7 @@
             'w-full h-[full] text-3xl ': sm,
             'w-[99%] h-full text-2xl  ': xs,
             'w-full items-center text-xl ': twoXs,
-          }" @click="ButtonClicked('8')">
+          }" @click="calculatorStore.ButtonClicked('8')">
           8
         </div>
         <div flex="~" items="center" justify="center" cursor="pointer"
@@ -106,7 +106,7 @@
             'w-full h-full text-2xl  ': sm,
             'w-[99%] h-full text-2xl  ': xs,
             'w-full items-center text-xl ': twoXs,
-          }" @click="ButtonClicked('7')">
+          }" @click="calculatorStore.ButtonClicked('7')">
           7
         </div>
       </div>
@@ -115,13 +115,13 @@
         <div flex="~" justify="center" cursor="pointer" hover="bg-secondary dark:secondaryOp dark:bg-opacity-25"
           duration="150" rounded="5px" :class="{
             'w-full h-[full] text-info text-7xl items-center ': twoXl,
-            'w-full h-full text-info text-6xl items-center  ': xl,
+            'w-full h-full text-info text-6xl items-center  px': xl,
             'w-full h-full text-info text-5xl items-center ': lg,
             'w-full  text-info text-4xl items-center ': md,
             'w-full h-[full] text-info text-4xl items-center ': sm,
             'w-full h-full text-info text-2xl items-center': xs,
             'w-full items-center text-info text-2xl ': twoXs,
-          }" @click="Operation('+')">
+          }" @click="calculatorStore.Operation('+')">
           +
         </div>
         <div flex="~" items="center" justify="center" cursor="pointer"
@@ -135,7 +135,7 @@
             'w-full h-[full] text-3xl ': sm,
             'w-[99%] h-full text-2xl  ': xs,
             'w-full items-center text-xl ': twoXs,
-          }" @click="ButtonClicked('6')">
+          }" @click="calculatorStore.ButtonClicked('6')">
           6
         </div>
         <div flex="~" items="center" justify="center" cursor="pointer"
@@ -149,7 +149,7 @@
             'w-full h-full text-2xl  ': sm,
             'w-[99%] h-full text-2xl  ': xs,
             'w-full items-center text-xl ': twoXs,
-          }" @click="ButtonClicked('5')">
+          }" @click="calculatorStore.ButtonClicked('5')">
           5
         </div>
         <div flex="~" items="center" justify="center" cursor="pointer"
@@ -163,7 +163,7 @@
             'w-full h-full text-2xl  ': sm,
             'w-[99%] h-full text-2xl  ': xs,
             'w-full items-center text-xl ': twoXs,
-          }" @click="ButtonClicked('4')">
+          }" @click="calculatorStore.ButtonClicked('4')">
           4
         </div>
       </div>
@@ -179,7 +179,7 @@
             'w-[99%] h-full  text-info text-4xl  ': sm,
             'w-full h-full text-info text-3xl ': xs,
             'w-full items-center text-info text-2xl ': twoXs,
-          }" @click="Operation('-')">
+          }" @click="calculatorStore.Operation('-')">
           –
         </div>
         <div flex="~" items="center" justify="center" cursor="pointer"
@@ -193,7 +193,7 @@
             'w-full h-full text-3xl ': sm,
             'w-[99%] h-full text-2xl  ': xs,
             'w-full items-center text-xl ': twoXs,
-          }" @click="ButtonClicked('3')">
+          }" @click="calculatorStore.ButtonClicked('3')">
           3
         </div>
         <div flex="~" items="center" justify="center" cursor="pointer"
@@ -207,7 +207,7 @@
             'w-full h-full text-3xl ': sm,
             'w-[99%] h-full text-2xl  ': xs,
             'w-full items-center text-xl ': twoXs,
-          }" @click="ButtonClicked('2')">
+          }" @click="calculatorStore.ButtonClicked('2')">
           2
         </div>
         <div flex="~" items="center" justify="center" cursor="pointer"
@@ -221,7 +221,7 @@
             'w-full h-full text-3xl ': sm,
             'w-[99%] h-full text-2xl  ': xs,
             'w-full items-center text-xl ': twoXs,
-          }" @click="ButtonClicked('1')">
+          }" @click="calculatorStore.ButtonClicked('1')">
           1
         </div>
       </div>
@@ -236,7 +236,7 @@
             'w-[99%] h-full text-5xl  items-end': sm,
             'w-full h-full ': xs,
             'w-full items-center ': twoXs,
-          }" @click="Operation('=')">
+          }" @click="calculatorStore.Operation('=')">
           =
         </div>
         <div flex="~" items="center" justify="center" cursor="pointer"
@@ -250,7 +250,7 @@
             'w-full h-full text-3xl ': sm,
             'w-[99%] h-full text-2xl  ': xs,
             'w-full items-center text-xl ': twoXs,
-          }" @click="ButtonClicked('000')">
+          }" @click="calculatorStore.ButtonClicked('000')">
           000
         </div>
         <div flex="~" items="center" justify="center" cursor="pointer"
@@ -264,7 +264,7 @@
             'w-full h-full text-3xl ': sm,
             'w-[99%] h-full text-2xl  ': xs,
             'w-full items-center text-xl ': twoXs,
-          }" @click="ButtonClicked('0')">
+          }" @click="calculatorStore.ButtonClicked('0')">
           0
         </div>
         <div flex="~" cursor="pointer" justify-center items-center
@@ -277,7 +277,7 @@
             'w-full h-full text-3xl ': sm,
             'w-[99%] h-full text-2xl  ': xs,
             'w-full items-center text-xl ': twoXs,
-          }" @click="Operation('.')">
+          }" @click="calculatorStore.Operation('.')">
           .
         </div>
       </div>
@@ -285,82 +285,50 @@
   </div>
 </template>
 <script setup>
-import { onKeyStroke } from "#imports";
+import { onKeyStroke, useCalculatorStore } from "#imports";
 
 const props = defineProps({
   screen: {
-    type: Function
+    type: String
   },
   windowBreakpoint: {
-    type: Object,
+    type: Object
   },
-});
+  screenHistory: {
+    type: String
+  },
+  historyState: {
+    type: Object
+  },
+})
+
 
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.windowBreakpoint;
 //= ====>> Buttons Clicked Function <<=====//
-const ButtonClicked = (number) => {
-  if (props.screen.value.length > 13) return;
-  if (props.screen.value == "0" && number == "000") return;
-  if (props.screen.value == "0") {
-    props.screen.value = number;
-  } else {
-    props.screen.value += number;
-  }
-};
+
 //= ====>> Operations Function <<=====//
-const Operation = (operation) => {
-  const lastChar = props.screen.value.slice(-1);
-  if (lastChar == operation) {
-    return;
-  }
-  if (
-    lastChar == "*" ||
-    lastChar == "+" ||
-    lastChar == "-" ||
-    lastChar == "/"
-  ) {
-    props.screen.value += lastChar;
-  }
-  if (operation === "=" || operation === "Enter") {
-    const history = props.screen.value.toString();
-    props.screen.value = eval(props.screen.value).toString().substring(0, 19);
-    props.screenHistory.value.push({
-      history,
-      result: props.screen.value,
-    });
-  } else if (operation === "%") {
-    props.screen.value = (eval(props.screen.value) / 100)
-      .toString()
-      .substring(0, 19);
-  } else {
-    props.screen.value += operation;
-  }
-};
+const calculatorStore = useCalculatorStore()
+
+
 
 //=====>> Clear / Deletes All Numbers <<=====//
-const Clear = () => {
-  props.screen.value = "0";
-};
+
 
 //=====>> BackSpace / Delete One Number  <<=====//
-const Backspace = () => {
-  props.screen.value =
-    props.screen.value.length <= 1 ? "0" : props.screen.value.slice(0, -1);
-};
+
 
 //=====>> keyboard <<=====//
 onKeyStroke(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."], (e) => {
   if (!(props.app.id == AppManager.focused)) {
     return;
   }
-
-  if (props.screen.value.length > 19) {
+  if (props.screen.length > 19) {
     return;
   }
-  if (props.screen.value == "0") {
-    props.screen.value = e.key;
+  if (props.screen == "0") {
+    props.screen = e.key;
   } else {
-    props.screen.value += e.key;
+    props.screen += e.key;
   }
   e.preventDefault();
 });
@@ -390,8 +358,5 @@ onKeyStroke(["Delete"], (e) => {
   e.preventDefault();
 });
 
-const modalCanceled = () => {
-  console.log("Canceled");
-  historyState.value = false;
-};
+
 </script>
