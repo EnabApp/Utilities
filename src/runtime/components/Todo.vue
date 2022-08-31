@@ -48,9 +48,7 @@ import { useTodoStore } from "../composables/useTodoStore";
 import { useBreakpointWindow, ref } from "#imports";
 
 const windowRef = ref(null);
-
 const BreakpointWindow = useBreakpointWindow(windowRef);
-
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = BreakpointWindow;
 
 const todoStore = useTodoStore();

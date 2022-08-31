@@ -1,155 +1,201 @@
 <template>
-  <!-- Application -->
   <Transition>
-    <UiDesktopWindow v-if="app.running" v-show="!app.minimized" :app="app" @keydown="escapeClear">
-      <div flex="~" ref="windowRef" text="white" :class="{
-        'justify-center items-stretch w-[100%] h-[100%] py-8': twoXs,
-        'justify-between  w-[100%] h-[100%] py-2': xs,
-        'justify-stretch items-center w-[100%] h-[100%] py-4': sm,
-        'justify-between items-center w-[100%] h-[100%] ': md,
-        'justify-between items-center w-[100%] h-[100%]': lg,
-        'justify-between items-center w-[100%] h-[100%] pb-[6rem]': xl,
-        'justify-start items-center w-[100%] h-[100%]  pb-[8rem]': twoXl,
-      }">
-        <div flex="~" p="x-2" :class="{
-          'justify-between  w-[100%] h-[100%%]': twoXs,
-          'justify-between items-center w-[100%] h-[100%]': xs,
-          'justify-between items-center w-[99%] h-[100%]': sm,
-          'items-center justify-between w-[75%] h-[100%]': md,
-          'justify-between items-center w-[80%] h-[100%]': lg,
-          'justify-between items-center w-[80%] h-[100%] ': xl,
-          'justify-start items-center w-[80%] h-[100%]': twoXl,
-        }">
-          <div m="y-2" h="full" flex="grow">
-            <div h="100%" flex="col" divide="y-1 dark:secondaryOp secondary">
-              <!-- ======>> Screen <<====== -->
-              <div id="calculation-result-bar" flex="~" items-center border="rounded-lg" w="full" text="right" :class="{
-                'h-[3rem] ': md,
-                'h-[4rem]': lg,
-                'h-[6rem] py-4': xl,
-                'py-[3rem] h-[6rem]': twoXl,
-              }">
-                <div :class="[
-                  screen.length < 8
-                    ? 'text-4xl'
-                    : screen.length < 12
-                      ? 'text-2xl'
-                      : screen.length < 16
-                        ? 'text-xl'
-                        : 'text-lg',
-                ]" w="full" p="x-4 y-2" text="primaryOp dark:primary" dir="ltr">
-                  {{  screen  }} {{  size  }}
-                </div>
-                <div v-if="!(twoXl || xl || lg || md)" p="1" m="1" border="0" rounded="lg"
-                  hover="bg-secondary dark:secondaryOp dark:bg-opacity-25">
-                  <div class="i-codicon-history visible" m="1" text="24px primaryOp dark:primary" cursor="pointer"
-                    @click="historyToggle()" />
-                </div>
-              </div>
-              <!-- ======>> History Model <<====== -->
-              <div position="relative" text="primaryOp dark:primary" w="full"
-                class="h-6/6 sm:h-5/6 md:h-6/6 lg:h-5/6 xl:h-6/6 ">
-                <Teleport to="body">
-                  <UiModal v-model="historyState" @cancel="modalCanceled">
-                    <template #title> سجل الحاسبة </template>
-                    <div v-if="historyState" opacity="93%" z="20" border="rounded-5px" h="full" w="full">
-                      <h3 v-if="screenHistory.length == 0" m="10" text="center primaryOp dark:primary">
-                        لا يوجد سجل
-                      </h3>
-                      <div flex="~ col" justify="center">
-                        <div class="overflow-y-auto h-429px">
-                          <div v-for="h in screenHistory.reverse()" :key="h.history" text="primaryOp dark:primary" m="2"
-                            flex="~ col gap-2">
-                            <div
-                              class="border-0 rounded-lg border-w-5 hover:bg-secondary bg-opacity-10 dark:secondaryOp dark:bg-opacity-25">
-                              <div m="3" text="xl primaryOp dark:primary">
-                                <h5>{{  " = "  }} {{  h.history  }}</h5>
-                              </div>
-                              <div m="3" text="2xl primaryOp dark:primary">
-                                <h5>{{  h.result  }}</h5>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div flex="~" justify="center">
-                        <div class="p-1 border-0 rounded-lg">
-                          <div v-if="screenHistory.length > 0" text="2xl primaryOp dark:primary" border="2 transparent"
-                            cursor="pointer" class="i-ant-design-delete-outlined" hover="border-gray-700" z="30"
-                            bottom="1" left="45%" @click="screenHistory = []" />
-                        </div>
-                      </div>
-                    </div>
-                  </UiModal>
-                </Teleport>
-                <!-- ======>> Numbers / Operations <<====== -->
-                <CalculatorButtons :historyState="historyState" :windowBreakpoint="windowBreakpoint" :screen="screen"
-                  :screenHistory="screenHistory" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- DISPLAY THE HISTORY ON LARGE SCREEN SIZES -->
-        <div v-if="twoXl || xl || lg || md" :class="{
-          'w-[20%] h-[100%]': twoXl,
-          'w-[25%] h-[90%]': xl,
-          'w-[25%] h-[100%]': md || lg,
-        }" bg="white" text-black text-5xl text-center>
-          SIGIL
+    <UiDesktopWindow v-if="app.running" v-show="!app.minimized" :app="app">
+      <div></div>
+      <div
+        p="x-10px b-5px"
+        text="2xl right primaryOp dark:primary"
+        dir="ltr"
+        w="full"
+        class="text-3xl"
+        ref="windowRef"
+        :class="{
+          'text-3xl': twoXs,
+          'text-1.785rem': xs,
+          'text-3xl': sm,
+          'text-4xl': md,
+          'text-5xl': lg,
+          'text-6xl': xl,
+          'text-7xl': twoXl,
+        }"
+      >
+        {{ ans.toLocaleString("en-US", { maximumFractionDigits: 8 }) }}
+        {{ operators[operator] }}
+        {{
+          num !== 0
+            ? num.toLocaleString("en-US", {
+                maximumFractionDigits: 8,
+              })
+            : ""
+        }}
+      </div>
+      <div m="5px" h="full" flex="~ col" justify="end">
+        <div class="grid grid-cols-4 gap-1px">
+          <button
+            cursor="pointer"
+            duration="150"
+            rounded="5px"
+            p="y-11px"
+            w="full"
+            font="semibold"
+            border="none"
+            :class="{
+              'text-lg': twoXs,
+              'text-xl': xs,
+              'text-2xl': sm,
+              'text-3xl': md,
+              'text-4xl': lg,
+              'text-5xl': xl,
+              'text-6xl': twoXl,
+              'text-info hover:bg-secondaryOp bg-inherit':
+                ((index + 1) % 4 === 0 || index < 7) &&
+                button !== '=' &&
+                button !== 'C' &&
+                button !== number,
+              'hover:bg-secondaryOp': (index + 1) % 4 === 0 || index < 7,
+              'text-error bg-inherit hover:bg-error hover:text-primary':
+                button === 'C',
+              'bg-info text-primary hover:bg-inherit hover:text-info':
+                button === '=',
+              'bg-inherit ': button !== number && button !== '=',
+            }"
+            v-for="(button, index) in buttons"
+            :key="index"
+            @click="handleClick(button)"
+            type="button"
+          >
+            {{ button }}
+          </button>
         </div>
       </div>
     </UiDesktopWindow>
   </Transition>
 </template>
 
-<script setup>
-import { useAppManager, ref, useToggle, useBreakpointWindow } from "#imports";
-
-const AppManager = useAppManager();
+<script setup lang="ts">
+import { ref, useBreakpointWindow } from "#imports";
+import { storeToRefs } from "pinia";
+import { useCalculatorStore } from "../composables/useCalculatorStore";
 
 const props = defineProps({
   app: {
     type: Object,
-    required: true
-  },
-  ButtonClicked: {
-    type: Function
-  },
-  Operation: {
-    type: Function
-  },
-  Clear: {
-    type: Function
-  },
-  Backspace: {
-    type: Function
-  },
-  onKeyStroke: {
-    type: Function
+    required: true,
   },
 });
 
-const screen = ref("0");
-const screenHistory = ref([]);
-const [historyState, historyToggle] = useToggle(false);
+const windowRef = ref(null);
+const BreakpointWindow = useBreakpointWindow(windowRef);
+const { size, twoXs, xs, sm, md, lg, xl, twoXl } = BreakpointWindow;
 
+const store = useCalculatorStore();
+const { ans, operator, num } = storeToRefs(store);
+const { calculate, addToNumber } = store;
 
-const modalCanceled = () => {
-  console.log("modal function clicked");
-  historyState.value = false;
+const buttons = [
+  "C",
+  "π",
+  "%",
+  "Del",
+  "1/x",
+  "x²",
+  "√x",
+  "÷",
+  7,
+  8,
+  9,
+  "x",
+  4,
+  5,
+  6,
+  "-",
+  1,
+  2,
+  3,
+  "+",
+  "+/-",
+  0,
+  ".",
+  "=",
+];
+
+const operators: any = {
+  add: "+",
+  subtract: "-",
+  multiply: "x",
+  divide: "÷",
 };
 
-const windowRef = ref(null);
-
-const windowBreakpoint = useBreakpointWindow(windowRef);
-
-const { size, twoXs, xs, sm, md, lg, xl, twoXl } = windowBreakpoint;
-
-
-function escapeClear(event) {
-  if (event.key === 'Escape') {
-    screen.value = '0'
-    console.log('escape clicked')
+const handleClick = (button: string | number) => {
+  if (typeof button === "number") {
+    addToNumber(button);
+  } else {
+    if (button === "C") {
+      ans.value = 0;
+      num.value = 0;
+      operator.value = "";
+    } else if (button === "π") {
+      if (operator.value === "") {
+        ans.value = 3.142;
+      } else {
+        num.value = 3.142;
+      }
+    } else if (button === "%") {
+      checkCalculate();
+      ans.value = parseFloat((ans.value / 100).toFixed(3));
+    } else if (button === "Del") {
+      if (operator.value === "") {
+        if (ans.value.toString().length === 1) {
+          ans.value = 0;
+        } else {
+          ans.value = parseFloat(ans.value.toString().slice(0, -1));
+        }
+      } else if (num.value === 0) {
+        operator.value = "";
+      } else {
+        if (num.value.toString().length === 1) {
+          num.value = 0;
+        } else {
+          num.value = parseFloat(num.value.toString().slice(0, -1));
+        }
+      }
+    } else if (button === "1/x") {
+      checkCalculate();
+      ans.value = parseFloat((1 / ans.value).toFixed(8));
+    } else if (button === "x²") {
+      checkCalculate();
+      ans.value = parseFloat((ans.value * ans.value).toFixed(8));
+    } else if (button === "√x") {
+      checkCalculate();
+      ans.value = parseFloat(Math.sqrt(ans.value).toFixed(8));
+    } else if (button === "÷") {
+      checkCalculate();
+      operator.value = "divide";
+    } else if (button === "x") {
+      checkCalculate();
+      operator.value = "multiply";
+    } else if (button === "-") {
+      checkCalculate();
+      operator.value = "subtract";
+    } else if (button === "+") {
+      checkCalculate();
+      operator.value = "add";
+    } else if (button === "+/-") {
+      if (num.value === 0) {
+        ans.value = -ans.value;
+      } else {
+        num.value = -num.value;
+      }
+    } else if (button === "=") {
+      calculate();
+    } else if (button === ".") {
+      operator.value = ".";
+    }
   }
-}
+};
+const checkCalculate = (): void => {
+  if (!(operator.value === "" || num.value === 0)) {
+    calculate();
+  }
+};
 </script>
