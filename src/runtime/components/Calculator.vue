@@ -10,11 +10,6 @@
         class="text-3xl"
         ref="windowRef"
         :class="{
-          'text-3xl': twoXs,
-          'text-1.785rem': xs,
-          'text-3xl': sm,
-          'text-4xl': md,
-          'text-5xl': lg,
           'text-6xl': xl,
           'text-7xl': twoXl,
         }"
@@ -35,7 +30,7 @@
             cursor="pointer"
             duration="150"
             rounded="5px"
-            p="y-11px"
+            p="y-10px"
             w="full"
             font="semibold"
             border="none"
@@ -47,17 +42,17 @@
               'text-4xl': lg,
               'text-5xl': xl,
               'text-6xl': twoXl,
-              'text-info hover:bg-secondaryOp bg-inherit':
-                ((index + 1) % 4 === 0 || index < 7) &&
+              'text-info dark:text-info hover:bg-secondaryOp hover:bg-opacity-25 bg-inherit':
+                ((index + 1) % 4 === 0 || index < 7 || index === 20) &&
                 button !== '=' &&
-                button !== 'C' &&
-                button !== number,
-              'hover:bg-secondaryOp': (index + 1) % 4 === 0 || index < 7,
+                button !== 'C',
               'text-error bg-inherit hover:bg-error hover:text-primary':
                 button === 'C',
-              'bg-info text-primary hover:bg-inherit hover:text-info':
-                button === '=',
-              'bg-inherit ': button !== number && button !== '=',
+              'bg-info text-primary hover:bg-opacity-50': button === '=',
+              'bg-inherit dark:text-primary':
+                ((index + 1) % 4 !== 0 || index < 7 || index !== 20) &&
+                button !== '=' &&
+                button !== 'C',
             }"
             v-for="(button, index) in buttons"
             :key="index"
@@ -73,7 +68,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, useBreakpointWindow } from "#imports";
+import { ref, useBreakpointWindow, useAppManager } from "#imports";
 import { storeToRefs } from "pinia";
 import { useCalculatorStore } from "../composables/useCalculatorStore";
 
@@ -83,6 +78,8 @@ const props = defineProps({
     required: true,
   },
 });
+
+const AppManager = useAppManager();
 
 const windowRef = ref(null);
 const BreakpointWindow = useBreakpointWindow(windowRef);
@@ -198,4 +195,59 @@ const checkCalculate = (): void => {
     calculate();
   }
 };
+onKeyStroke(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"], (e) => {
+  if (!(props.app.id == AppManager.focused)) {
+    return;
+  }
+  if (operator.value === "") {
+    addToNumber(e.key);
+  } else {
+    num.value += e.key;
+  }
+  e.preventDefault();
+});
+
+onKeyStroke(["+", "-", "*", "/", "%", "Enter"], (e) => {
+  if (!(props.app.id == AppManager.focused)) {
+    return;
+  }
+  if (operator.value === "") {
+    operator.value = e.key;
+  } else {
+    calculate();
+  }
+  e.preventDefault();
+});
+
+onKeyStroke(["Backspace"], (e) => {
+  if (!(props.app.id == AppManager.focused)) {
+    return;
+  }
+  if (operator.value === "") {
+    if (ans.value.toString().length === 1) {
+      ans.value = 0;
+    } else {
+      ans.value = parseFloat(ans.value.toString().slice(0, -1));
+    }
+  } else if (num.value === 0) {
+    operator.value = "";
+  } else {
+    if (num.value.toString().length === 1) {
+      num.value = 0;
+    } else {
+      num.value = parseFloat(num.value.toString().slice(0, -1));
+    }
+  }
+  e.preventDefault();
+});
+
+onKeyStroke(["Escape"], (e) => {
+  if (!(props.app.id == AppManager.focused)) {
+    return;
+  }
+  num.value = 0;
+  ans.value = 0;
+  operator.value = "";
+  e.preventDefault();
+});
 </script>
