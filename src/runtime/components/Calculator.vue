@@ -1,7 +1,5 @@
 <template>
-  <Transition>
-    <UiDesktopWindow v-if="app.running" v-show="!app.minimized" :app="app">
-      <div></div>
+  <!-- Application -->
       <div
         p="x-10px b-5px"
         text="2xl right primaryOp dark:primary"
@@ -63,8 +61,6 @@
           </button>
         </div>
       </div>
-    </UiDesktopWindow>
-  </Transition>
 </template>
 
 <script setup lang="ts">

@@ -1,7 +1,5 @@
 <template>
   <!-- Application -->
-  <Transition>
-    <UiDesktopWindow v-if="app.running" v-show="!app.minimized" :app="app">
       <div flex="~ col grow gap-2" ref="windowRef">
         <UiTabGroup
           v-if="!(twoXl || xl || lg || md)"
@@ -39,8 +37,6 @@
           </div>
         </div>
       </div>
-    </UiDesktopWindow>
-  </Transition>
 </template>
 
 <script setup>
