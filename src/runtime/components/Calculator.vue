@@ -22,16 +22,12 @@
           })
         : ""
     }}
-    {{ size }}
   </div>
 
   <!-- //====== Buttons styles and loop includes Numbers & Operations ======// -->
   <div m="5px" h="full" flex="~ col" justify="end">
     <div grid="~ cols-10">
-      <div
-        class="grid grid-cols-4 gap-1px col-span-10"
-        :class="{ 'col-span-7': twoXl || xl || lg || md }"
-      >
+      <div class="grid grid-cols-4 gap-1px col-span-10">
         <button
           cursor="pointer"
           duration="150"
@@ -67,9 +63,9 @@
         </button>
       </div>
       <!-- DISPLAY THE HISTORY ON LARGE SCREEN SIZES -->
-      <div v-if="twoXl || xl || lg || md" class="col-span-3" bg="white">
+      <!-- <div v-if="twoXl || xl || lg || md" class="col-span-3" bg="white">
         <div>History!</div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

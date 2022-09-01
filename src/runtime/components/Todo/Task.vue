@@ -84,8 +84,9 @@
 </template>
 
 <script setup>
-import { useSupabaseClient, useMoment, watch } from "#imports";
-import { useTodoStore } from "../../composables/useTodoStore";
+import { useSupabaseClient, watch } from "#imports";
+import { useTodoStore } from "../composables/useTodoStore";
+import moment from "../composables/useMoment";
 
 const props = defineProps({
   task: {
@@ -106,10 +107,6 @@ const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
 const dateShow = ref(
   moment(props.task.inserted_at).toISOString().substring(0, 16)
 );
-
-//Calculate shit
-// var n = 1530.345;
-// console.log(n.toLocaleString(), ".toLocaleString() find me in task.vue");
 
 //=========>> Update Task Function <<=========//
 

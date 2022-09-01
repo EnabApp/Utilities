@@ -19,7 +19,6 @@ const props = defineProps({
 const todoStore = useTodoStore();
 const user = useUser();
 const task = ref("");
-const moment = useMoment();
 
 //=========>> Add Todo Function <<=========//
 const addTodo = async () => {
