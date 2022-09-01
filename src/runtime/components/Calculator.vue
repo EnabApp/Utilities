@@ -27,7 +27,10 @@
   <!-- //====== Buttons styles and loop includes Numbers & Operations ======// -->
   <div m="5px" h="full" flex="~ col" justify="end">
     <div grid="~ cols-10">
-      <div class="grid grid-cols-4 gap-1px col-span-10">
+      <div
+        class="grid grid-cols-4 gap-1px col-span-10"
+        :class="{ 'col-span-7': twoXl || xl || lg || md }"
+      >
         <button
           cursor="pointer"
           duration="150"
@@ -63,8 +66,47 @@
         </button>
       </div>
       <!-- DISPLAY THE HISTORY ON LARGE SCREEN SIZES -->
-      <div v-if="twoXl || xl || lg || md" class="col-span-3" bg="white">
-        <div>under construction!</div>
+      <div
+        relative="~"
+        v-if="twoXl || xl || lg || md"
+        col="span-3"
+        overflow="y-scroll"
+        h="350px"
+      >
+        <div class="p-1 border-0 rounded-lg">
+          <div
+            hover:bg="secondary dark:secondaryOp"
+            p="2"
+            rounded="5px"
+            duration="150"
+            class="text-xl text-primaryOp dark:text-primary"
+            m="5"
+            v-for="history in historyList"
+            :key="history"
+            dir="rtl"
+          >
+            {{ history }}
+          </div>
+          <h3
+            v-if="historyList.length == 0"
+            m="10"
+            text="center primaryOp dark:primary"
+          >
+            لا يوجد سجل
+          </h3>
+          <div
+            absolute="~"
+            v-if="historyList.length > 0"
+            text="2xl primaryOp dark:primary"
+            border="2 transparent"
+            cursor="pointer"
+            class="i-ant-design-delete-outlined"
+            hover="border-gray-700"
+            top="8"
+            left="5%"
+            @click="historyList = []"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -101,7 +143,21 @@ const { ans, operator, num } = storeToRefs(store);
 const { calculate, addToNumber } = store;
 
 //====== History Toggle ======//
-const screenHistory = ref([]);
+const historyList = ref([
+  "3456",
+  "435670",
+  "986756534",
+  "56789034-",
+  "4356435678",
+  "3453456789",
+  "546789565750",
+  "2347654",
+  "554 x 2 = 1108",
+  "10*10 = 100",
+  "10/2 = 5",
+  "10+10 = 20",
+  "10-10 = 0",
+]);
 const [historyState, historyToggle] = useToggle(false);
 
 //====== Buttons Defining ======//
@@ -246,9 +302,17 @@ onKeyStroke(["+", "-", "*", "/", "%", "Enter"], (e) => {
   if (!(props.app.id == AppManager.focused)) {
     return;
   }
-  if (operator.value === "") {
-    operator.value = e.key;
-  } else {
+  if (e.key === "+") {
+    operator.value = "add";
+  } else if (e.key === "-") {
+    operator.value = "subtract";
+  } else if (e.key === "*") {
+    operator.value = "multiply";
+  } else if (e.key === "/") {
+    operator.value = "divide";
+  } else if (e.key === "%") {
+    operator.value = "divide";
+  } else if (e.key === "Enter") {
     calculate();
   }
   e.preventDefault();
