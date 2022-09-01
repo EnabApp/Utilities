@@ -63,9 +63,9 @@
         </button>
       </div>
       <!-- DISPLAY THE HISTORY ON LARGE SCREEN SIZES -->
-      <!-- <div v-if="twoXl || xl || lg || md" class="col-span-3" bg="white">
-        <div>History!</div>
-      </div> -->
+      <div v-if="twoXl || xl || lg || md" class="col-span-3" bg="white">
+        <div>under construction!</div>
+      </div>
     </div>
   </div>
 </template>
