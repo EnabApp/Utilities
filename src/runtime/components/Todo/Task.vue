@@ -84,8 +84,9 @@
 </template>
 
 <script setup>
-import { useSupabaseClient, useMoment, watch } from "#imports";
+import { useSupabaseClient, watch, ref } from "#imports";
 import { useTodoStore } from "../../composables/useTodoStore";
+import { useMoment } from "../../composables/useMoment";
 
 const props = defineProps({
   task: {
@@ -97,9 +98,9 @@ const props = defineProps({
   },
 });
 
+const supabase = useSupabaseClient();
 const todoStore = useTodoStore();
 const moment = useMoment();
-const supabase = useSupabaseClient();
 
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
 

@@ -1,5 +1,6 @@
 <template>
   <!-- Application -->
+  <!-- //====== Calculator Screen ======// -->
   <div
     p="x-10px b-5px"
     text="2xl right primaryOp dark:primary"
@@ -8,8 +9,8 @@
     class="text-3xl"
     ref="windowRef"
     :class="{
-      'text-6xl': xl,
-      'text-7xl': twoXl,
+      'text-4xl': lg,
+      'text-5xl': xl || twoXl,
     }"
   >
     {{ ans.toLocaleString("en-US", { maximumFractionDigits: 8 }) }}
@@ -22,49 +23,61 @@
         : ""
     }}
   </div>
+
+  <!-- //====== Buttons styles and loop includes Numbers & Operations ======// -->
   <div m="5px" h="full" flex="~ col" justify="end">
-    <div class="grid grid-cols-4 gap-1px">
-      <button
-        cursor="pointer"
-        duration="150"
-        rounded="5px"
-        p="y-10px"
-        w="full"
-        font="semibold"
-        border="none"
-        :class="{
-          'text-lg': twoXs,
-          'text-xl': xs,
-          'text-2xl': sm,
-          'text-3xl': md,
-          'text-4xl': lg,
-          'text-5xl': xl,
-          'text-6xl': twoXl,
-          'text-info dark:text-info hover:bg-secondaryOp hover:bg-opacity-25 bg-inherit':
-            ((index + 1) % 4 === 0 || index < 7 || index === 20) &&
-            button !== '=' &&
-            button !== 'C',
-          'text-error bg-inherit hover:bg-error hover:text-primary':
-            button === 'C',
-          'bg-info text-primary hover:bg-opacity-50': button === '=',
-          'bg-inherit dark:text-primary':
-            ((index + 1) % 4 !== 0 || index < 7 || index !== 20) &&
-            button !== '=' &&
-            button !== 'C',
-        }"
-        v-for="(button, index) in buttons"
-        :key="index"
-        @click="handleClick(button)"
-        type="button"
-      >
-        {{ button }}
-      </button>
+    <div grid="~ cols-10">
+      <div class="grid grid-cols-4 gap-1px col-span-10">
+        <button
+          cursor="pointer"
+          duration="150"
+          rounded="5px"
+          p="y-10px"
+          w="full"
+          font="semibold"
+          border="none"
+          :class="{
+            'text-lg': twoXs,
+            'text-xl': xs,
+            'text-2xl': sm,
+            'text-3xl': md,
+            'text-4xl': lg || xl || twoXl,
+            'text-info dark:text-info hover:bg-secondaryOp hover:bg-opacity-25 bg-inherit':
+              ((index + 1) % 4 === 0 || index < 7 || index === 20) &&
+              button !== '=' &&
+              button !== 'C',
+            'text-error bg-inherit hover:bg-error hover:text-primary':
+              button === 'C',
+            'bg-info text-primary hover:bg-opacity-50': button === '=',
+            'bg-inherit dark:text-primary  hover:bg-secondaryOp hover:bg-opacity-25':
+              ((index + 1) % 4 !== 0 || index < 7 || index !== 20) &&
+              button !== '=' &&
+              button !== 'C',
+          }"
+          v-for="(button, index) in buttons"
+          :key="index"
+          @click="handleClick(button)"
+          type="button"
+        >
+          {{ button }}
+        </button>
+      </div>
+      <!-- DISPLAY THE HISTORY ON LARGE SCREEN SIZES -->
+      <!-- <div v-if="twoXl || xl || lg || md" class="col-span-3" bg="white">
+        <div>History!</div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, useBreakpointWindow, useAppManager } from "#imports";
+import {
+  ref,
+  useBreakpointWindow,
+  useAppManager,
+  onKeyStroke,
+  useToggle,
+} from "#imports";
 import { storeToRefs } from "pinia";
 import { useCalculatorStore } from "../composables/useCalculatorStore";
 
@@ -77,14 +90,21 @@ const props = defineProps({
 
 const AppManager = useAppManager();
 
+//====== Window Size Changing ======//
 const windowRef = ref(null);
 const BreakpointWindow = useBreakpointWindow(windowRef);
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = BreakpointWindow;
 
+//====== Store Defining and usage ======//
 const store = useCalculatorStore();
 const { ans, operator, num } = storeToRefs(store);
 const { calculate, addToNumber } = store;
 
+//====== History Toggle ======//
+const screenHistory = ref([]);
+const [historyState, historyToggle] = useToggle(false);
+
+//====== Buttons Defining ======//
 const buttons = [
   "C",
   "π",
@@ -112,6 +132,7 @@ const buttons = [
   "=",
 ];
 
+//====== Operations Defining ======//
 const operators: any = {
   add: "+",
   subtract: "-",
@@ -119,6 +140,7 @@ const operators: any = {
   divide: "÷",
 };
 
+//====== Handle Click for the Operations and Numbers ======//
 const handleClick = (button: string | number) => {
   if (typeof button === "number") {
     addToNumber(button);
@@ -182,15 +204,32 @@ const handleClick = (button: string | number) => {
     } else if (button === "=") {
       calculate();
     } else if (button === ".") {
-      operator.value = ".";
+      if (operator.value === "") {
+        if (ans.value.toString().includes(".")) {
+          return;
+        } else {
+          ans.value = ans.value.toString() + ".";
+        }
+      } else {
+        if (num.value.toString().includes(".")) {
+          return;
+        } else {
+          num.value = num.value.toString() + ".";
+        }
+      }
     }
   }
 };
+
+//====== Checks Calculate Function ======//
 const checkCalculate = (): void => {
   if (!(operator.value === "" || num.value === 0)) {
     calculate();
   }
 };
+
+//====== Keyboard Buttons ======//
+
 onKeyStroke(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"], (e) => {
   if (!(props.app.id == AppManager.focused)) {
     return;
