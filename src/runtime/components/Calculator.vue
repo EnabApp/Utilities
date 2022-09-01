@@ -1,66 +1,66 @@
 <template>
   <!-- Application -->
-      <div
-        p="x-10px b-5px"
-        text="2xl right primaryOp dark:primary"
-        dir="ltr"
+  <div
+    p="x-10px b-5px"
+    text="2xl right primaryOp dark:primary"
+    dir="ltr"
+    w="full"
+    class="text-3xl"
+    ref="windowRef"
+    :class="{
+      'text-6xl': xl,
+      'text-7xl': twoXl,
+    }"
+  >
+    {{ ans.toLocaleString("en-US", { maximumFractionDigits: 8 }) }}
+    {{ operators[operator] }}
+    {{
+      num !== 0
+        ? num.toLocaleString("en-US", {
+            maximumFractionDigits: 8,
+          })
+        : ""
+    }}
+  </div>
+  <div m="5px" h="full" flex="~ col" justify="end">
+    <div class="grid grid-cols-4 gap-1px">
+      <button
+        cursor="pointer"
+        duration="150"
+        rounded="5px"
+        p="y-10px"
         w="full"
-        class="text-3xl"
-        ref="windowRef"
+        font="semibold"
+        border="none"
         :class="{
-          'text-6xl': xl,
-          'text-7xl': twoXl,
+          'text-lg': twoXs,
+          'text-xl': xs,
+          'text-2xl': sm,
+          'text-3xl': md,
+          'text-4xl': lg,
+          'text-5xl': xl,
+          'text-6xl': twoXl,
+          'text-info dark:text-info hover:bg-secondaryOp hover:bg-opacity-25 bg-inherit':
+            ((index + 1) % 4 === 0 || index < 7 || index === 20) &&
+            button !== '=' &&
+            button !== 'C',
+          'text-error bg-inherit hover:bg-error hover:text-primary':
+            button === 'C',
+          'bg-info text-primary hover:bg-opacity-50': button === '=',
+          'bg-inherit dark:text-primary':
+            ((index + 1) % 4 !== 0 || index < 7 || index !== 20) &&
+            button !== '=' &&
+            button !== 'C',
         }"
+        v-for="(button, index) in buttons"
+        :key="index"
+        @click="handleClick(button)"
+        type="button"
       >
-        {{ ans.toLocaleString("en-US", { maximumFractionDigits: 8 }) }}
-        {{ operators[operator] }}
-        {{
-          num !== 0
-            ? num.toLocaleString("en-US", {
-                maximumFractionDigits: 8,
-              })
-            : ""
-        }}
-      </div>
-      <div m="5px" h="full" flex="~ col" justify="end">
-        <div class="grid grid-cols-4 gap-1px">
-          <button
-            cursor="pointer"
-            duration="150"
-            rounded="5px"
-            p="y-10px"
-            w="full"
-            font="semibold"
-            border="none"
-            :class="{
-              'text-lg': twoXs,
-              'text-xl': xs,
-              'text-2xl': sm,
-              'text-3xl': md,
-              'text-4xl': lg,
-              'text-5xl': xl,
-              'text-6xl': twoXl,
-              'text-info dark:text-info hover:bg-secondaryOp hover:bg-opacity-25 bg-inherit':
-                ((index + 1) % 4 === 0 || index < 7 || index === 20) &&
-                button !== '=' &&
-                button !== 'C',
-              'text-error bg-inherit hover:bg-error hover:text-primary':
-                button === 'C',
-              'bg-info text-primary hover:bg-opacity-50': button === '=',
-              'bg-inherit dark:text-primary':
-                ((index + 1) % 4 !== 0 || index < 7 || index !== 20) &&
-                button !== '=' &&
-                button !== 'C',
-            }"
-            v-for="(button, index) in buttons"
-            :key="index"
-            @click="handleClick(button)"
-            type="button"
-          >
-            {{ button }}
-          </button>
-        </div>
-      </div>
+        {{ button }}
+      </button>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
