@@ -14,10 +14,10 @@
                 <div
                   class="border-0 rounded-lg border-w-5 hover:bg-secondary bg-opacity-10 dark:secondaryOp dark:bg-opacity-25">
                   <div m="3" text="xl primaryOp dark:primary">
-                    <h5>{{ " = " }} {{ h.history }}</h5>
+                    <h5>{{  " = "  }} {{  h.history  }}</h5>
                   </div>
                   <div m="3" text="2xl primaryOp dark:primary">
-                    <h5>{{ h.result }}</h5>
+                    <h5>{{  h.result  }}</h5>
                   </div>
                 </div>
               </div>
@@ -39,16 +39,13 @@
 <script setup>
 const props = defineProps({
   modalCanceled: {
-    type: Function
+    type: Function,
   },
   historyState: {
-    type: Array
+    type: Array,
   },
   screenHistory: {
-    type: Array
-  }
-})
-
-
-
+    type: Array,
+  },
+});
 </script>

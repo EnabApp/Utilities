@@ -1,6 +1,6 @@
 {
   "name": "@enab/utilities",
-  "version": "1.0.13-beta.0",
+  "version": "1.0.13-beta.3",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@enab/core": "^1.7.11",
+    "@enab/todo": "^1.1.0",
     "@enab/ui": "^1.4.93",
     "@iconify/json": "^2.1.77",
     "@nuxt/kit": "^3.0.0-rc.8",
