@@ -27,7 +27,10 @@
   <!-- //====== Buttons styles and loop includes Numbers & Operations ======// -->
   <div m="5px" h="full" flex="~ col" justify="end">
     <div grid="~ cols-10">
-      <div class="grid grid-cols-4 gap-1px col-span-10">
+      <div
+        class="grid grid-cols-4 gap-1px col-span-10"
+        :class="{ 'col-span-7': twoXl || xl || lg || md }"
+      >
         <button
           cursor="pointer"
           duration="150"
@@ -63,8 +66,50 @@
         </button>
       </div>
       <!-- DISPLAY THE HISTORY ON LARGE SCREEN SIZES -->
-      <div v-if="twoXl || xl || lg || md" class="col-span-3" bg="white">
-        <div>under construction!</div>
+      <div
+        relative="~"
+        v-if="twoXl || xl || lg || md"
+        col="span-3"
+        overflow="y-scroll"
+        h="350px"
+      >
+        <div class="p-1 border-0 rounded-lg">
+          <div
+            hover="bg-secondary dark:bg-secondaryOp"
+            p="10px"
+            rounded="5px"
+            duration="150"
+            class="text-xl text-primaryOp dark:text-primary"
+            m="5"
+            v-for="h in historyList"
+            :key="h.history"
+            dir="rtl"
+          >
+            <div flex="~ col" justify="center">
+              <div text="2xl primaryOp dark:primary">
+                <h5>{{ h.result }}</h5>
+              </div>
+            </div>
+          </div>
+          <h3
+            v-if="historyList.length == 0"
+            m="10"
+            text="center primaryOp dark:primary"
+          >
+            لا يوجد سجل
+          </h3>
+          <div
+            absolute="~"
+            v-if="historyList.length > 0"
+            text="2xl primaryOp dark:primary"
+            border="2 transparent"
+            cursor="pointer"
+            class="i-ant-design-delete-outlined"
+            top="8"
+            left="5%"
+            @click="historyList = []"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -100,8 +145,8 @@ const store = useCalculatorStore();
 const { ans, operator, num } = storeToRefs(store);
 const { calculate, addToNumber } = store;
 
-//====== History Toggle ======//
-const screenHistory = ref([]);
+//====== History ======//
+const historyList = ref([]);
 const [historyState, historyToggle] = useToggle(false);
 
 //====== Buttons Defining ======//
@@ -203,6 +248,10 @@ const handleClick = (button: string | number) => {
       }
     } else if (button === "=") {
       calculate();
+      const history = {
+        result: ans.value,
+      };
+      historyList.value.push(history);
     } else if (button === ".") {
       if (operator.value === "") {
         if (ans.value.toString().includes(".")) {
@@ -237,19 +286,45 @@ onKeyStroke(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"], (e) => {
   if (operator.value === "") {
     addToNumber(e.key);
   } else {
-    num.value += e.key;
+    addToNumber(e.key);
   }
   e.preventDefault();
 });
 
-onKeyStroke(["+", "-", "*", "/", "%", "Enter"], (e) => {
+onKeyStroke(["+", "-", "*", "/", "%", ".", "Enter"], (e) => {
   if (!(props.app.id == AppManager.focused)) {
     return;
   }
-  if (operator.value === "") {
-    operator.value = e.key;
-  } else {
+  if (e.key === "+") {
+    operator.value = "add";
+  } else if (e.key === "-") {
+    operator.value = "subtract";
+  } else if (e.key === "*") {
+    operator.value = "multiply";
+  } else if (e.key === "/") {
+    operator.value = "divide";
+  } else if (e.key === "%") {
+    operator.value = "divide";
+  } else if (e.key === "Enter") {
     calculate();
+    const history = {
+      result: ans.value,
+    };
+    historyList.value.push(history);
+  } else if (e.key === ".") {
+    if (operator.value === "") {
+      if (ans.value.toString().includes(".")) {
+        return;
+      } else {
+        ans.value = ans.value.toString() + ".";
+      }
+    } else {
+      if (num.value.toString().includes(".")) {
+        return;
+      } else {
+        num.value = num.value.toString() + ".";
+      }
+    }
   }
   e.preventDefault();
 });

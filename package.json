@@ -22,7 +22,7 @@
     "release": "cd scripts && node --loader ts-node/esm release.ts"
   },
   "dependencies": {
-    "@enab/core": "^1.8.21-beta.4",
+    "@enab/core": "^1.8.21-beta.5",
     "@enab/todo": "^1.1.0",
     "@enab/ui": "^1.4.93",
     "@iconify/json": "^2.1.77",
