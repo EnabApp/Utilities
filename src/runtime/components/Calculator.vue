@@ -70,6 +70,7 @@
       <CalculatorHistory
         v-if="twoXl || xl || lg || md"
         :historyList="historyList"
+        :history="history"
         :BreakpointWindow="BreakpointWindow"
       />
     </div>
