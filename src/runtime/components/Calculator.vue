@@ -32,6 +32,7 @@
         :class="{ 'col-span-7': twoXl || xl || lg || md }"
       >
         <button
+          overflow="auto"
           cursor="pointer"
           duration="150"
           rounded="5px"
@@ -65,52 +66,13 @@
           {{ button }}
         </button>
       </div>
-      <!-- DISPLAY THE HISTORY ON LARGE SCREEN SIZES -->
-      <div
-        relative="~"
+      <!-- //====== Calculator History ======// -->
+      <CalculatorHistory
         v-if="twoXl || xl || lg || md"
-        col="span-3"
-        overflow="y-scroll"
-        h="350px"
-      >
-        <div class="p-1 border-0 rounded-lg">
-          <div
-            hover="bg-secondary dark:bg-secondaryOp"
-            p="10px"
-            rounded="5px"
-            duration="150"
-            class="text-xl text-primaryOp dark:text-primary"
-            m="5"
-            v-for="h in historyList"
-            :key="h.history"
-            dir="rtl"
-          >
-            <div flex="~ col" justify="center">
-              <div text="2xl primaryOp dark:primary">
-                <h5>{{ h.result }}</h5>
-              </div>
-            </div>
-          </div>
-          <h3
-            v-if="historyList.length == 0"
-            m="10"
-            text="center primaryOp dark:primary"
-          >
-            لا يوجد سجل
-          </h3>
-          <div
-            absolute="~"
-            v-if="historyList.length > 0"
-            text="2xl primaryOp dark:primary"
-            border="2 transparent"
-            cursor="pointer"
-            class="i-ant-design-delete-outlined"
-            top="8"
-            left="5%"
-            @click="historyList = []"
-          />
-        </div>
-      </div>
+        :historyList="historyList"
+        :history="history"
+        :BreakpointWindow="BreakpointWindow"
+      />
     </div>
   </div>
 </template>
@@ -148,7 +110,7 @@ const { calculate, addToNumber } = store;
 //====== History ======//
 const historyList = ref([]);
 const [historyState, historyToggle] = useToggle(false);
-
+let history = ref("");
 //====== Buttons Defining ======//
 const buttons = [
   "C",
@@ -248,6 +210,7 @@ const handleClick = (button: string | number) => {
       }
     } else if (button === "=") {
       calculate();
+      if (ans.value == 0) return;
       const history = {
         result: ans.value,
       };
@@ -278,7 +241,6 @@ const checkCalculate = (): void => {
 };
 
 //====== Keyboard Buttons ======//
-
 onKeyStroke(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"], (e) => {
   if (!(props.app.id == AppManager.focused)) {
     return;
@@ -307,6 +269,7 @@ onKeyStroke(["+", "-", "*", "/", "%", ".", "Enter"], (e) => {
     operator.value = "divide";
   } else if (e.key === "Enter") {
     calculate();
+    if (ans.value == 0) return;
     const history = {
       result: ans.value,
     };

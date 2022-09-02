@@ -1,13 +1,13 @@
-import moment from "moment/moment.js";
-import ar from "moment/locale/ar";
+import moment from "moment/src/moment.js";
+import ar from "moment/src/locale/ar";
+
+moment.updateLocale("ar", ar);
 
 moment.updateLocale("ar", {
   longDateFormat: {
-    LT: "h:mm A" 
+    LT: "h:mm A",
   },
 });
-
-moment.updateLocale("ar", ar);
 
 export const useMoment = () => {
   return moment;
