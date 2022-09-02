@@ -75,17 +75,21 @@
       >
         <div class="p-1 border-0 rounded-lg">
           <div
-            hover:bg="secondary dark:secondaryOp"
-            p="2"
+            hover="bg-secondary dark:bg-secondaryOp"
+            p="10px"
             rounded="5px"
             duration="150"
             class="text-xl text-primaryOp dark:text-primary"
             m="5"
-            v-for="history in historyList"
-            :key="history"
+            v-for="h in historyList"
+            :key="h.history"
             dir="rtl"
           >
-            {{ history }}
+            <div flex="~ col" justify="center">
+              <div text="2xl primaryOp dark:primary">
+                <h5>{{ h.result }}</h5>
+              </div>
+            </div>
           </div>
           <h3
             v-if="historyList.length == 0"
@@ -101,7 +105,6 @@
             border="2 transparent"
             cursor="pointer"
             class="i-ant-design-delete-outlined"
-            hover="border-gray-700"
             top="8"
             left="5%"
             @click="historyList = []"
@@ -142,22 +145,8 @@ const store = useCalculatorStore();
 const { ans, operator, num } = storeToRefs(store);
 const { calculate, addToNumber } = store;
 
-//====== History Toggle ======//
-const historyList = ref([
-  "3456",
-  "435670",
-  "986756534",
-  "56789034-",
-  "4356435678",
-  "3453456789",
-  "546789565750",
-  "2347654",
-  "554 x 2 = 1108",
-  "10*10 = 100",
-  "10/2 = 5",
-  "10+10 = 20",
-  "10-10 = 0",
-]);
+//====== History ======//
+const historyList = ref([]);
 const [historyState, historyToggle] = useToggle(false);
 
 //====== Buttons Defining ======//
@@ -259,6 +248,10 @@ const handleClick = (button: string | number) => {
       }
     } else if (button === "=") {
       calculate();
+      const history = {
+        result: ans.value,
+      };
+      historyList.value.push(history);
     } else if (button === ".") {
       if (operator.value === "") {
         if (ans.value.toString().includes(".")) {
@@ -293,12 +286,12 @@ onKeyStroke(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"], (e) => {
   if (operator.value === "") {
     addToNumber(e.key);
   } else {
-    num.value += e.key;
+    addToNumber(e.key);
   }
   e.preventDefault();
 });
 
-onKeyStroke(["+", "-", "*", "/", "%", "Enter"], (e) => {
+onKeyStroke(["+", "-", "*", "/", "%", ".", "Enter"], (e) => {
   if (!(props.app.id == AppManager.focused)) {
     return;
   }
@@ -314,6 +307,24 @@ onKeyStroke(["+", "-", "*", "/", "%", "Enter"], (e) => {
     operator.value = "divide";
   } else if (e.key === "Enter") {
     calculate();
+    const history = {
+      result: ans.value,
+    };
+    historyList.value.push(history);
+  } else if (e.key === ".") {
+    if (operator.value === "") {
+      if (ans.value.toString().includes(".")) {
+        return;
+      } else {
+        ans.value = ans.value.toString() + ".";
+      }
+    } else {
+      if (num.value.toString().includes(".")) {
+        return;
+      } else {
+        num.value = num.value.toString() + ".";
+      }
+    }
   }
   e.preventDefault();
 });
