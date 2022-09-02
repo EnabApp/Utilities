@@ -25,7 +25,7 @@
       </span>
     </div>
 
-    <div class="p-1 border-0 rounded-lg">
+    <div p="1" rounded="lg" >
       <div
         hover="bg-secondary dark:bg-secondaryOp"
         p="10px"
@@ -48,7 +48,7 @@
         m="10"
         text="center primaryOp dark:primary"
       >
-        لا توجد بيانات
+        لا توجد بيانات!
       </h3>
     </div>
   </div>
