@@ -10,20 +10,23 @@ export const useCalculatorStore = defineStore("Calculator-Store", {
   actions: {
     calculate() {
       if (this.operator === "add") {
-        this.ans = parseFloat((this.num + this.ans).toFixed(8));
+        this.ans = parseFloat((this.num + this.ans).toFixed(10));
       } else if (this.operator === "subtract") {
-        this.ans = parseFloat((this.ans - this.num).toFixed(8));
+        this.ans = parseFloat((this.ans - this.num).toFixed(10));
       } else if (this.operator === "multiply") {
-        this.ans = parseFloat((this.ans * this.num).toFixed(8));
+        this.ans = parseFloat((this.ans * this.num).toFixed(10));
       } else if (this.operator === "divide") {
-        this.ans = parseFloat((this.ans / this.num).toFixed(8));
+        this.ans = parseFloat((this.ans / this.num).toFixed(10));
       }
       this.num = 0;
       this.operator = "";
     },
     addToNumber(number: number | string) {
       const { $toast } = useNuxtApp();
-      if (this.ans.toString().length > 15) {
+      if (this.ans.toString().length > 16) {
+        $toast.error("لقد وصلت الى الحد الاقصى ", 2);
+        return;
+      } if (this.num.toString().length > 16) {
         $toast.error("لقد وصلت الى الحد الاقصى ", 2);
         return;
       }
