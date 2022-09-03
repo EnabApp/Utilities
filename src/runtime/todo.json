@@ -3,7 +3,8 @@
     "title": "مهامي",
     "icon": "i-ri-todo-fill",
     "owned":true,
-    "size": "min-w-[350px] min-h-[550px] max-w-[350px] max-h-[550px]",
+    "minWidth": 300,  
+    "minHeight": 200, 
     "maximized":  false,
     "maximizable": true
 }

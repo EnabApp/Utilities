@@ -2,6 +2,7 @@
   "name": "Calculator",
   "title": "الحاسبة",
   "icon": "i-ic-baseline-calculate",
-  "size": "min-w-[330px] min-h-[536px] max-w-[330px] max-h-[536px]",
+  "minWidth": 300,  
+  "minHeight": 200, 
   "maximizable": true
 }

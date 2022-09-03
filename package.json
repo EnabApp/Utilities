@@ -24,7 +24,7 @@
   "dependencies": {
     "@enab/core": "^1.8.21-beta.5",
     "@enab/todo": "^1.1.0",
-    "@enab/ui": "^1.4.93",
+    "@enab/ui": "^1.4.94-beta.6",
     "@iconify/json": "^2.1.77",
     "@nuxt/kit": "^3.0.0-rc.8",
     "@nuxt/schema": "^3.0.0-rc.8",
