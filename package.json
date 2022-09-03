@@ -1,6 +1,6 @@
 {
   "name": "@enab/utilities",
-  "version": "1.0.14-beta.0",
+  "version": "1.0.14-beta.2",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -22,7 +22,7 @@
     "release": "cd scripts && node --loader ts-node/esm release.ts"
   },
   "dependencies": {
-    "@enab/core": "^1.8.21-beta.5",
+    "@enab/core": "^1.8.21-beta.7",
     "@enab/todo": "^1.1.0",
     "@enab/ui": "^1.4.94-beta.6",
     "@iconify/json": "^2.1.77",
