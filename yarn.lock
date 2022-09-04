@@ -301,19 +301,35 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@enab/core@^1.8.22-beta.5":
-  version "1.8.22-beta.5"
-  resolved "https://registry.yarnpkg.com/@enab/core/-/core-1.8.22-beta.5.tgz#657ee3fc4f5e4c0db1d037334e9c0337282c2f0a"
-  integrity sha512-CzHeXeJ3ey8Tbit43QEEdotEMm+NTpsc3hYn/dFoE9eRPrLzlws2UWws5MtrR9D/jD5muq2FtDdRfmU+L+0A6Q==
+"@enab/core@^1.8.22-beta.11":
+  version "1.8.22-beta.11"
+  resolved "https://registry.yarnpkg.com/@enab/core/-/core-1.8.22-beta.11.tgz#7b4a4d9fa348114f4f2d09713d5c9076281c4ef5"
+  integrity sha512-HEukWLDFgkZ4RCvH1+wx81+1NbOtGJJrGEG/pMFHnQfTbZUuFruK70oCKzKU9ZHNPqjWrFVqfcBveQfSQby4Ag==
   dependencies:
     "@nuxt/kit" "npm:@nuxt/kit-edge@latest"
     "@nuxtjs/color-mode" "^3.1.4"
-    "@nuxtjs/supabase" "0.1.23"
+    "@nuxtjs/supabase" "^0.1.23"
     "@pinia/nuxt" "^0.4.1"
     "@unocss/inspector" "^0.44.2"
     "@unocss/nuxt" "^0.44.0"
     "@unocss/preset-attributify" "^0.44.1"
-    "@unocss/preset-icons" "^0.44.1"
+    "@unocss/preset-typography" "^0.44.1"
+    "@unocss/preset-web-fonts" "^0.44.1"
+    "@vueuse/core" "^9.1.1"
+    "@vueuse/nuxt" "^9.1.1"
+
+"@enab/systemapps@^1.0.1-beta.1":
+  version "1.0.1-beta.1"
+  resolved "https://registry.yarnpkg.com/@enab/systemapps/-/systemapps-1.0.1-beta.1.tgz#ba649caf5b8a6bccf3275b7a5dbc67229a01eebd"
+  integrity sha512-qG9XVQcQz3mH8SwVKawMH2/Kgfr288tfJqeOAqh9+5GttS7nFHcd3N4Q6x20lZSbxN+eDK8ZqIYHZ9b6KVN96A==
+  dependencies:
+    "@nuxt/kit" "npm:@nuxt/kit-edge@latest"
+    "@nuxtjs/color-mode" "^3.1.4"
+    "@nuxtjs/supabase" "^0.1.23"
+    "@pinia/nuxt" "^0.4.1"
+    "@unocss/inspector" "^0.44.2"
+    "@unocss/nuxt" "^0.44.0"
+    "@unocss/preset-attributify" "^0.44.1"
     "@unocss/preset-typography" "^0.44.1"
     "@unocss/preset-web-fonts" "^0.44.1"
     "@vueuse/core" "^9.1.1"
@@ -659,7 +675,7 @@
     lodash.template "^4.5.0"
     pathe "^0.3.0"
 
-"@nuxtjs/supabase@0.1.23":
+"@nuxtjs/supabase@0.1.23", "@nuxtjs/supabase@^0.1.23":
   version "0.1.23"
   resolved "https://registry.yarnpkg.com/@nuxtjs/supabase/-/supabase-0.1.23.tgz#f7d00c103b70e96bd55471a477ea867facd60dd2"
   integrity sha512-gCBI7cm552RGcbbDzUAlA+NFCuLZXVcfpsvbTVLneOUzh3cvYxLK04qYRTE81x2L/FV9FFWSG0h7Mp6kacGEiw==

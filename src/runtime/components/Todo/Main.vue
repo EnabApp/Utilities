@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-import { useTodoStore } from "../composables/useTodoStore";
+import { useTodoStore } from "../../composables/useTodoStore";
 import { useBreakpointWindow, ref } from "#imports";
 
 const windowRef = ref(null);

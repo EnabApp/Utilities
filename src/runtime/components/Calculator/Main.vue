@@ -56,7 +56,7 @@ import {
   useToggle,
 } from "#imports";
 import { storeToRefs } from "pinia";
-import { useCalculatorStore } from "../composables/useCalculatorStore";
+import { useCalculatorStore } from "../../composables/useCalculatorStore";
 
 const props = defineProps({
   app: {

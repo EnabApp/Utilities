@@ -19,7 +19,6 @@ export default defineNuxtModule<ModuleOptions>({
     // if (options.addPlugin) {}
     const runtimeDir = fileURLToPath(new URL('./runtime', import.meta.url))
     nuxt.options.build.transpile.push(runtimeDir)
-    addPlugin(resolve(runtimeDir, 'registerer'))
 
     nuxt.hook('components:dirs', (dirs) => {
       dirs.push({
