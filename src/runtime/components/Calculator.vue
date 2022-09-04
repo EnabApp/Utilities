@@ -1,78 +1,48 @@
 <template>
   <!-- Application -->
   <!-- //====== Calculator Screen ======// -->
-  <div
-    p="x-10px b-5px"
-    text="2xl right primaryOp dark:primary"
-    dir="ltr"
-    w="full"
-    class="text-3xl"
-    ref="windowRef"
-    :class="{
-      'text-4xl': lg,
-      'text-5xl': xl || twoXl,
-    }"
-  >
+  <div p="x-10px b-5px" text="2xl right primaryOp dark:primary" dir="ltr" w="full" class="text-3xl" ref="windowRef" :class="{
+    'text-4xl': lg,
+    'text-5xl': xl || twoXl,
+  }">
     {{ ans.toLocaleString("en-US", { maximumFractionDigits: 8 }) }}
     {{ operators[operator] }}
     {{
-      num !== 0
-        ? num.toLocaleString("en-US", {
-            maximumFractionDigits: 8,
-          })
-        : ""
+    num !== 0
+    ? num.toLocaleString("en-US", {
+    maximumFractionDigits: 8,
+    })
+    : ""
     }}
   </div>
 
   <!-- //====== Buttons styles and loop includes Numbers & Operations ======// -->
   <div m="5px" h="full" flex="~ col" justify="end">
     <div grid="~ cols-10">
-      <div
-        class="grid grid-cols-4 gap-1px col-span-10"
-        :class="{ 'col-span-7': twoXl || xl || lg || md }"
-      >
-        <button
-          overflow="auto"
-          cursor="pointer"
-          duration="150"
-          rounded="5px"
-          p="y-10px"
-          w="full"
-          font="semibold"
-          border="none"
-          :class="{
-            'text-lg': twoXs,
-            'text-xl': xs,
-            'text-2xl': sm,
-            'text-3xl': md,
-            'text-4xl': lg || xl || twoXl,
-            'text-info dark:text-info hover:bg-secondaryOp hover:bg-opacity-25 bg-inherit':
-              ((index + 1) % 4 === 0 || index < 7 || index === 20) &&
-              button !== '=' &&
-              button !== 'C',
-            'text-error bg-inherit hover:bg-error hover:text-primary':
-              button === 'C',
-            'bg-info text-primary hover:bg-opacity-50': button === '=',
-            'bg-inherit dark:text-primary  hover:bg-secondaryOp hover:bg-opacity-25':
-              ((index + 1) % 4 !== 0 || index < 7 || index !== 20) &&
-              button !== '=' &&
-              button !== 'C',
-          }"
-          v-for="(button, index) in buttons"
-          :key="index"
-          @click="handleClick(button)"
-          type="button"
-        >
+      <div class="grid grid-cols-4 gap-1px col-span-10" :class="{ 'col-span-7': twoXl || xl || lg || md }">
+        <button overflow="auto" cursor="pointer" duration="150" rounded="5px" p="y-10px" w="full" font="semibold" border="none" :class="{
+          'text-lg': twoXs,
+          'text-xl': xs,
+          'text-2xl': sm,
+          'text-3xl': md,
+          'text-4xl': lg || xl || twoXl,
+          'text-info dark:text-info hover:bg-secondaryOp hover:bg-opacity-25 bg-inherit':
+            ((index + 1) % 4 === 0 || index < 7 || index === 20) &&
+            button !== '=' &&
+            button !== 'C',
+          'text-error bg-inherit hover:bg-error hover:text-primary':
+            button === 'C',
+          'bg-info text-primary hover:bg-opacity-50': button === '=',
+          'bg-inherit dark:text-primary  hover:bg-secondaryOp hover:bg-opacity-25':
+            ((index + 1) % 4 !== 0 || index < 7 || index !== 20) &&
+            button !== '=' &&
+            button !== 'C',
+        }" v-for="(button, index) in buttons" :key="index" @click="handleClick(button)" type="button">
           {{ button }}
         </button>
       </div>
       <!-- //====== Calculator History ======// -->
-      <CalculatorHistory
-        v-if="twoXl || xl || lg || md"
-        :historyList="historyList"
-        :history="history"
-        :BreakpointWindow="BreakpointWindow"
-      />
+      <CalculatorHistory v-if="twoXl || xl || lg || md" :historyList="historyList" :history="history" :BreakpointWindow="BreakpointWindow" />
     </div>
   </div>
 </template>
