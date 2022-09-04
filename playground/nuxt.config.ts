@@ -5,6 +5,10 @@ import MyModule from '..'
 export default defineNuxtConfig({
     ssr: false,
 
+    autoImports: {
+        global: false
+    },
+
     modules: [
         MyModule,
         '@enab/ui',

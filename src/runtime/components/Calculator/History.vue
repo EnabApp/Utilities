@@ -13,7 +13,7 @@
         hover="text-error dark:text-error text-opacity-50 dark:text-opacity-75"
         duration="150"
         text="sm seconderyOp dark:secondary"
-        border="2"ُ
+        border="2"
         p="x-2"
         rounded="5px"
         cursor="pointer"
