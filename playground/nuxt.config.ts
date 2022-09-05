@@ -7,8 +7,10 @@ export default defineNuxtConfig({
 
     modules: [
         MyModule,
+        '@enab/systemapps',
         '@enab/core',
         '@nuxtjs/supabase',
+        '@nuxt/image-edge',
         '@pinia/nuxt',
         '@vueuse/nuxt',
         '@unocss/nuxt',

@@ -1,8 +1,0 @@
-{
-  "name": "Calculator",
-  "title": "الحاسبة",
-  "icon": "i-ic-baseline-calculate",
-  "minWidth": 300,  
-  "minHeight": 200, 
-  "maximizable": true
-}
