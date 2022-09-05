@@ -38,8 +38,9 @@
   "description": "Enab WebOS Utilities Module",
   "author": "Enab WebOS Utilities Team",
   "devDependencies": {
-    "@enab/core": "^1.8.22-beta.11",
+    "@enab/core": "^1.8.22-beta.12",
     "@enab/systemapps": "^1.0.1-beta.1",
+    "@enab/ui": "^1.4.94-beta.7",
     "@nuxt/image-edge": "^1.0.0-27703825.db0934c",
     "@nuxt/module-builder": "latest",
     "@tauri-apps/api": "^1.0.2",
