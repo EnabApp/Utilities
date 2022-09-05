@@ -6,11 +6,11 @@ export default defineNuxtConfig({
     ssr: false,
 
     modules: [
-        '@nuxt/image-edge',
         MyModule,
         '@enab/systemapps',
         '@enab/core',
         '@nuxtjs/supabase',
+        '@nuxt/image-edge',
         '@pinia/nuxt',
         '@vueuse/nuxt',
         '@unocss/nuxt',
