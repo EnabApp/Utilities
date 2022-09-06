@@ -2,8 +2,7 @@
   <!-- DISPLAY THE HISTORY ON LARGE SCREEN SIZES -->
   <div
     v-if="!historyState ? twoXl || xl || lg || md : twoXs || xs || sm"
-    md:col="span-3"
-    col="span-10"
+    col-span-3
     overflow="y-scroll"
     h="350px"
   >
@@ -74,7 +73,5 @@ function clearHistory() {
     props.historyList.pop()
   }
 }
-
-// const displayHistoryresponsive = !historyState ? 'span-3' : 'span-10'
 
 </script>
