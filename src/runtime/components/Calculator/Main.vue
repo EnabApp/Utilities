@@ -36,7 +36,7 @@
       <div grid="~ cols-10">
         <div
           class="grid grid-cols-4 gap-1px col-span-10"
-          :class="{'col-span-7': twoXl || xl || lg || md }"
+          :class="{ 'col-span-7': twoXl || xl || lg || md }"
         >
           <button
             overflow="auto"
