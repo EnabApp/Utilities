@@ -1,8 +1,9 @@
 <template>
   <!-- DISPLAY THE HISTORY ON LARGE SCREEN SIZES -->
   <div
-    v-if="twoXl || xl || lg || md"
-    col="span-3"
+    v-if="!historyState ? twoXl || xl || lg || md : twoXs || xs || sm"
+    md:col="span-3"
+    col="span-10"
     overflow="y-scroll"
     h="350px"
   >
@@ -19,7 +20,7 @@
         cursor="pointer"
         top="8"
         left="5%"
-        @click="historyList = []"
+        @click="clearHistory"
       >
         محو السجل
       </span>
@@ -62,6 +63,18 @@ const props = defineProps({
   BreakpointWindow: {
     type: Object,
   },
+  historyState: {
+    type: Boolean,
+  }
 });
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
+
+function clearHistory() {
+  while (props.historyList.length > 0) {
+    props.historyList.pop()
+  }
+}
+
+// const displayHistoryresponsive = !historyState ? 'span-3' : 'span-10'
+
 </script>

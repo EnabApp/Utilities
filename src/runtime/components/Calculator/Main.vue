@@ -1,6 +1,7 @@
 <template>
   <!-- Application -->
   <!-- //====== Calculator Screen ======// -->
+<<<<<<< Updated upstream
   <div p="x-10px b-5px" text="2xl right primaryOp dark:primary" dir="ltr" w="full" class="text-3xl" ref="windowRef" :class="{
     'text-4xl': lg,
     'text-5xl': xl || twoXl,
@@ -41,9 +42,89 @@
         }" v-for="(button, index) in buttons" :key="index" @click="handleClick(button)" type="button">
           {{ button }}
         </button>
+=======
+  <div class="flex flex-col h-full justify-end items-stretch">
+    <div
+      p="x-10px b-5px"
+      text="2xl right primaryOp dark:primary"
+      dir="ltr"
+      w="full"
+      class="text-3xl"
+      ref="windowRef"
+      :class="{
+        'text-4xl': lg,
+        'text-5xl': xl || twoXl,
+      }"
+    >
+      {{ ans.toLocaleString("en-US", { maximumFractionDigits: 8 }) }}
+      {{ operators[operator] }}
+      {{
+        num !== 0
+          ? num.toLocaleString("en-US", {
+              maximumFractionDigits: 8,
+            })
+          : ""
+      }}
+      <CalculatorHistoryIcon
+        v-if="twoXs || xs || sm"
+        @click="historyToggle"
+        class="absolute left-3 bottom-0 top-20 cursor-pointer"
+        w="30px"
+        h="30px"
+      />
+    </div>
+    <!-- //====== Buttons styles and loop includes Numbers & Operations ======// -->
+    <div m="5px" h="full" flex="~ col" justify="end">
+      <div grid="~ cols-10">
+        <div
+          class="grid grid-cols-4 gap-1px col-span-10"
+          :class="{'col-span-7': twoXl || xl || lg || md }"
+        >
+          <button
+            overflow="auto"
+            cursor="pointer"
+            duration="150"
+            rounded="5px"
+            p="y-10px"
+            w="full"
+            font="semibold"
+            border="none"
+            :class="{
+              'text-lg': twoXs,
+              'text-xl': xs,
+              'text-2xl': sm,
+              'text-3xl': md,
+              'text-4xl': lg || xl || twoXl,
+              'text-info dark:text-info hover:bg-secondaryOp hover:bg-opacity-25 bg-inherit':
+                ((index + 1) % 4 === 0 || index < 7 || index === 20) &&
+                button !== '=' &&
+                button !== 'C',
+              'text-error bg-inherit hover:bg-error hover:text-primary':
+                button === 'C',
+              'bg-info text-primary hover:bg-opacity-50': button === '=',
+              'bg-inherit dark:text-primary  hover:bg-secondaryOp hover:bg-opacity-25':
+                ((index + 1) % 4 !== 0 || index < 7 || index !== 20) &&
+                button !== '=' &&
+                button !== 'C',
+            }"
+            v-for="(button, index) in buttons"
+            :key="index"
+            @click="handleClick(button)"
+            type="button"
+          >
+            {{ button }}
+          </button>
+        </div>
+        <!-- //====== Calculator History ======// -->
+        <CalculatorHistory
+          v-if="!historyState ? twoXl || xl || lg || md : twoXs || xs || sm"
+          :historyList="historyList"
+          :history="history"
+          :BreakpointWindow="BreakpointWindow"
+          :historyState="historyState"
+        />
+>>>>>>> Stashed changes
       </div>
-      <!-- //====== Calculator History ======// -->
-      <CalculatorHistory v-if="twoXl || xl || lg || md" :historyList="historyList" :history="history" :BreakpointWindow="BreakpointWindow" />
     </div>
   </div>
 </template>

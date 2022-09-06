@@ -21,7 +21,7 @@
         </div>
       </template>
     </UiTabGroup>
-    
+
     <div v-if="twoXl || xl || md || lg" grid="~ cols-2 gap-30px" p="x-5">
       <div flex="~ col">
         <div text="2xl secondaryOp dark:secondary" font="semibold">
@@ -40,7 +40,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useTodoStore } from "../../composables/useTodoStore";
 import { useBreakpointWindow, ref } from "#imports";
 
