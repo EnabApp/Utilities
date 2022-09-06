@@ -14,6 +14,7 @@
     })
     : ""
     }}
+    <IconsHistoryIcon/>
   </div>
 
   <!-- //====== Buttons styles and loop includes Numbers & Operations ======// -->
