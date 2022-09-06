@@ -13,8 +13,8 @@ appStore.addApp({
     "title": "مهامي",
     "icon": "i-ri-todo-fill",
     "owned":true,
-    "minWidth": 300,  
-    "minHeight": 200, 
+    "minWidth": 350,  
+    "minHeight": 550, 
     "maximized":  false,
     "maximizable": true
 }) 
@@ -23,7 +23,7 @@ appStore.addApp({
   "title": "الحاسبة",
   "icon": "i-ic-baseline-calculate",
   "minWidth": 300,  
-  "minHeight": 200, 
+  "minHeight": 300, 
   "maximizable": true
 })
 </script>
