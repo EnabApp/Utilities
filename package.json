@@ -1,6 +1,6 @@
 {
   "name": "@enab/utilities",
-  "version": "1.0.15-beta.0",
+  "version": "1.0.15-beta.1",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -41,7 +41,7 @@
   "author": "Enab WebOS Utilities Team",
   "devDependencies": {
     "@enab/core": "^1.8.22-beta.15",
-    "@enab/systemapps": "^1.0.1-beta.1",
+    "@enab/systemapps": "^1.0.1-beta.3",
     "@enab/ui": "^1.4.94-beta.7",
     "@nuxt/image-edge": "^1.0.0-27703825.db0934c",
     "@nuxt/module-builder": "latest",
