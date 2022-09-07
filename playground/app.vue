@@ -22,8 +22,8 @@ appStore.addApp({
   "name": "Calculator",
   "title": "الحاسبة",
   "icon": "i-ic-baseline-calculate",
-  "minWidth": 300,
-  "minHeight": 200,
+  "minWidth": 300,  
+  "minHeight": 300, 
   "maximizable": true
 })
 </script>
