@@ -12,7 +12,7 @@
         v-if="historyList.length > 0"
         hover="text-error dark:text-error text-opacity-50 dark:text-opacity-75"
         duration="150"
-        text="sm seconderyOp dark:secondary"
+        text="sm secondaryOp dark:secondary"
         border="2"
         p="x-2"
         rounded="5px"
@@ -70,5 +70,26 @@ function clearHistory() {
     props.historyList.pop()
   }
 }
-
 </script>
+
+<style scoped>
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  </style>
