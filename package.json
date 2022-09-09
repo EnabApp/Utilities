@@ -1,6 +1,6 @@
 {
   "name": "@enab/utilities",
-  "version": "1.0.14-beta.8",
+  "version": "1.0.15-beta.1",
   "license": "MIT",
   "type": "module",
   "exports": {
@@ -22,26 +22,30 @@
     "release": "cd scripts && node --loader ts-node/esm release.ts"
   },
   "dependencies": {
-    "@nuxt/kit": "npm:@nuxt/kit-edge@latest"
+    "@enab/utilities": "^1.0.14-beta.5",
+    "@nuxt/kit": "npm:@nuxt/kit-edge@latest",
+    "@nuxtjs/color-mode": "^3.1.4",
+    "@nuxtjs/supabase": "0.1.23",
+    "@pinia/nuxt": "^0.4.1",
+    "@unocss/inspector": "^0.44.2",
+    "@unocss/nuxt": "^0.44.0",
+    "@unocss/preset-attributify": "^0.44.1",
+    "@unocss/preset-icons": "^0.44.1",
+    "@unocss/preset-typography": "^0.44.1",
+    "@unocss/preset-web-fonts": "^0.44.1",
+    "@vueuse/core": "^9.1.1",
+    "@vueuse/nuxt": "^9.1.1",
+    "moment": "^2.29.4"
   },
   "description": "Enab WebOS Utilities Module",
   "author": "Enab WebOS Utilities Team",
   "devDependencies": {
-    "@enab/core": "latest",
-    "@enab/systemapps": "latest",
+    "@enab/core": "^1.8.22-beta.15",
+    "@enab/systemapps": "^1.0.1-beta.3",
+    "@enab/ui": "^1.4.94-beta.7",
     "@nuxt/image-edge": "^1.0.0-27703825.db0934c",
     "@nuxt/module-builder": "latest",
-    "@nuxtjs/color-mode": "^3.1.4",
-    "@nuxtjs/supabase": "^0.1.25",
-    "@pinia/nuxt": "^0.4.1",
     "@tauri-apps/api": "^1.0.2",
-    "@unocss/inspector": "^0.45.15",
-    "@unocss/nuxt": "^0.45.15",
-    "@unocss/preset-attributify": "^0.45.15",
-    "@unocss/preset-typography": "^0.45.15",
-    "@unocss/preset-web-fonts": "^0.45.15",
-    "@vueuse/core": "^9.1.1",
-    "@vueuse/nuxt": "^9.1.1",
     "bumpp": "^8.2.1",
     "nuxt": "npm:nuxt3@latest",
     "ts-node": "^10.9.1"
