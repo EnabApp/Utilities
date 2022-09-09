@@ -24,10 +24,10 @@ export const useCalculatorStore = defineStore("Calculator-Store", {
     addToNumber(number: number | string) {
       const { $toast } = useNuxtApp();
       if (this.ans.toString().length > 16) {
-        $toast.error("لقد وصلت الى الحد الاقصى ", 2);
+        $toast.error("لقد وصلت الى الحد الاقصى ");
         return;
       } if (this.num.toString().length > 16) {
-        $toast.error("لقد وصلت الى الحد الاقصى ", 2);
+        $toast.error("لقد وصلت الى الحد الاقصى ");
         return;
       }
       if (this.operator !== "") {

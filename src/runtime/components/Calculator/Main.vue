@@ -25,7 +25,7 @@
       }}
       <CalculatorHistoryIcon
         v-if="twoXs || xs || sm"
-        @click="historyToggle"
+        @click="toggleModal"
         class="absolute left-3 bottom-0 top-20 cursor-pointer"
         w="30px"
         h="30px"
@@ -36,7 +36,7 @@
       <div grid="~ cols-10">
         <div
           class="grid grid-cols-4 gap-1px col-span-10"
-          :class="{ 'col-span-7': twoXl || xl || lg || md }"
+          :class="{ 'col-span-7': twoXl || xl || lg || md, 'col-span-10': sm || xs || twoXs}"
         >
           <button
             overflow="auto"
@@ -75,12 +75,21 @@
         </div>
         <!-- //====== Calculator History ======// -->
         <CalculatorHistory
-          v-if="!historyState ? twoXl || xl || lg || md : twoXs || xs || sm"
           :historyList="historyList"
           :history="history"
           :BreakpointWindow="BreakpointWindow"
-          :historyState="historyState"
         />
+        <!-- DISPLAY THE HISTORY FOR SMALL SCREEN SIZES -->
+        <Teleport to="body">
+          <UiModal v-model="stateModal" @cancel="modalCanceled">
+            <template v-slot:title>Calculation History</template>
+              <div class="h-32" overflow="y-scroll" flex="~ col gap-1" relative>
+                <p v-if="historyList[0]" class="absolute left-0 top-0 py-3 px-5 bg-white text-center text-black cursor-pointer rounded-lg" @click="clearHistory">clear</p>
+                <p class="text-center" v-else>لم يتم حساب اي عمليات</p>
+                <h5 v-for="(result, index) in historyList" :key="index">{{ result.result }}</h5>
+              </div>
+          </UiModal>
+        </Teleport>
       </div>
     </div>
   </div>
@@ -96,13 +105,26 @@ import {
 } from "#imports";
 import { storeToRefs } from "pinia";
 import { useCalculatorStore } from "../../composables/useCalculatorStore";
-
 const props = defineProps({
   app: {
     type: Object,
     required: true,
   },
 });
+
+// FUNCTION TO CLEAR THE HISTORY IN UIMODAL
+function clearHistory() {
+  while(historyList.value.length > 0) {
+    historyList.value.pop()
+  }
+}
+
+// for toggle the history list for small screen sizes
+const [stateModal, toggleModal] = useToggle(false);
+
+const modalCanceled = () => {
+  stateModal.value = !stateModal;
+};
 
 const AppManager = useAppManager();
 
@@ -118,7 +140,6 @@ const { calculate , addToNumber } = store;
 
 //====== History ======//
 const historyList = ref([]);
-const [historyState, historyToggle] = useToggle(false);
 let history = ref("");
 //====== Buttons Defining ======//
 const buttons = [
@@ -147,7 +168,6 @@ const buttons = [
   ".",
   "=",
 ];
-
 //====== Operations Defining ======//
 const operators: any = {
   add: "+",
@@ -155,7 +175,6 @@ const operators: any = {
   multiply: "x",
   divide: "÷",
 };
-
 //====== Handle Click for the Operations and Numbers ======//
 const handleClick = (button: string | number) => {
   if (typeof button === "number") {
@@ -224,9 +243,6 @@ const handleClick = (button: string | number) => {
         result: ans.value,
       };
       historyList.value.push(history);
-      ans.value = 0;
-      num.value = 0;
-      operator.value = "";
     } else if (button === ".") {
       if (operator.value === "") {
         if (ans.value.toString().includes(".")) {

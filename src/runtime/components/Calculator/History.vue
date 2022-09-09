@@ -1,7 +1,7 @@
 <template>
   <!-- DISPLAY THE HISTORY ON LARGE SCREEN SIZES -->
   <div
-    v-if="!historyState ? twoXl || xl || lg || md : twoXs || xs || sm"
+    v-if="twoXl || xl || lg || md"
     col-span-3
     overflow="y-scroll"
     h="350px"
@@ -62,9 +62,6 @@ const props = defineProps({
   BreakpointWindow: {
     type: Object,
   },
-  historyState: {
-    type: Boolean,
-  }
 });
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = props.BreakpointWindow;
 
