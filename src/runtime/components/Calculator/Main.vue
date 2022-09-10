@@ -79,7 +79,6 @@
         <!-- //====== Calculator History FOR LARGE SCREEN SIZES ======// -->
         <CalculatorHistory
           :historyList="historyList"
-          :history="history"
           :BreakpointWindow="BreakpointWindow"
         />
         <!-- DISPLAY THE HISTORY FOR SMALL SCREEN SIZES -->
@@ -136,14 +135,10 @@ const windowRef = ref(null);
 const BreakpointWindow = useBreakpointWindow(windowRef);
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = BreakpointWindow;
 
-//====== Store Defining and usage ======//
-// const store = useCalculatorStore();
-// const { ans, operator, num } = storeToRefs(store);
-// const { calculate , addToNumber } = store;
+
 
 //====== History ======//
 const historyList = ref([]);
-// let history = ref("");
 //====== Buttons Defining ======//
 const buttons = [
   "C",
@@ -171,109 +166,13 @@ const buttons = [
   ".",
   "=",
 ];
-//====== Operations Defining ======//
-// const operators: any = {
-//   add: "+",
-//   subtract: "-",
-//   multiply: "x",
-//   divide: "÷",
-// };
-//====== Handle Click for the Operations and Numbers ======//
-// const handleClick = (button: string | number) => {
-//   if (typeof button === "number") {
-//     addToNumber(button);
-//   } else {
-//     if (button === "C") {
-//       ans.value = 0;
-//       num.value = 0;
-//       operator.value = "";
-//     } else if (button === "π") {
-//       if (operator.value === "") {
-//         ans.value = 3.142;
-//       } else {
-//         num.value = 3.142;
-//       }
-//     } else if (button === "%") {
-//       checkCalculate();
-//       ans.value = parseFloat((ans.value / 100).toFixed(3));
-//     } else if (button === "Del") {
-//       if (operator.value === "") {
-//         if (ans.value.toString().length === 1) {
-//           ans.value = 0;
-//         } else {
-//           ans.value = parseFloat(ans.value.toString().slice(0, -1));
-//         }
-//       } else if (num.value === 0) {
-//         operator.value = "";
-//       } else {
-//         if (num.value.toString().length === 1) {
-//           num.value = 0;
-//         } else {
-//           num.value = parseFloat(num.value.toString().slice(0, -1));
-//         }
-//       }
-//     } else if (button === "1/x") {
-//       checkCalculate();
-//       ans.value = parseFloat((1 / ans.value).toFixed(8));
-//     } else if (button === "x²") {
-//       checkCalculate();
-//       ans.value = parseFloat((ans.value * ans.value).toFixed(8));
-//     } else if (button === "√x") {
-//       checkCalculate();
-//       ans.value = parseFloat(Math.sqrt(ans.value).toFixed(8));
-//     } else if (button === "÷") {
-//       checkCalculate();
-//       operator.value = "divide";
-//     } else if (button === "x") {
-//       checkCalculate();
-//       operator.value = "multiply";
-//     } else if (button === "-") {
-//       checkCalculate();
-//       operator.value = "subtract";
-//     } else if (button === "+") {
-//       checkCalculate();
-//       operator.value = "add";
-//     } else if (button === "+/-") {
-//       if (num.value === 0) {
-//         ans.value = -ans.value;
-//       } else {
-//         num.value = -num.value;
-//       }
-//     } else if (button === "=") {
-//       calculate();
-//       if (ans.value == 0) return;
-//       const history = {
-//         result: ans.value,
-//       };
-//       historyList.value.push(history);
-//     } else if (button === ".") {
-//       if (operator.value === "") {
-//         if (ans.value.toString().includes(".")) {
-//           return;
-//         } else {
-//           ans.value = ans.value.toString() + ".";
-//         }
-//       } else {
-//         if (num.value.toString().includes(".")) {
-//           return;
-//         } else {
-//           num.value = num.value.toString() + ".";
-//         }
-//       }
-//     }
-//   }
-// };
-
-
-
-
 /* my new function start */
-
 // PARTS OF CALCULATION VARIABLES
 let currentValue = ref("");
 let previousValue = ref("");
 let operation = ref("");
 let resultValue = ref("");
+let numberAfterEqual = ref("");
 
 // PROCESS OF CALCULATION AND RESULT VARIABLES
 let processOfCalculation = ref("");
@@ -282,12 +181,6 @@ let result = ref("");
 // RESULT IN HISTORY AND RESULT IN HISTORY STORAGE VARIABLES
 let resultInHistory = ref("");
 let historyStorage = ref("")
-
-// const history = ref(historyStorage ?? []);
-// const history = ref([]);
-
-
-
 
 function calculate(button) {
   // adding numbers to the screen
@@ -367,10 +260,12 @@ function calculate(button) {
     processOfCalculation.value =
       previousValue.value + " " + operation.value + " " + currentValue.value;
 
+
     // calculate( number before operation sign + the operation sign + number after operation sign)
     resultValue.value = eval(
       previousValue.value + operation.value + currentValue.value
     );
+
 
     // prepare the data to push to the history
     resultInHistory.value =
@@ -381,11 +276,10 @@ function calculate(button) {
       historyList.value.push(resultInHistory.value);
     }
 
-    // save the data into local storage
-    // historyStorage = useStorage.setItem('result', resultInHistory.value);
+    /* PUSH useStorage HERE */
 
-    // SET THE RESULT TO THE span UP LEFT
-    // result.value = resultValue.value;
+
+
     // remove the numbers from the result bar WHEN CLICK THE EQUAL BUTTON
     previousValue.value = "";
     currentValue.value = "";
@@ -394,100 +288,6 @@ function calculate(button) {
 }
 
 /* my new function end */
-
-
-// //====== Checks Calculate Function ======//
-// const checkCalculate = (): void => {
-//   if (!(operator.value === "" || num.value === 0)) {
-//     calculate();
-//   }
-// };
-
-// //====== Keyboard Buttons ======//
-// onKeyStroke(["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"], (e) => {
-//   if (!(props.app.id == AppManager.focused)) {
-//     return;
-//   }
-//   if (operator.value === "") {
-//     addToNumber(e.key);
-//   } else {
-//     addToNumber(e.key);
-//   }
-//   e.preventDefault();
-// });
-
-// onKeyStroke(["+", "-", "*", "/", "%", ".", "Enter"], (e) => {
-//   if (!(props.app.id == AppManager.focused)) {
-//     return;
-//   }
-//   if (e.key === "+") {
-//     operator.value = "add";
-//   } else if (e.key === "-") {
-//     operator.value = "subtract";
-//   } else if (e.key === "*") {
-//     operator.value = "multiply";
-//   } else if (e.key === "/") {
-//     operator.value = "divide";
-//   } else if (e.key === "%") {
-//     operator.value = "divide";
-//   } else if (e.key === "Enter") {
-//     calculate();
-//     if (ans.value == 0) return;
-//     const history = {
-//       result: ans.value,
-//     };
-//     historyList.value.push(history);
-//   } else if (e.key === ".") {
-//     if (operator.value === "") {
-//       if (ans.value.toString().includes(".")) {
-//         return;
-//       } else {
-//         ans.value = ans.value.toString() + ".";
-//       }
-//     } else {
-//       if (num.value.toString().includes(".")) {
-//         return;
-//       } else {
-//         num.value = num.value.toString() + ".";
-//       }
-//     }
-//   }
-//   e.preventDefault();
-// });
-
-// onKeyStroke(["Backspace"], (e) => {
-//   if (!(props.app.id == AppManager.focused)) {
-//     return;
-//   }
-//   if (operator.value === "") {
-//     if (ans.value.toString().length === 1) {
-//       ans.value = 0;
-//     } else {
-//       ans.value = parseFloat(ans.value.toString().slice(0, -1));
-//     }
-//   } else if (num.value === 0) {
-//     operator.value = "";
-//   } else {
-//     if (num.value.toString().length === 1) {
-//       num.value = 0;
-//     } else {
-//       num.value = parseFloat(num.value.toString().slice(0, -1));
-//     }
-//   }
-//   e.preventDefault();
-// });
-
-// onKeyStroke(["Escape"], (e) => {
-//   if (!(props.app.id == AppManager.focused)) {
-//     return;
-//   }
-//   num.value = 0;
-//   ans.value = 0;
-//   operator.value = "";
-//   e.preventDefault();
-// });
-
-
 </script>
 
 <style scoped>
