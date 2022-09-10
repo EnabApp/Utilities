@@ -23,6 +23,7 @@
             })
           : ""
       }}
+
       <CalculatorHistoryIcon
         v-if="twoXs || xs || sm"
         @click="toggleModal"
@@ -111,6 +112,7 @@ const props = defineProps({
     required: true,
   },
 });
+
 
 // FUNCTION TO CLEAR THE HISTORY IN UIMODAL
 function clearHistory() {
@@ -351,4 +353,28 @@ onKeyStroke(["Escape"], (e) => {
   operator.value = "";
   e.preventDefault();
 });
+
+
 </script>
+
+<style scoped>
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  </style>
