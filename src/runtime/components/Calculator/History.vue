@@ -35,11 +35,11 @@
         m="5"
         v-for="(history, index) in historyList"
         :key="index"
-        dir="rtl"
+        dir="ltr"
       >
         <div flex="~ col" justify="center">
           <div text="2xl primaryOp dark:primary">
-            <h5>{{ history.result }}</h5>
+            <h5>{{ history }}</h5>
           </div>
         </div>
       </div>
