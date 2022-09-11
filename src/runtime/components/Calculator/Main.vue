@@ -69,6 +69,7 @@ import {
 } from "#imports";
 // import { storeToRefs } from "pinia";
 // import { useCalculatorStore } from "../../composables/useCalculatorStore";
+// import { useStorage } from '@vueuse/core'
 const props = defineProps({
   app: {
     type: Object,
@@ -100,8 +101,7 @@ const { size, twoXs, xs, sm, md, lg, xl, twoXl } = BreakpointWindow;
 
 
 
-//====== History ======//
-const historyList = ref([]);
+
 //====== Buttons Defining ======//
 const buttons = [
   "C",
@@ -142,9 +142,13 @@ let result = ref("");
 
 // RESULT IN HISTORY AND RESULT IN HISTORY STORAGE VARIABLES
 let resultInHistory = ref("");
-let historyStorage = ref("")
+// let historyStorage = ref("")
 
-function calculate(button) {
+//====== History ======//
+const historyList = ref([]);
+
+/* IF YOU SEE (IF ELSE) STATEMENTS IT MEANS IF THE NUMBER IS FROM THE RESULT OF THE PREVIOUS OPERATION OR NOT*/
+async function calculate(button) {
   // adding numbers to the screen
   if (!isNaN(button) || button == ".")
   {
@@ -176,7 +180,8 @@ function calculate(button) {
   // GETTING THE REST OF DIVIDING
   if (button === "%")
   {
-    currentValue.value = currentValue.value / 100;
+    if (currentValue.value) currentValue.value = currentValue.value / 100;
+    else resultValue.value = resultValue.value / 100;
   }
   console.log(currentValue.value.length)
 
@@ -186,25 +191,28 @@ function calculate(button) {
     currentValue.value = currentValue.value.substring(
       0,
       currentValue.value.length - 1
-    );
+    )
   }
 
   // multiply the number by himself
   if (button === "x²")
   {
-    currentValue.value = currentValue.value * currentValue.value
+    if (currentValue.value) currentValue.value = currentValue.value * currentValue.value
+    else resultValue.value = resultValue.value * resultValue.value
   }
 
   // the square root of the number
   if (button === '√x')
   {
-    currentValue.value = Math.sqrt(currentValue.value)
+    if (currentValue.value) currentValue.value = parseFloat(Math.sqrt(currentValue.value))
+    else resultValue.value = resultValue.value = parseFloat(Math.sqrt(resultValue.value))
   }
 
   // get the 1/X of the number
   if (button === "1/x")
   {
-    currentValue.value = eval(1 / currentValue.value)
+    if (currentValue.value) currentValue.value = eval(1 / currentValue.value)
+    else resultValue.value = eval(1 / resultValue.value)
   }
 
   // if it is "π" then set the value to 3.14
@@ -216,7 +224,8 @@ function calculate(button) {
   // if the number is positive then set it to negative else set it to positive
   if (button === "+/-" && currentValue.value != 0)
   {
-    currentValue.value = currentValue.value > 0 ? currentValue.value * -1 : currentValue.value * -1
+    if (currentValue.value) currentValue.value = currentValue.value > 0 ? currentValue.value * -1 : currentValue.value * -1
+    else resultValue.value = resultValue.value > 0 ? resultValue.value * -1 : resultValue.value * -1
   }
 
   // GET THE RESULT OF THE OPERATION
@@ -247,7 +256,7 @@ function calculate(button) {
 
     // prepare the data to push to the history
     resultInHistory.value =
-      processOfCalculation.value + " " + "=" + " " +  (resultValue.value ? resultValue.value : currentValue.value);
+      processOfCalculation.value + " " + "=" + " " + (resultValue.value ? resultValue.value : currentValue.value);
 
     // push the data to the history if there is an operation
     if (operation.value)
@@ -256,6 +265,7 @@ function calculate(button) {
     }
 
     /* PUSH useStorage HERE */
+    // historyStorage = await useStorage().setItem('history', historyList.value)
 
     // remove the numbers from the result bar WHEN CLICK THE EQUAL BUTTON
     previousValue.value = "";

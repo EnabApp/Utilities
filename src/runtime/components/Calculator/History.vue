@@ -32,7 +32,6 @@
         rounded="5px"
         duration="150"
         class="text-xl text-primaryOp dark:text-primary"
-        m="5"
         v-for="(history, index) in historyList"
         :key="index"
         dir="ltr"
