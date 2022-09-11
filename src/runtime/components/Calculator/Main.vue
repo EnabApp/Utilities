@@ -66,6 +66,7 @@ import {
   useAppManager,
   onKeyStroke,
   useToggle,
+  onMounted
 } from "#imports";
 // import { storeToRefs } from "pinia";
 // import { useCalculatorStore } from "../../composables/useCalculatorStore";
@@ -98,8 +99,6 @@ const AppManager = useAppManager();
 const windowRef = ref(null);
 const BreakpointWindow = useBreakpointWindow(windowRef);
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = BreakpointWindow;
-
-
 
 
 //====== Buttons Defining ======//
@@ -142,10 +141,15 @@ let result = ref("");
 
 // RESULT IN HISTORY AND RESULT IN HISTORY STORAGE VARIABLES
 let resultInHistory = ref("");
-// let historyStorage = ref("")
+
 
 //====== History ======//
 const historyList = ref([]);
+const historyStorage = useStorage('calculator-history', [])
+
+onMounted(() => {
+  historyList.value = historyStorage.value
+})
 
 /* IF YOU SEE (IF ELSE) STATEMENTS IT MEANS IF THE NUMBER IS FROM THE RESULT OF THE PREVIOUS OPERATION OR NOT*/
 async function calculate(button) {
@@ -265,7 +269,7 @@ async function calculate(button) {
     }
 
     /* PUSH useStorage HERE */
-    // historyStorage = await useStorage().setItem('history', historyList.value)
+     historyStorage.value = historyList.value
 
     // remove the numbers from the result bar WHEN CLICK THE EQUAL BUTTON
     previousValue.value = "";
