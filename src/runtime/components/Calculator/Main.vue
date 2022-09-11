@@ -69,7 +69,7 @@ import {
 } from "#imports";
 // import { storeToRefs } from "pinia";
 // import { useCalculatorStore } from "../../composables/useCalculatorStore";
-// import { useStorage } from '@vueuse/core'
+import { useStorage } from '@vueuse/core'
 const props = defineProps({
   app: {
     type: Object,
@@ -188,7 +188,7 @@ async function calculate(button) {
   // DELETE THE LAST NUMBER
   if (button === "Del")
   {
-    currentValue.value = currentValue.value.substring(
+    currentValue.value = currentValue.value.slice(
       0,
       currentValue.value.length - 1
     )
