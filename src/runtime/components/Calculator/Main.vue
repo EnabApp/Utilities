@@ -12,7 +12,7 @@
         h="30px" />
     </div>
     <!-- //====== Buttons styles and loop includes Numbers & Operations ======// -->
-    <div m="5px" h="full" flex="~ col" justify="center" sm:justify="end">
+    <div m="5px" h="full" flex="~ col" justify="end">
       <div grid="~ cols-10" h="6/6">
         <div class="grid grid-cols-4 gap-1px col-span-10"
           :class="{ 'col-span-7': twoXl || xl || lg || md, 'col-span-10': sm || xs || twoXs}">
@@ -64,7 +64,6 @@ import {
   ref,
   useBreakpointWindow,
   useAppManager,
-  onKeyStroke,
   useToggle,
   onMounted
 } from "#imports";
