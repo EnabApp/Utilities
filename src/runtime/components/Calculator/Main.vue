@@ -1,19 +1,19 @@
 <template>
   <!-- Application -->
   <!-- //====== Calculator Screen ======// -->
-  <div class="flex flex-col h-full justify-end items-stretch">
-    <div h="2rem" p="x-10px b-5px" text="2xl right primaryOp dark:primary" dir="ltr" w="full" class="text-3xl"
-      ref="windowRef" :class="{
+  <div class="flex flex-col h-full justify-end items-stretch border-box">
+    <div h="2rem" text="2xl right primaryOp dark:primary" dir="ltr" w="full"
+      class="flex flex-row-reverse justify-between text-3xl py-5" ref="windowRef" :class="{
         'text-4xl': lg,
         'text-5xl': xl || twoXl,
       }">
       {{ previousValue + operation + currentValue }} <span> {{ resultValue }} </span>
-      <CalculatorHistoryIcon v-if="twoXs || xs || sm" @click="toggleModal"
-        class="absolute left-3 bottom-0 top-20 cursor-pointer" w="30px" h="30px" />
+      <CalculatorHistoryIcon v-if="twoXs || xs || sm" @click="toggleModal" class="cursor-pointer ml-2" w="30px"
+        h="30px" />
     </div>
     <!-- //====== Buttons styles and loop includes Numbers & Operations ======// -->
-    <div m="5px" h="full" flex="~ col" justify="end">
-      <div grid="~ cols-10">
+    <div m="5px" h="full" flex="~ col" justify="center" sm:justify="end">
+      <div grid="~ cols-10" h="6/6">
         <div class="grid grid-cols-4 gap-1px col-span-10"
           :class="{ 'col-span-7': twoXl || xl || lg || md, 'col-span-10': sm || xs || twoXs}">
           <button overflow="auto" cursor="pointer" duration="150" rounded="5px" p="y-10px" w="full" font="semibold"
@@ -42,12 +42,12 @@
         <CalculatorHistory :historyList="historyList" :BreakpointWindow="BreakpointWindow" />
         <!-- DISPLAY THE HISTORY FOR SMALL SCREEN SIZES -->
         <Teleport to="body">
-          <UiModal v-model="stateModal" @cancel="modalCanceled">
-            <template v-slot:title>Calculation History</template>
-            <div class="h-32" overflow="y-scroll" flex="~ col gap-1" relative>
+          <UiModal id="history-modal" v-model="stateModal" @cancel="modalCanceled">
+            <template v-slot:title>سجل العمليات</template>
+            <div class="h-46" overflow="y-scroll" flex="~ col gap-1" relative>
               <p v-if="historyList[0]"
-                class="absolute left-2 top-0 py-3 px-5 bg-white text-center text-black cursor-pointer rounded-lg"
-                @click="clearHistory">clear</p>
+                class="absolute left-1 top-0 py-3 px-5 bg-white text-center text-black cursor-pointer rounded-lg border-box"
+                @click="clearHistory">محو السجل</p>
               <p class="text-center" v-else>لم يتم حساب اي عمليات</p>
               <h5 class="flex justify-end" dir="ltr" v-for="(result, index) in historyList" :key="index">{{ result}}
               </h5>
@@ -130,17 +130,17 @@ const buttons = [
 ];
 /* my new function start */
 // PARTS OF CALCULATION VARIABLES
-let currentValue = ref("");
-let previousValue = ref("");
-let operation = ref("");
-let resultValue = ref("");
+const currentValue = ref("");
+const previousValue = ref("");
+const operation = ref("");
+let addNumber = true
 
 // PROCESS OF CALCULATION AND RESULT VARIABLES
-let processOfCalculation = ref("");
-let result = ref("");
+const processOfCalculation = ref("");
+const resultValue = ref("");
 
 // RESULT IN HISTORY AND RESULT IN HISTORY STORAGE VARIABLES
-let resultInHistory = ref("");
+const resultInHistory = ref("");
 
 
 //====== History ======//
@@ -156,20 +156,23 @@ async function calculate(button) {
   // adding numbers to the screen
   if (!isNaN(button) || button == ".")
   {
+    // checking if there is no number and tryna add zero as the first number, if so it won't be added, otherwise it will.
     if (currentValue.value.length <= 10)
     {
-      currentValue.value += button;
-      // set result value to ""
+      if (currentValue.value.length === 0 && button === 0) addNumber = false;
+      else
+      {
+        currentValue.value += button
+      }
     }
   }
 
-  // clear the numbers
+  // clear All numbers
   if (button === "C")
   {
     operation.value = "";
     previousValue.value = "";
     currentValue.value = "";
-    result.value = "";
     resultValue.value = ""
   }
   // split between numbers before the operator and after the operator
@@ -187,8 +190,6 @@ async function calculate(button) {
     if (currentValue.value) currentValue.value = currentValue.value / 100;
     else resultValue.value = resultValue.value / 100;
   }
-  console.log(currentValue.value.length)
-
   // DELETE THE LAST NUMBER
   if (button === "Del")
   {
@@ -235,7 +236,6 @@ async function calculate(button) {
   // GET THE RESULT OF THE OPERATION
   if (button === "=")
   {
-
     // turning multiply into '*' to be easy calculated
     if (operation.value === "×")
     {
@@ -268,8 +268,8 @@ async function calculate(button) {
       historyList.value.push(resultInHistory.value);
     }
 
-    /* PUSH useStorage HERE */
-     historyStorage.value = historyList.value
+    /* SAVING THE DATA OF THE HISTORY INTO THE localStorage */
+    historyStorage.value = historyList.value
 
     // remove the numbers from the result bar WHEN CLICK THE EQUAL BUTTON
     previousValue.value = "";
@@ -287,11 +287,6 @@ async function calculate(button) {
   width: 10px;
 }
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #888;
@@ -300,5 +295,9 @@ async function calculate(button) {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2196F3;
 }
 </style>
