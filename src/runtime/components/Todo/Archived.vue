@@ -7,17 +7,9 @@
       <div
         flex="~ col gap-28px"
         w="full"
+        h="100"
         overflow="y-scroll"
-        snap="y"
-        :class="{
-          'h-19.5rem': twoXs,
-          'h-21.6875rem': xs,
-          'h-23.75rem': sm,
-          'h-25.3125rem': md,
-          'h-30.625rem': lg,
-          'h-31.5626rem': xl,
-          'h-36.875rem': twoXl,
-        }"
+        snap="y" 
       >
         <!-- ===========>> Todo Content <<=========== -->
         <TransitionGroup>

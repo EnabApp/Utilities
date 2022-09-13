@@ -20,7 +20,7 @@
             text="primaryOp dark:primary"
             caret="error"
             :class="{
-              'text-0.80rem': twoXs,
+              'text-0.90rem': twoXs,
               'text-0.90rem': xs,
               'text-1.00rem': sm,
               'text-1.10rem': md,

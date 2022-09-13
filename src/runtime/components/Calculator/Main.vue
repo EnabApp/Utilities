@@ -8,9 +8,12 @@
         'text-5xl': xl || twoXl,
       }">
       {{ previousValue + operation + currentValue }} <span> {{ resultValue }} </span>
+
+      <!-- history icon -->
       <CalculatorHistoryIcon v-if="twoXs || xs || sm" @click="toggleModal"
-        class="absolute left-3 bottom-0 top-20 cursor-pointer" w="30px" h="30px" />
+        class="absolute left-3 bottom-0 top-16 cursor-pointer" w="30px" h="30px" />
     </div>
+    
     <!-- //====== Buttons styles and loop includes Numbers & Operations ======// -->
     <div m="5px" h="full" flex="~ col" justify="end">
       <div grid="~ cols-10">
@@ -40,15 +43,17 @@
         </div>
         <!-- //====== Calculator History FOR LARGE SCREEN SIZES ======// -->
         <CalculatorHistory :historyList="historyList" :BreakpointWindow="BreakpointWindow" />
+
         <!-- DISPLAY THE HISTORY FOR SMALL SCREEN SIZES -->
         <Teleport to="body">
           <UiModal v-model="stateModal" @cancel="modalCanceled">
-            <template v-slot:title>Calculation History</template>
+            <template v-slot:title>السجل</template>
             <div class="h-32" overflow="y-scroll" flex="~ col gap-1" relative>
               <p v-if="historyList[0]"
-                class="absolute left-2 top-0 py-3 px-5 bg-white text-center text-black cursor-pointer rounded-lg"
-                @click="clearHistory">clear</p>
-              <p class="text-center" v-else>لم يتم حساب اي عمليات</p>
+                class="absolute left-2 top-0 py-1 px-2 bg-white text-center text-black cursor-pointer rounded-lg border-2"
+                hover="text-error dark:text-error text-opacity-50 dark:text-opacity-75"
+                @click="clearHistory">محو السجل</p>
+              <p class="text-center" v-else>لم يتم حساب أي عمليات</p>
               <h5 class="flex justify-end" dir="ltr" v-for="(result, index) in historyList" :key="index">{{ result}}
               </h5>
             </div>

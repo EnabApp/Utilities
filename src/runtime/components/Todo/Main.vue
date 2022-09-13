@@ -9,14 +9,14 @@
       :tabs="['جميع المهام', 'المؤرشفة']"
     >
       <template #tab-1
-        ><div flex="~ col">
+        ><div flex="~ col" overflow="y-scroll">
           <TodoAdd />
           <TodoAll :BreakpointWindow="BreakpointWindow" />
         </div>
       </template>
       <!-- =========>> End Template <<========= -->
       <template #tab-2>
-        <div flex="~ col">
+        <div flex="~ col" overflow="y-scroll">
           <TodoArchived :BreakpointWindow="BreakpointWindow" />
         </div>
       </template>

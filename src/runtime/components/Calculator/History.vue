@@ -71,7 +71,7 @@ function clearHistory() {
 }
 </script>
 
-<style scoped>
+<!-- <style scoped>
   /* width */
   ::-webkit-scrollbar {
     width: 10px;
@@ -91,4 +91,4 @@ function clearHistory() {
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
-  </style>
+  </style> -->
