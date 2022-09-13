@@ -65,11 +65,12 @@ import {
   useBreakpointWindow,
   useAppManager,
   useToggle,
-  onMounted
+  onMounted,
+  onKeyStroke
 } from "#imports";
 // import { storeToRefs } from "pinia";
 // import { useCalculatorStore } from "../../composables/useCalculatorStore";
-import { useStorage } from '@vueuse/core'
+import { onKeyDown, useStorage } from '@vueuse/core'
 const props = defineProps({
   app: {
     type: Object,
@@ -277,7 +278,84 @@ async function calculate(button) {
   }
 }
 
-/* my new function end */
+// using keyboard keys
+
+// adding numbers
+const numbersKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.']
+
+numbersKeys.forEach(numberKey => {
+  onKeyStroke(numberKey, (e) => {
+    if (currentValue.value.length <= 10)
+    {
+      if (currentValue.value.length === 0 && numberKey == '0') addNumber = false;
+      else
+      {
+        currentValue.value += numberKey
+      }
+    }
+  }, { eventName: 'keypress' })
+})
+
+// adding operations
+const operationKeys = ['+', '*', '-', '/']
+
+operationKeys.forEach(operatorKey => {
+  onKeyStroke(operatorKey, (e) => {
+    currentValue.value += operatorKey
+  }, { eventName: 'keypress' })
+})
+
+// delete number
+onKeyStroke('Backspace', (e) => {
+  currentValue.value = currentValue.value.slice(
+    0,
+    currentValue.value.length - 1
+  )
+}, { eventName: 'keydown' })
+
+// get the result using (= , Enter) keys
+onKeyStroke('Enter', (e) => {
+    // turning multiply into '*' to be easy calculated
+    if (operation.value === "×")
+    {
+      operation.value = "*";
+    }
+
+    // turning divide into '/' to be easy calculated
+    if (operation.value === "÷")
+    {
+      operation.value = '/'
+    }
+
+    // saving the process of calculation into one variable (not include the result)
+    processOfCalculation.value =
+      previousValue.value + " " + operation.value + " " + currentValue.value;
+
+
+    // calculate( number before operation sign + the operation sign + number after operation sign)
+    resultValue.value = eval(
+      previousValue.value + operation.value + currentValue.value
+    );
+    // prepare the data to push to the history
+    resultInHistory.value =
+      processOfCalculation.value + " " + "=" + " " + (resultValue.value ? resultValue.value : currentValue.value);
+
+    // push the data to the history if there is an operation
+    if (operation.value)
+    {
+      historyList.value.push(resultInHistory.value);
+    }
+
+    /* SAVING THE DATA OF THE HISTORY INTO THE localStorage */
+    historyStorage.value = historyList.value
+
+    // remove the numbers from the result bar WHEN CLICK THE EQUAL BUTTON
+    previousValue.value = "";
+    currentValue.value = "";
+    operation.value = "";
+  }, { eventName: 'keyup' })
+
+
 </script>
 
 <style scoped>
