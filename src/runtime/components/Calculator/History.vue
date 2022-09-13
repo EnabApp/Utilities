@@ -1,7 +1,7 @@
 <template>
   <!-- DISPLAY THE HISTORY ON LARGE SCREEN SIZES -->
 
-    <div v-if="twoXl || xl || lg || md" col-span-3 overflow="y-scroll" h="350px">
+    <div v-if="twoXl || xl || lg || md" col-span-3 overflow="y-scroll" h="400px">
       <div flex="~" justify="between" items="center" p="x-3px">
         <div text="xl primaryOp dark:primary" font="bold">السجل</div>
         <span v-if="historyList.length > 0" hover="text-error dark:text-error text-opacity-50 dark:text-opacity-75"
@@ -26,7 +26,7 @@
         </h3>
       </div>
     </div>
- 
+
 </template>
 
 <script setup>

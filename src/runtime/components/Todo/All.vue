@@ -1,5 +1,5 @@
 <template>
-  <div m="t-5px" p="b-15px">
+  <div h="full">
     <!-- ===========>> All Tasks Content <<=========== -->
     <div
       flex="~ col gap-28px"
@@ -7,13 +7,13 @@
       snap="y"
       overflow="y-scroll"
       :class="{
-        'h-19.5rem': twoXs,
-        'h-21.6875rem': xs,
-        'h-23.75rem': sm,
-        'h-25.3125rem': md,
+        'h-25.5rem': twoXs,
+        'h-26.6875rem': xs,
+        'h-26.75rem': sm,
+        'h-27.3125rem': md,
         'h-30.625rem': lg,
         'h-31.5626rem': xl,
-        'h-37rem': twoXl,
+        'h-45rem': twoXl,
       }"
     >
       <!--  these r the sizes for  xs:305px sm:380px md:405px lg:490px xl:505px 2xl:580px 3xl:605px-->

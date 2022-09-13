@@ -4,12 +4,13 @@
     <UiTabGroup
       v-if="!(twoXl || xl || lg || md)"
       p="x-20px"
-      text="21px "
+      text="21px"
       :col="false"
       :tabs="['جميع المهام', 'المؤرشفة']"
+      class="h-[100%]"
     >
       <template #tab-1
-        ><div flex="~ col">
+        ><div flex="~ col" h="[95%]">
           <TodoAdd />
           <TodoAll :BreakpointWindow="BreakpointWindow" />
         </div>
@@ -22,7 +23,7 @@
       </template>
     </UiTabGroup>
 
-    <div v-if="twoXl || xl || md || lg" grid="~ cols-2 gap-30px" p="x-5">
+    <div v-if="twoXl || xl || md || lg" grid="~ cols-2 gap-30px" p="x-5" h="full">
       <div flex="~ col">
         <div text="2xl secondaryOp dark:secondary" font="semibold">
           جميع المهام

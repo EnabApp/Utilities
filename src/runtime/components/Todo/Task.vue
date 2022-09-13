@@ -26,7 +26,7 @@
               'text-1.10rem': md,
               'text-1.20rem': lg,
               'text-1.30rem': xl,
-              'text-1.35rem': twoXl,
+              'text-1.75rem': twoXl,
             }"
           />
         </div>
