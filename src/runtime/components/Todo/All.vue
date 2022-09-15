@@ -1,20 +1,11 @@
 <template>
-  <div h="full">
+  <div>
     <!-- ===========>> All Tasks Content <<=========== -->
     <div
-      flex="~ col gap-28px"
+      id="tasks-container "
+      flex="~ col gap-4"
       w="full"
       snap="y"
-      overflow="y-scroll"
-      :class="{
-        'h-25.5rem': twoXs,
-        'h-26.6875rem': xs,
-        'h-26.75rem': sm,
-        'h-27.3125rem': md,
-        'h-30.625rem': lg,
-        'h-31.5626rem': xl,
-        'h-45rem': twoXl,
-      }"
     >
       <!--  these r the sizes for  xs:305px sm:380px md:405px lg:490px xl:505px 2xl:580px 3xl:605px-->
       <TransitionGroup>
@@ -48,7 +39,15 @@ const todoStore = useTodoStore();
 .v-leave-active {
   animation: translate 0.3s reverse;
 }
-
+/* :class="{
+        'h-25.5rem': twoXs,
+        'h-26.6875rem': xs,
+        'h-26.75rem': sm,
+        'h-27.3125rem': md,
+        'h-32.625rem': lg,
+        'h-25.5626rem': xl,
+        'h-36rem': twoXl,
+      }" */
 @keyframes translate {
   0% {
     opacity: 0;

@@ -1,7 +1,7 @@
 <template>
   <!-- Application -->
   <!-- //====== Calculator Screen ======// -->
-  <div class="flex flex-col h-full justify-end items-stretch border-box">
+  <div class="flex flex-col h-full justify-end items-stretch border-box" relative>
     <div h="2rem" text="2xl right primaryOp dark:primary" dir="ltr" w="full"
       class="flex flex-row-reverse justify-between text-3xl py-5" ref="windowRef" :class="{
         'text-4xl': lg,
@@ -41,19 +41,21 @@
         <!-- //====== Calculator History FOR LARGE SCREEN SIZES ======// -->
         <CalculatorHistory :historyList="historyList" :BreakpointWindow="BreakpointWindow" />
         <!-- DISPLAY THE HISTORY FOR SMALL SCREEN SIZES -->
-        <Teleport to="body">
+        <!-- <Teleport to="body">
           <UiModal id="history-modal" v-model="stateModal" @cancel="modalCanceled">
             <template v-slot:title>سجل العمليات</template>
             <div class="h-46" overflow="y-scroll" flex="~ col gap-1" relative>
               <p v-if="historyList[0]"
                 class="absolute left-1 top-0 py-3 px-5 bg-white text-center text-black cursor-pointer rounded-lg border-box"
-                @click="clearHistory">محو السجل</p>
+                @click="clearHistory">محو</p>
               <p class="text-center" v-else>لم يتم حساب اي عمليات</p>
-              <h5 class="flex justify-end" dir="ltr" v-for="(result, index) in historyList" :key="index">{{ result}}
+              <h5 class="flex justify-end" dir="ltr" v-for="(result, index) in historyList" :key="index">{{ result }}
               </h5>
             </div>
           </UiModal>
-        </Teleport>
+        </Teleport> -->
+        <CalculatorHistorySmall v-if='!(twoXl || xl || lg || md)' :BreakpointWindow="BreakpointWindow"
+        :toggleModal="toggleModal" :stateModal="stateModal" :historyList="historyList" />
       </div>
     </div>
   </div>
@@ -68,8 +70,6 @@ import {
   onMounted,
   onKeyStroke
 } from "#imports";
-// import { storeToRefs } from "pinia";
-// import { useCalculatorStore } from "../../composables/useCalculatorStore";
 import { onKeyDown, useStorage } from '@vueuse/core'
 const props = defineProps({
   app: {
@@ -79,19 +79,10 @@ const props = defineProps({
 });
 
 // FUNCTION TO CLEAR THE HISTORY IN UIMODAL
-function clearHistory() {
-  while (historyList.value.length > 0)
-  {
-    historyList.value.pop()
-  }
-}
 
 // for toggle the history list for small screen sizes
 const [stateModal, toggleModal] = useToggle(false);
 
-const modalCanceled = () => {
-  stateModal.value = !stateModal;
-};
 
 const AppManager = useAppManager();
 
@@ -315,47 +306,45 @@ onKeyStroke('Backspace', (e) => {
 
 // get the result using (= , Enter) keys
 onKeyStroke('Enter', (e) => {
-    // turning multiply into '*' to be easy calculated
-    if (operation.value === "×")
-    {
-      operation.value = "*";
-    }
+  // turning multiply into '*' to be easy calculated
+  if (operation.value === "×")
+  {
+    operation.value = "*";
+  }
 
-    // turning divide into '/' to be easy calculated
-    if (operation.value === "÷")
-    {
-      operation.value = '/'
-    }
+  // turning divide into '/' to be easy calculated
+  if (operation.value === "÷")
+  {
+    operation.value = '/'
+  }
 
-    // saving the process of calculation into one variable (not include the result)
-    processOfCalculation.value =
-      previousValue.value + " " + operation.value + " " + currentValue.value;
-
-
-    // calculate( number before operation sign + the operation sign + number after operation sign)
-    resultValue.value = eval(
-      previousValue.value + operation.value + currentValue.value
-    );
-    // prepare the data to push to the history
-    resultInHistory.value =
-      processOfCalculation.value + " " + "=" + " " + (resultValue.value ? resultValue.value : currentValue.value);
-
-    // push the data to the history if there is an operation
-    if (operation.value)
-    {
-      historyList.value.push(resultInHistory.value);
-    }
-
-    /* SAVING THE DATA OF THE HISTORY INTO THE localStorage */
-    historyStorage.value = historyList.value
-
-    // remove the numbers from the result bar WHEN CLICK THE EQUAL BUTTON
-    previousValue.value = "";
-    currentValue.value = "";
-    operation.value = "";
-  }, { eventName: 'keyup' })
+  // saving the process of calculation into one variable (not include the result)
+  processOfCalculation.value =
+    previousValue.value + " " + operation.value + " " + currentValue.value;
 
 
+  // calculate( number before operation sign + the operation sign + number after operation sign)
+  resultValue.value = eval(
+    previousValue.value + operation.value + currentValue.value
+  );
+  // prepare the data to push to the history
+  resultInHistory.value =
+    processOfCalculation.value + " " + "=" + " " + (resultValue.value ? resultValue.value : currentValue.value);
+
+  // push the data to the history if there is an operation
+  if (operation.value)
+  {
+    historyList.value.push(resultInHistory.value);
+  }
+
+  /* SAVING THE DATA OF THE HISTORY INTO THE localStorage */
+  historyStorage.value = historyList.value
+
+  // remove the numbers from the result bar WHEN CLICK THE EQUAL BUTTON
+  previousValue.value = "";
+  currentValue.value = "";
+  operation.value = "";
+}, { eventName: 'keyup' })
 </script>
 
 <style scoped>

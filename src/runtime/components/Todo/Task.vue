@@ -1,5 +1,5 @@
 <template>
-  <div flex="~ col">
+  <div id="task" flex="~ col" h="full">
     <div id="taskHover" flex="~" items="center" justify="between" w="full">
       <div w="full">
         <div flex="~ gap-9px" items="center">

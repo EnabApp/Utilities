@@ -7,10 +7,9 @@
       text="21px"
       :col="false"
       :tabs="['جميع المهام', 'المؤرشفة']"
-      class="h-[100%]"
     >
       <template #tab-1
-        ><div flex="~ col" h="[95%]">
+        ><div flex="~ col">
           <TodoAdd />
           <TodoAll :BreakpointWindow="BreakpointWindow" />
         </div>
@@ -23,7 +22,7 @@
       </template>
     </UiTabGroup>
 
-    <div v-if="twoXl || xl || md || lg" grid="~ cols-2 gap-30px" p="x-5" h="full">
+    <div v-if="twoXl || xl || md || lg" grid="~ cols-2 gap-30px" p="x-5">
       <div flex="~ col">
         <div text="2xl secondaryOp dark:secondary" font="semibold">
           جميع المهام
