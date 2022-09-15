@@ -1,11 +1,13 @@
 <template>
-  <div>
+  <div class="relative h-full">
     <!-- ===========>> All Tasks Content <<=========== -->
     <div
       id="tasks-container "
-      flex="~ col gap-4"
+      flex="~ col gap-5"
       w="full"
       snap="y"
+      class="absolute top-0 bottom-0 right-0 left-0 h-98% px-2"
+      overflow="auto"
     >
       <!--  these r the sizes for  xs:305px sm:380px md:405px lg:490px xl:505px 2xl:580px 3xl:605px-->
       <TransitionGroup>

@@ -7,30 +7,31 @@
       text="21px"
       :col="false"
       :tabs="['جميع المهام', 'المؤرشفة']"
+      h="90%"
     >
-      <template #tab-1
-        ><div flex="~ col">
+      <template #tab-1 h="full"
+        ><div flex="~ col" h="full">
           <TodoAdd />
           <TodoAll :BreakpointWindow="BreakpointWindow" />
         </div>
       </template>
       <!-- =========>> End Template <<========= -->
-      <template #tab-2>
-        <div flex="~ col">
+      <template #tab-2 h="full">
+        <div flex="~ col" h="full">
           <TodoArchived :BreakpointWindow="BreakpointWindow" />
         </div>
       </template>
     </UiTabGroup>
 
-    <div v-if="twoXl || xl || md || lg" grid="~ cols-2 gap-30px" p="x-5">
-      <div flex="~ col">
+    <div v-if="twoXl || xl || md || lg" grid="~ cols-2 gap-30px" p="x-5" h="full">
+      <div flex="~ col" class=" h-full">
         <div text="2xl secondaryOp dark:secondary" font="semibold">
           جميع المهام
         </div>
         <TodoAdd />
         <TodoAll :BreakpointWindow="BreakpointWindow" />
       </div>
-      <div flex="~ col">
+      <div flex="~ col" class=" h-full">
         <div text="2xl secondaryOp dark:secondary" font="semibold">
           المهام المؤرشفة
         </div>
