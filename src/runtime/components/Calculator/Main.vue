@@ -8,7 +8,7 @@
         'text-5xl': xl || twoXl,
       }">
       {{ previousValue + operation + currentValue }} <span> {{ resultValue }} </span>
-      <CalculatorHistoryIcon v-if="twoXs || xs || sm" @click="toggleModal" class="cursor-pointer ml-2" w="30px"
+      <CalculatorHistoryIcon v-if="twoXs || xs || sm" @click="toggleModal()" class="cursor-pointer ml-2" w="30px"
         h="30px" />
     </div>
     <!-- //====== Buttons styles and loop includes Numbers & Operations ======// -->
@@ -40,20 +40,7 @@
         </div>
         <!-- //====== Calculator History FOR LARGE SCREEN SIZES ======// -->
         <CalculatorHistory :historyList="historyList" :BreakpointWindow="BreakpointWindow" />
-        <!-- DISPLAY THE HISTORY FOR SMALL SCREEN SIZES -->
-        <!-- <Teleport to="body">
-          <UiModal id="history-modal" v-model="stateModal" @cancel="modalCanceled">
-            <template v-slot:title>سجل العمليات</template>
-            <div class="h-46" overflow="y-scroll" flex="~ col gap-1" relative>
-              <p v-if="historyList[0]"
-                class="absolute left-1 top-0 py-3 px-5 bg-white text-center text-black cursor-pointer rounded-lg border-box"
-                @click="clearHistory">محو</p>
-              <p class="text-center" v-else>لم يتم حساب اي عمليات</p>
-              <h5 class="flex justify-end" dir="ltr" v-for="(result, index) in historyList" :key="index">{{ result }}
-              </h5>
-            </div>
-          </UiModal>
-        </Teleport> -->
+        <!-- Calculator history for small screen sizes -->
         <CalculatorHistorySmall v-if='!(twoXl || xl || lg || md)' :BreakpointWindow="BreakpointWindow"
         :toggleModal="toggleModal" :stateModal="stateModal" :historyList="historyList" />
       </div>
