@@ -42,7 +42,7 @@
         <CalculatorHistory :historyList="historyList" :BreakpointWindow="BreakpointWindow" />
         <!-- Calculator history for small screen sizes -->
         <CalculatorHistorySmall v-if='!(twoXl || xl || lg || md)' :BreakpointWindow="BreakpointWindow"
-        :toggleModal="toggleModal" :stateModal="stateModal" :historyList="historyList" />
+          :toggleModal="toggleModal" :stateModal="stateModal" :historyList="historyList" />
       </div>
     </div>
   </div>
@@ -214,45 +214,48 @@ async function calculate(button) {
   // GET THE RESULT OF THE OPERATION
   if (button === "=")
   {
-    // turning multiply into '*' to be easy calculated
-    if (operation.value === "×")
-    {
-      operation.value = "*";
-    }
-
-    // turning divide into '/' to be easy calculated
-    if (operation.value === "÷")
-    {
-      operation.value = '/'
-    }
-
-    // saving the process of calculation into one variable (not include the result)
-    processOfCalculation.value =
-      previousValue.value + " " + operation.value + " " + currentValue.value;
-
-
-    // calculate( number before operation sign + the operation sign + number after operation sign)
-    resultValue.value = eval(
-      previousValue.value + operation.value + currentValue.value
-    );
-
-    // prepare the data to push to the history
-    resultInHistory.value =
-      processOfCalculation.value + " " + "=" + " " + (resultValue.value ? resultValue.value : currentValue.value);
-
-    // push the data to the history if there is an operation
     if (operation.value)
     {
-      historyList.value.push(resultInHistory.value);
+      // turning multiply into '*' to be easy calculated
+      if (operation.value === "×")
+      {
+        operation.value = "*";
+      }
+
+      // turning divide into '/' to be easy calculated
+      if (operation.value === "÷")
+      {
+        operation.value = '/'
+      }
+
+      // saving the process of calculation into one variable (not include the result)
+      processOfCalculation.value =
+        previousValue.value + " " + operation.value + " " + currentValue.value;
+
+
+      // calculate( number before operation sign + the operation sign + number after operation sign)
+      resultValue.value = eval(
+        previousValue.value + operation.value + currentValue.value
+      );
+
+      // prepare the data to push to the history
+      resultInHistory.value =
+        processOfCalculation.value + " " + "=" + " " + (resultValue.value ? resultValue.value : currentValue.value);
+
+      // push the data to the history if there is an operation
+      if (operation.value)
+      {
+        historyList.value.push(resultInHistory.value);
+      }
+
+      /* SAVING THE DATA OF THE HISTORY INTO THE localStorage */
+      historyStorage.value = historyList.value
+
+      // remove the numbers from the result bar WHEN CLICK THE EQUAL BUTTON
+      previousValue.value = "";
+      currentValue.value = "";
+      operation.value = "";
     }
-
-    /* SAVING THE DATA OF THE HISTORY INTO THE localStorage */
-    historyStorage.value = historyList.value
-
-    // remove the numbers from the result bar WHEN CLICK THE EQUAL BUTTON
-    previousValue.value = "";
-    currentValue.value = "";
-    operation.value = "";
   }
 }
 
@@ -294,6 +297,7 @@ onKeyStroke('Backspace', (e) => {
 // get the result using (= , Enter) keys
 onKeyStroke('Enter', (e) => {
   // turning multiply into '*' to be easy calculated
+
   if (operation.value === "×")
   {
     operation.value = "*";
@@ -316,13 +320,12 @@ onKeyStroke('Enter', (e) => {
   );
   // prepare the data to push to the history
   resultInHistory.value =
-    processOfCalculation.value + " " + "=" + " " + (resultValue.value ? resultValue.value : currentValue.value);
+    processOfCalculation.value + " " + "=" + " " + resultValue.value;
 
   // push the data to the history if there is an operation
-  if (operation.value)
-  {
+
     historyList.value.push(resultInHistory.value);
-  }
+
 
   /* SAVING THE DATA OF THE HISTORY INTO THE localStorage */
   historyStorage.value = historyList.value
