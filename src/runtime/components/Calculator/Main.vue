@@ -57,16 +57,14 @@ import {
   onMounted,
   onKeyStroke
 } from "#imports";
-import { onKeyDown, useStorage } from '@vueuse/core'
+import { useStorage } from '@vueuse/core'
 const props = defineProps({
   app: {
     type: Object,
     required: true,
   },
 });
-
-// FUNCTION TO CLEAR THE HISTORY IN UIMODAL
-
+/* SLICE THE RESULT.VALUE */
 // for toggle the history list for small screen sizes
 const [stateModal, toggleModal] = useToggle(false);
 
@@ -130,11 +128,13 @@ onMounted(() => {
 })
 
 /* IF YOU SEE (IF ELSE) STATEMENTS IT MEANS IF THE NUMBER IS FROM THE RESULT OF THE PREVIOUS OPERATION OR NOT*/
-async function calculate(button) {
+function calculate(button) {
   // adding numbers to the screen
   if (!isNaN(button) || button == ".")
   {
-    // checking if there is no number and tryna add zero as the first number, if so it won't be added, otherwise it will.
+    // fix the concat bug
+    // if (resultValue.value) { currentValue.value += resultValue.value }
+    // checking if there is no number and trying to add zero as the first number, if so it won't be added, otherwise it will.
     if (currentValue.value.length <= 10)
     {
       if (currentValue.value.length === 0 && button === 0) addNumber = false;
@@ -156,10 +156,10 @@ async function calculate(button) {
   // split between numbers before the operator and after the operator
   if (["×", "+", "-", "÷"].includes(button))
   {
-    previousValue.value = resultValue.value ? resultValue.value : currentValue.value;
-    currentValue.value += button;
-    operation.value = button;
-    currentValue.value = "";
+    previousValue.value = resultValue.value ? resultValue.value : currentValue.value
+    currentValue.value += button
+    operation.value = button
+    currentValue.value = ""
     resultValue.value = ""
   }
   // GETTING THE REST OF DIVIDING
@@ -231,7 +231,6 @@ async function calculate(button) {
       // saving the process of calculation into one variable (not include the result)
       processOfCalculation.value =
         previousValue.value + " " + operation.value + " " + currentValue.value;
-
 
       // calculate( number before operation sign + the operation sign + number after operation sign)
       resultValue.value = eval(
@@ -322,6 +321,7 @@ onKeyStroke('Enter', (e) => {
   resultInHistory.value =
     processOfCalculation.value + " " + "=" + " " + resultValue.value;
 
+
   // push the data to the history if there is an operation
 
     historyList.value.push(resultInHistory.value);
@@ -337,23 +337,3 @@ onKeyStroke('Enter', (e) => {
 }, { eventName: 'keyup' })
 </script>
 
-<style scoped>
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #2196F3;
-}
-</style>
