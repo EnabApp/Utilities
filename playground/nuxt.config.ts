@@ -1,4 +1,3 @@
-import { defineNuxtConfig } from 'nuxt'
 import MyModule from '..'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
