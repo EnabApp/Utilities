@@ -43,9 +43,9 @@
     "@vueuse/core": "^9.1.1",
     "@vueuse/nuxt": "^9.1.1",
     "bumpp": "^8.2.1",
+    "moment": "latest",
     "nuxt": "npm:nuxt3@latest",
-    "ts-node": "^10.9.1",
-    "moment": "latest"
+    "ts-node": "^10.9.1"
   },
   "description": "Enab WebOS Utilities Module",
   "author": "Enab WebOS Utilities Team"
