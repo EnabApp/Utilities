@@ -1,5 +1,5 @@
 <template>
-  <div flex="~ col">
+  <div id="task" flex="~ col" >
     <div id="taskHover" flex="~" items="center" justify="between" w="full">
       <div w="full">
         <div flex="~ gap-9px" items="center">
@@ -16,9 +16,10 @@
           <input
             v-model.lazy="task.task"
             font="bold"
-            w="full"
-            text="primaryOp dark:primary"
-            caret="error"
+            w="fit-content"
+            border="red 2px solid"
+            text="right primaryOp dark:primary"
+            caret="info"
             :class="{
               'text-0.80rem': twoXs,
               'text-0.90rem': xs,
@@ -26,7 +27,7 @@
               'text-1.10rem': md,
               'text-1.20rem': lg,
               'text-1.30rem': xl,
-              'text-1.35rem': twoXl,
+              'text-1.75rem': twoXl,
             }"
           />
         </div>

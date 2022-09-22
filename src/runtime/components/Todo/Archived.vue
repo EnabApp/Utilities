@@ -1,33 +1,22 @@
 <template>
-  <div flex="~ col">
+  <div flex="~ col" class="relative h-full">
     <!-- ========>> Search Input Content <<======== -->
     <UiInput m="y-20px" placeholder="ابحث.." v-model="searchQuery" />
     <!-- ===========>> All Tasks Content <<=========== -->
-    <div m="t-5px" p="b-15px">
-      <div
-        flex="~ col gap-28px"
-        w="full"
-        overflow="y-scroll"
-        snap="y"
-        :class="{
-          'h-19.5rem': twoXs,
-          'h-21.6875rem': xs,
-          'h-23.75rem': sm,
-          'h-25.3125rem': md,
-          'h-30.625rem': lg,
-          'h-31.5626rem': xl,
-          'h-36.875rem': twoXl,
-        }"
-      >
+    <div m="t-5px" p="b-15px" class="relative h-full">
+      <div flex="~ col gap-28px" w="full" overflow="y-scroll" snap="y"
+        class="absolute top-0 bottom-0 right-0 left-0 h-98% px-2">
+        <h3 v-if="twoXs || xs || sm" flex="~" gap="2" w="full" text="xl secondaryOp dark:secondary" font="semibold">لديك
+          {{ todoStore.getArchivedTasks.length }}
+          <h3 v-if="todoStore.getArchivedTasks.length  > 1"> مهام </h3>
+          <h3  v-else> مهمة </h3>
+          مؤرشفة
+        </h3>
+
         <!-- ===========>> Todo Content <<=========== -->
         <TransitionGroup>
-          <TodoTask
-            :BreakpointWindow="BreakpointWindow"
-            :task="task"
-            v-for="task in searchedTodos"
-            :key="task.id"
-            snap="center"
-          />
+          <TodoTask :BreakpointWindow="BreakpointWindow" :task="task" v-for="task in searchedTodos" :key="task.id"
+            snap="center" />
         </TransitionGroup>
       </div>
     </div>
@@ -64,6 +53,7 @@ const searchedTodos = computed(() => {
 .v-enter-active {
   animation: translate 0.3s;
 }
+
 .v-leave-active {
   animation: translate 0.3s reverse;
 }
@@ -72,6 +62,7 @@ const searchedTodos = computed(() => {
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }

@@ -1,30 +1,17 @@
 <template>
-  <div m="t-5px" p="b-15px">
+  <div class="relative h-full">
     <!-- ===========>> All Tasks Content <<=========== -->
-    <div
-      flex="~ col gap-28px"
-      w="full"
-      snap="y"
-      overflow="y-scroll"
-      :class="{
-        'h-19.5rem': twoXs,
-        'h-21.6875rem': xs,
-        'h-23.75rem': sm,
-        'h-25.3125rem': md,
-        'h-30.625rem': lg,
-        'h-31.5626rem': xl,
-        'h-37rem': twoXl,
-      }"
-    >
+    <div id="tasks-container " flex="~ col gap-5" w="full" snap="y"
+      class="absolute top-0 bottom-0 right-0 left-0 h-98% px-2" overflow="auto">
       <!--  these r the sizes for  xs:305px sm:380px md:405px lg:490px xl:505px 2xl:580px 3xl:605px-->
+      <h3 v-if="twoXs || xs || sm" flex="~" gap="2" text="xl secondaryOp dark:secondary" font="semibold">لديك {{ todoStore.getNotArchivedTasks.length }}
+        <h3  v-if="todoStore.getNotArchivedTasks.length  > 1"> مهام </h3>
+        <h3 v-else> مهمة </h3>
+      </h3>
+
       <TransitionGroup>
-        <TodoTask
-          :BreakpointWindow="BreakpointWindow"
-          :task="task"
-          v-for="task in todoStore.getNotArchivedTasks"
-          :key="task.id"
-          snap="center"
-        />
+        <TodoTask :BreakpointWindow="BreakpointWindow" :task="task" v-for="task in todoStore.getNotArchivedTasks"
+          :key="task.id" snap="center" />
       </TransitionGroup>
     </div>
   </div>
@@ -45,6 +32,7 @@ const todoStore = useTodoStore();
 .v-enter-active {
   animation: translate 0.3s;
 }
+
 .v-leave-active {
   animation: translate 0.3s reverse;
 }
@@ -53,6 +41,7 @@ const todoStore = useTodoStore();
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }

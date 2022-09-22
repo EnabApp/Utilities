@@ -1,19 +1,19 @@
 <template>
   <!-- Application -->
   <!-- //====== Calculator Screen ======// -->
-  <div class="flex flex-col h-full justify-end items-stretch">
-    <div h="2rem" p="x-10px b-5px" text="2xl right primaryOp dark:primary" dir="ltr" w="full" class="text-3xl"
-      ref="windowRef" :class="{
+  <div class="flex flex-col h-full justify-end items-stretch border-box" relative>
+    <div h="2rem" text="2xl right primaryOp dark:primary" dir="ltr" w="full"
+      class="flex flex-row-reverse justify-between text-3xl py-5" ref="windowRef" :class="{
         'text-4xl': lg,
         'text-5xl': xl || twoXl,
       }">
       {{ previousValue + operation + currentValue }} <span> {{ resultValue }} </span>
-      <CalculatorHistoryIcon v-if="twoXs || xs || sm" @click="toggleModal"
-        class="absolute left-3 bottom-0 top-20 cursor-pointer" w="30px" h="30px" />
+      <CalculatorHistoryIcon v-if="twoXs || xs || sm" @click="toggleModal()" class="cursor-pointer ml-2" w="30px"
+        h="30px" />
     </div>
     <!-- //====== Buttons styles and loop includes Numbers & Operations ======// -->
     <div m="5px" h="full" flex="~ col" justify="end">
-      <div grid="~ cols-10">
+      <div grid="~ cols-10" h="6/6">
         <div class="grid grid-cols-4 gap-1px col-span-10"
           :class="{ 'col-span-7': twoXl || xl || lg || md, 'col-span-10': sm || xs || twoXs}">
           <button overflow="auto" cursor="pointer" duration="150" rounded="5px" p="y-10px" w="full" font="semibold"
@@ -40,20 +40,9 @@
         </div>
         <!-- //====== Calculator History FOR LARGE SCREEN SIZES ======// -->
         <CalculatorHistory :historyList="historyList" :BreakpointWindow="BreakpointWindow" />
-        <!-- DISPLAY THE HISTORY FOR SMALL SCREEN SIZES -->
-        <Teleport to="body">
-          <UiModal v-model="stateModal" @cancel="modalCanceled">
-            <template v-slot:title>Calculation History</template>
-            <div class="h-32" overflow="y-scroll" flex="~ col gap-1" relative>
-              <p v-if="historyList[0]"
-                class="absolute left-2 top-0 py-3 px-5 bg-white text-center text-black cursor-pointer rounded-lg"
-                @click="clearHistory">clear</p>
-              <p class="text-center" v-else>لم يتم حساب اي عمليات</p>
-              <h5 class="flex justify-end" dir="ltr" v-for="(result, index) in historyList" :key="index">{{ result}}
-              </h5>
-            </div>
-          </UiModal>
-        </Teleport>
+        <!-- Calculator history for small screen sizes -->
+        <CalculatorHistorySmall v-if='!(twoXl || xl || lg || md)' :BreakpointWindow="BreakpointWindow"
+          :toggleModal="toggleModal" :stateModal="stateModal" :historyList="historyList" />
       </div>
     </div>
   </div>
@@ -64,33 +53,21 @@ import {
   ref,
   useBreakpointWindow,
   useAppManager,
-  onKeyStroke,
   useToggle,
+  onMounted,
+  onKeyStroke
 } from "#imports";
-// import { storeToRefs } from "pinia";
-// import { useCalculatorStore } from "../../composables/useCalculatorStore";
-// import { useStorage } from '@vueuse/core'
+import { useStorage } from '@vueuse/core'
 const props = defineProps({
   app: {
     type: Object,
     required: true,
   },
 });
-
-// FUNCTION TO CLEAR THE HISTORY IN UIMODAL
-function clearHistory() {
-  while (historyList.value.length > 0)
-  {
-    historyList.value.pop()
-  }
-}
-
+/* SLICE THE RESULT.VALUE */
 // for toggle the history list for small screen sizes
 const [stateModal, toggleModal] = useToggle(false);
 
-const modalCanceled = () => {
-  stateModal.value = !stateModal;
-};
 
 const AppManager = useAppManager();
 
@@ -98,8 +75,6 @@ const AppManager = useAppManager();
 const windowRef = ref(null);
 const BreakpointWindow = useBreakpointWindow(windowRef);
 const { size, twoXs, xs, sm, md, lg, xl, twoXl } = BreakpointWindow;
-
-
 
 
 //====== Buttons Defining ======//
@@ -131,50 +106,60 @@ const buttons = [
 ];
 /* my new function start */
 // PARTS OF CALCULATION VARIABLES
-let currentValue = ref("");
-let previousValue = ref("");
-let operation = ref("");
-let resultValue = ref("");
+const currentValue = ref("");
+const previousValue = ref("");
+const operation = ref("");
+let addNumber = true
 
 // PROCESS OF CALCULATION AND RESULT VARIABLES
-let processOfCalculation = ref("");
-let result = ref("");
+const processOfCalculation = ref("");
+const resultValue = ref("");
 
 // RESULT IN HISTORY AND RESULT IN HISTORY STORAGE VARIABLES
-let resultInHistory = ref("");
-// let historyStorage = ref("")
+const resultInHistory = ref("");
+
 
 //====== History ======//
 const historyList = ref([]);
+const historyStorage = useStorage('calculator-history', [])
+
+onMounted(() => {
+  historyList.value = historyStorage.value
+})
 
 /* IF YOU SEE (IF ELSE) STATEMENTS IT MEANS IF THE NUMBER IS FROM THE RESULT OF THE PREVIOUS OPERATION OR NOT*/
-async function calculate(button) {
+function calculate(button) {
   // adding numbers to the screen
   if (!isNaN(button) || button == ".")
   {
+    // fix the concat bug
+    // if (resultValue.value) { currentValue.value += resultValue.value }
+    // checking if there is no number and trying to add zero as the first number, if so it won't be added, otherwise it will.
     if (currentValue.value.length <= 10)
     {
-      currentValue.value += button;
-      // set result value to ""
+      if (currentValue.value.length === 0 && button === 0) addNumber = false;
+      else
+      {
+        currentValue.value += button
+      }
     }
   }
 
-  // clear the numbers
+  // clear All numbers
   if (button === "C")
   {
     operation.value = "";
     previousValue.value = "";
     currentValue.value = "";
-    result.value = "";
     resultValue.value = ""
   }
   // split between numbers before the operator and after the operator
   if (["×", "+", "-", "÷"].includes(button))
   {
-    previousValue.value = resultValue.value ? resultValue.value : currentValue.value;
-    currentValue.value += button;
-    operation.value = button;
-    currentValue.value = "";
+    previousValue.value = resultValue.value ? resultValue.value : currentValue.value
+    currentValue.value += button
+    operation.value = button
+    currentValue.value = ""
     resultValue.value = ""
   }
   // GETTING THE REST OF DIVIDING
@@ -183,12 +168,10 @@ async function calculate(button) {
     if (currentValue.value) currentValue.value = currentValue.value / 100;
     else resultValue.value = resultValue.value / 100;
   }
-  console.log(currentValue.value.length)
-
   // DELETE THE LAST NUMBER
   if (button === "Del")
   {
-    currentValue.value = currentValue.value.substring(
+    currentValue.value = currentValue.value.slice(
       0,
       currentValue.value.length - 1
     )
@@ -231,70 +214,126 @@ async function calculate(button) {
   // GET THE RESULT OF THE OPERATION
   if (button === "=")
   {
-
-    // turning multiply into '*' to be easy calculated
-    if (operation.value === "×")
-    {
-      operation.value = "*";
-    }
-
-    // turning divide into '/' to be easy calculated
-    if (operation.value === "÷")
-    {
-      operation.value = '/'
-    }
-
-    // saving the process of calculation into one variable (not include the result)
-    processOfCalculation.value =
-      previousValue.value + " " + operation.value + " " + currentValue.value;
-
-
-    // calculate( number before operation sign + the operation sign + number after operation sign)
-    resultValue.value = eval(
-      previousValue.value + operation.value + currentValue.value
-    );
-
-    // prepare the data to push to the history
-    resultInHistory.value =
-      processOfCalculation.value + " " + "=" + " " + (resultValue.value ? resultValue.value : currentValue.value);
-
-    // push the data to the history if there is an operation
     if (operation.value)
     {
-      historyList.value.push(resultInHistory.value);
+      // turning multiply into '*' to be easy calculated
+      if (operation.value === "×")
+      {
+        operation.value = "*";
+      }
+
+      // turning divide into '/' to be easy calculated
+      if (operation.value === "÷")
+      {
+        operation.value = '/'
+      }
+
+      // saving the process of calculation into one variable (not include the result)
+      processOfCalculation.value =
+        previousValue.value + " " + operation.value + " " + currentValue.value;
+
+      // calculate( number before operation sign + the operation sign + number after operation sign)
+      resultValue.value = eval(
+        previousValue.value + operation.value + currentValue.value
+      );
+
+      // prepare the data to push to the history
+      resultInHistory.value =
+        processOfCalculation.value + " " + "=" + " " + (resultValue.value ? resultValue.value : currentValue.value);
+
+      // push the data to the history if there is an operation
+      if (operation.value)
+      {
+        historyList.value.push(resultInHistory.value);
+      }
+
+      /* SAVING THE DATA OF THE HISTORY INTO THE localStorage */
+      historyStorage.value = historyList.value
+
+      // remove the numbers from the result bar WHEN CLICK THE EQUAL BUTTON
+      previousValue.value = "";
+      currentValue.value = "";
+      operation.value = "";
     }
-
-    /* PUSH useStorage HERE */
-    // historyStorage = await useStorage().setItem('history', historyList.value)
-
-    // remove the numbers from the result bar WHEN CLICK THE EQUAL BUTTON
-    previousValue.value = "";
-    currentValue.value = "";
-    operation.value = "";
   }
 }
 
-/* my new function end */
+// using keyboard keys
+
+// adding numbers
+const numbersKeys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '.']
+
+numbersKeys.forEach(numberKey => {
+  onKeyStroke(numberKey, (e) => {
+    if (currentValue.value.length <= 10)
+    {
+      if (currentValue.value.length === 0 && numberKey == '0') addNumber = false;
+      else
+      {
+        currentValue.value += numberKey
+      }
+    }
+  }, { eventName: 'keypress' })
+})
+
+// adding operations
+const operationKeys = ['+', '*', '-', '/']
+
+operationKeys.forEach(operatorKey => {
+  onKeyStroke(operatorKey, (e) => {
+    currentValue.value += operatorKey
+  }, { eventName: 'keypress' })
+})
+
+// delete number
+onKeyStroke('Backspace', (e) => {
+  currentValue.value = currentValue.value.slice(
+    0,
+    currentValue.value.length - 1
+  )
+}, { eventName: 'keydown' })
+
+// get the result using (= , Enter) keys
+onKeyStroke('Enter', (e) => {
+  // turning multiply into '*' to be easy calculated
+
+  if (operation.value === "×")
+  {
+    operation.value = "*";
+  }
+
+  // turning divide into '/' to be easy calculated
+  if (operation.value === "÷")
+  {
+    operation.value = '/'
+  }
+
+  // saving the process of calculation into one variable (not include the result)
+  processOfCalculation.value =
+    previousValue.value + " " + operation.value + " " + currentValue.value;
+
+
+  // calculate( number before operation sign + the operation sign + number after operation sign)
+  resultValue.value = eval(
+    previousValue.value + operation.value + currentValue.value
+  );
+  // prepare the data to push to the history
+  resultInHistory.value =
+    processOfCalculation.value + " " + "=" + " " + resultValue.value;
+
+
+  // push the data to the history if there is an operation
+
+    historyList.value.push(resultInHistory.value);
+
+
+  /* SAVING THE DATA OF THE HISTORY INTO THE localStorage */
+  historyStorage.value = historyList.value
+
+  // remove the numbers from the result bar WHEN CLICK THE EQUAL BUTTON
+  previousValue.value = "";
+  currentValue.value = "";
+  operation.value = "";
+}, { eventName: 'keyup' })
 </script>
 
-<style scoped>
-/* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-</style>
